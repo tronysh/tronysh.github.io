@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":8,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="由$n(n≥0)$个数据元素$(a_1, a_2, ..., a_n)$构成的有限序列。记作：$L&#x3D;(a_1, a_2, ..., a_n)$。$a_1$——首元素，$a_n$——尾元素。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构——线性表（一）">
+<meta property="og:url" content="http://tronysh.github.io/2019/10/22/data-structure2/index.html">
+<meta property="og:site_name" content="Tronysh">
+<meta property="og:description" content="由$n(n≥0)$个数据元素$(a_1, a_2, ..., a_n)$构成的有限序列。记作：$L&#x3D;(a_1, a_2, ..., a_n)$。$a_1$——首元素，$a_n$——尾元素。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/10/22/yqDBGN1VFPahQW3.png">
+<meta property="article:published_time" content="2019-10-22T01:13:15.000Z">
+<meta property="article:modified_time" content="2020-01-23T04:45:16.008Z">
+<meta property="article:author" content="Tronysh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/22/yqDBGN1VFPahQW3.png">
+
+<link rel="canonical" href="http://tronysh.github.io/2019/10/22/data-structure2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数据结构——线性表（一） | Tronysh</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ad350ecb3c67fc126ff8495447afc90a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tronysh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2019/10/22/data-structure2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/bro.jpg">
+      <meta itemprop="name" content="Tronysh">
+      <meta itemprop="description" content="忠于美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tronysh">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构——线性表（一）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-22 09:13:15" itemprop="dateCreated datePublished" datetime="2019-10-22T09:13:15+08:00">2019-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-23 12:45:16" itemprop="dateModified" datetime="2020-01-23T12:45:16+08:00">2020-01-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">由$n(n≥0)$个数据元素$(a_1, a_2, ..., a_n)$构成的有限序列。记作：$L=(a_1, a_2, ..., a_n)$。$a_1$——首元素，$a_n$——尾元素。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="线性表的定义"><a href="#线性表的定义" class="headerlink" title="线性表的定义"></a>线性表的定义</h2><p>由$n(n≥0)$个数据元素$(a_1, a_2, …, a_n)$构成的有限序列。记作：$L=(a_1, a_2, …, a_n)$。$a_1$——首元素，$a_n$——尾元素。</p>
+<p>表的长度（表长）——线性表中数据元素的数目。</p>
+<p>空表——不含数据元素的线性表（表长为0）。</p>
+<h2 id="线性表的特征"><a href="#线性表的特征" class="headerlink" title="线性表的特征"></a>线性表的特征</h2><p>对于$L=(a<em>1, a_2, …, a</em>{i-1} , a<em>i, a</em>{i+1} , …, a_n)$</p>
+<ol>
+<li><p>$a<em>{i-1}$在$a_i$之前，称$a</em>{i-1}$是$a_i$的直接前驱$(1&lt;i≤n)$</p>
+</li>
+<li><p>$a<em>{i+1}$在$a_i$之后，称$a</em>{i+1}$是$a_i$的直接后继$(1≤i&lt;n)$</p>
+</li>
+<li><p>$a_1$没有前驱</p>
+</li>
+<li><p>$a_n$没有后继</p>
+</li>
+<li><p>$a_i(1&lt;i&lt;n)$有且仅有一个直接前驱和一个直接后继</p>
+</li>
+</ol>
+<h2 id="抽象数据类型线性表的定义"><a href="#抽象数据类型线性表的定义" class="headerlink" title="抽象数据类型线性表的定义"></a>抽象数据类型线性表的定义</h2><p>ADT List</p>
+<p>{ 数据对象：$D=\lbrace a_i|a_i∈ElemSet，i=1,2,…,n,n≥0\rbrace$</p>
+<p>  数据关系：$R<em>1=\lbrace&lt; a</em>{i-1} ,a<em>i&gt;| a</em>{i-1} ,a_i∈D,i=1,2,…,n  \rbrace$</p>
+<p>　基本操作：</p>
+<ol>
+<li><code>InitList(&amp;L) 　　//构造空表L</code></li>
+<li><code>ListLength(L)　　//求表的长度</code></li>
+<li><code>GetElem(L, i, &amp;e)　　//取元素ai，由e返回ai</code></li>
+<li><code>PriorElem(L, ce, &amp;pre_e)　　//求ce的前驱，由pre_e返回</code></li>
+<li><code>InsertElem(&amp;L, i, e)　　//在元素ai之前插入新元素e</code></li>
+<li><code>DeleteElem(&amp;L, i)　　//删除第i个元素</code></li>
+<li><code>EmptyList(L)　　//判断是否为空表</code>
+　　　</li>
+</ol>
+<p>……</p>
+<p>　　} ADT List</p>
+<p>说明：</p>
+<ol>
+<li>删除表$L$中第$i$个数据元素$(1\leq i\leq n)$，记作：<code>DeleteElem(&amp;L, i)</code>；指定序号，删除$a_i$</li>
+<li>指定元素值$x$，删除表$L$中的值为$x$的元素，记作：<code>DeleteElem(&amp;L, x)</code>；若$a_i=x$，删除$a_i$</li>
+<li>在元素$a_i$之前插入新元素$e(1\leq i\leq n+1)$，记作：<code>InsertElem(&amp;L, i, e)</code></li>
+<li>查找——确定元素值（或数据项的值）为$e$的元素。若有一个$a_i=e$，则称“查找成功”$(i=1,2,…,n)$</li>
+<li>排序——按元素值或某个数据项值的递增（或递减）次序重新排列表中各元素的位置</li>
+<li>将表$L_a$和$L_b$合并为$L_c$</li>
+<li>表$L_a$复制为表$L_b$</li>
+</ol>
+<h2 id="线性表的顺序表示"><a href="#线性表的顺序表示" class="headerlink" title="线性表的顺序表示"></a>线性表的顺序表示</h2><p>　　<br>顺序分配：$(a_1,a_2,…,a_n)$顺序存储结构的一般形式</p>
+<p><img src="https://i.loli.net/2019/10/22/yqDBGN1VFPahQW3.png" alt="memory.png"></p>
+<p>b表示表的首/基地址</p>
+<p>p表示1个数据元素所占存储单元的数目</p>
+<h4 id="例1：分别定义元素所占空间、表长、尾元素的位置"><a href="#例1：分别定义元素所占空间、表长、尾元素的位置" class="headerlink" title="例1：分别定义元素所占空间、表长、尾元素的位置"></a>例1：分别定义元素所占空间、表长、尾元素的位置</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxleng 100</span></span><br><span class="line">&#123;</span><br><span class="line">    ElemType la[maxleng+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> length;    <span class="comment">//当前长度</span></span><br><span class="line">    <span class="keyword">int</span> last;    <span class="comment">//an的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h3><p>例2：元素所占空间和表长合并为C语言的一个结构类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxleng 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType elem[maxleng];</span><br><span class="line">    <span class="keyword">int</span> length;    <span class="comment">//表长</span></span><br><span class="line">&#125; Sqlist;</span><br><span class="line">Sqlist La;</span><br></pre></td></tr></table></figure>
+<p>其中：typedef——别名定义，Sqlist——结构类型名，La——结构类型变量名，La.length——表长，La.elem[0]——$a_1$，La[La.length-1]——$a_n$。</p>
+<h3 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType *elem;    <span class="comment">//存储空间基地址</span></span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> listsize;    <span class="comment">//当前分配的存储容量 以 sizeof(ElemType)为单位</span></span><br><span class="line">&#125; Sqlist;</span><br><span class="line">Sqlist Lb;</span><br></pre></td></tr></table></figure>
+<h3 id="寻址公式"><a href="#寻址公式" class="headerlink" title="寻址公式"></a>寻址公式</h3><p>假设：线性表的首地址为b，每个数据元素占p个存储单元，则表中任意元素$(1\leq i\leq n)$的存储地址是：$LOC(i)=LOC(1)+(i-1)<em>p=b+(i-1)</em>p，(1&lt;=i&lt;=n)$。</p>
+<h3 id="顺序表的插入算法"><a href="#顺序表的插入算法" class="headerlink" title="顺序表的插入算法"></a>顺序表的插入算法</h3><p>在线性表$L=(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中的第$i$个元素前插入元素$x$。 </p>
+<p>移动元素下标范围：$i - 1$ ~ $n - 1$ 或 $i - 1$ ~ $L.length - 1$。</p>
+<h4 id="算法1：静态分配线性表空间，用指针指向被操作的线性表"><a href="#算法1：静态分配线性表空间，用指针指向被操作的线性表" class="headerlink" title="算法1：静态分配线性表空间，用指针指向被操作的线性表"></a>算法1：静态分配线性表空间，用指针指向被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Insert</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i值不合法</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=maxleng)</span><br><span class="line">        <span class="keyword">return</span> OVERLOW;    <span class="comment">//溢出</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];    <span class="comment">//向后移动元素</span></span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//插入新元素</span></span><br><span class="line">    L.length++;    <span class="comment">// 长度变量增1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本思想：</p>
+<ul>
+<li>判断插入的位置是否合理；</li>
+<li>判断表长是否达到分配空间的最大值；</li>
+<li>从线性表中的最后一个元素到插入位置的所有元素，依次往后移动一个元素的位置，这样给待插入的元素留出了一个空位置；</li>
+<li>把新增元素插入到这个空位置，表长增加1，返回。</li>
+</ul>
+<h4 id="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"><a href="#算法2：动态分配线性表空间，用引用参数表示被操作的线性表" class="headerlink" title="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"></a>算法2：动态分配线性表空间，用引用参数表示被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Insert</span><span class="params">(Sqlist &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i的合法取值为1至n+1</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=L.listsize)    <span class="comment">//溢出时扩充</span></span><br><span class="line">    &#123;</span><br><span class="line">        ElemType *newbase;</span><br><span class="line">        newbase=(ElemType *)<span class="built_in">realloc</span>(L.elem, L.listsize+LISTINCREMENT*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="keyword">if</span>(newbase==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> OVERFLOW;</span><br><span class="line">        L.elem=newbase;</span><br><span class="line">        L.length+=LISTINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//向后移动元素，空出第i个元素的分量elem[i-1]</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];</span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//新元素插入</span></span><br><span class="line">    L.length++;    <span class="comment">//线性表长度加1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入操作移动元素次数的分析"><a href="#插入操作移动元素次数的分析" class="headerlink" title="插入操作移动元素次数的分析"></a>插入操作移动元素次数的分析</h3><p>在$(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中$a_i$之前插入新元素$e(1\leq i\leq n)$。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">当插入点为</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">i</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">n</th>
+<th style="text-align:center">n+1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需移动元素个数</td>
+<td style="text-align:center">n</td>
+<td style="text-align:center">n-1</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">n-i+1</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假定$P<em>i$是在各位置插入元素的概率，且$P_1=P_2=…=P_n=P</em>{n+1}=\frac{1}{n+1}$</p>
+<p>则插入一个元素时移动元素的平均值是：</p>
+<script type="math/tex; mode=display">E_{is}=\sum_{i=1}^{n+1}P_i(n-i+1)=\frac{n}{2}</script><h3 id="顺序表的删除算法"><a href="#顺序表的删除算法" class="headerlink" title="顺序表的删除算法"></a>顺序表的删除算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||L-&gt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"not exits"</span>);</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(j=i;j&lt;=L-&gt;length<span class="number">-1</span>;j++)</span><br><span class="line">            L-&gt;elem[j<span class="number">-1</span>]=L-&gt;elem[j];</span><br><span class="line">    L-&gt;length--;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本思想：</p>
+<ul>
+<li>判断删除元素的下标是否存在；</li>
+<li>用一个for循环来移动元素，移动元素下标范围为 i 到 length-1；</li>
+<li>修改表长为原表长减1。</li>
+</ul>
+<h3 id="删除操作及移动元素次数的分析"><a href="#删除操作及移动元素次数的分析" class="headerlink" title="删除操作及移动元素次数的分析"></a>删除操作及移动元素次数的分析</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">被删除元素位置</th>
+<th style="text-align:center">i=1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">i</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需移动元素个数</td>
+<td style="text-align:center">n-1</td>
+<td style="text-align:center">n-2</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">n-i</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假定$q<em>i$是在各位置插入元素的概率，且$q_1=q_2=…=q_n=q</em>{n+1}=\frac{1}{n}$</p>
+<p>则删除一个元素时移动的平均值是：</p>
+<script type="math/tex; mode=display">E_{dl}=\sum_{i=1}^{n+1}q_i(n-i)=\frac{n-1}{2}</script><h3 id="顺序结构的优缺点"><a href="#顺序结构的优缺点" class="headerlink" title="顺序结构的优缺点"></a>顺序结构的优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>是一种随机存储结构，存取任何元素的时间是一个常数，速度快；</li>
+<li>结构简单，逻辑上相邻元素在物理上也是相邻的；</li>
+<li>不需要使用指针，节省存储空间。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>插入和删除元素要移动大量元素，消耗大量时间；</li>
+<li>需要一块连续的存储空间；</li>
+<li>插入元素可能发生溢出；</li>
+<li>自由区中的存储空间不能被其他数据占用（共享），存在浪费空间的问题。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/21/hello-world/" rel="next" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/22/data-structure3/" rel="prev" title="数据结构——线性表（二）">
+                  数据结构——线性表（二） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的定义"><span class="nav-text">线性表的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的特征"><span class="nav-text">线性表的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象数据类型线性表的定义"><span class="nav-text">抽象数据类型线性表的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性表的顺序表示"><span class="nav-text">线性表的顺序表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例1：分别定义元素所占空间、表长、尾元素的位置"><span class="nav-text">例1：分别定义元素所占空间、表长、尾元素的位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态分配"><span class="nav-text">静态分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分配"><span class="nav-text">动态分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻址公式"><span class="nav-text">寻址公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表的插入算法"><span class="nav-text">顺序表的插入算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法1：静态分配线性表空间，用指针指向被操作的线性表"><span class="nav-text">算法1：静态分配线性表空间，用指针指向被操作的线性表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法2：动态分配线性表空间，用引用参数表示被操作的线性表"><span class="nav-text">算法2：动态分配线性表空间，用引用参数表示被操作的线性表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作移动元素次数的分析"><span class="nav-text">插入操作移动元素次数的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序表的删除算法"><span class="nav-text">顺序表的删除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作及移动元素次数的分析"><span class="nav-text">删除操作及移动元素次数的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序结构的优缺点"><span class="nav-text">顺序结构的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Tronysh"
+    src="/images/bro.jpg">
+  <p class="site-author-name" itemprop="name">Tronysh</p>
+  <div class="site-description" itemprop="description">忠于美好</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/tronysh_ai@163.com" title="E-Mail &amp;rarr; tronysh_ai@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/tronysh" title="Instagram &amp;rarr; https:&#x2F;&#x2F;instagram.com&#x2F;tronysh" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tronysh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.2.js"></script>
+
+<script src="/js/motion.js?v=7.4.2.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.2.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.2.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+  
+
+</body>
+</html>

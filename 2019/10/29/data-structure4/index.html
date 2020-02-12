@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":8,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="栈是输入与输出操作限制在栈顶位置进行的数据结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构——栈">
+<meta property="og:url" content="http://tronysh.github.io/2019/10/29/data-structure4/index.html">
+<meta property="og:site_name" content="Tronysh">
+<meta property="og:description" content="栈是输入与输出操作限制在栈顶位置进行的数据结构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E6%A0%88%E7%9A%84%E6%A6%82%E5%BF%B5.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E6%A0%88%E5%9B%BE.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%A1%BA%E5%BA%8F%E6%A0%881_%E9%9D%9E.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%A1%BA%E5%BA%8F%E6%A0%881_%E7%A9%BA.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%A1%BA%E5%BA%8F%E6%A0%882_%E9%9D%9E.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%A1%BA%E5%BA%8F%E6%A0%882_%E7%A9%BA.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%93%BE%E5%BC%8F%E6%A0%88_%E9%9D%9E.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%93%BE%E5%BC%8F%E6%A0%88%E5%8F%8D.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%93%BE%E5%BC%8F%E6%A0%88%E8%BF%9B%E6%A0%88.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E9%93%BE%E5%BC%8F%E6%A0%88%E5%87%BA%E6%A0%88.png">
+<meta property="article:published_time" content="2019-10-29T11:15:21.000Z">
+<meta property="article:modified_time" content="2020-01-23T04:44:54.734Z">
+<meta property="article:author" content="Tronysh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tronysh.github.io/2019/10/29/data-structure4/%E6%A0%88%E7%9A%84%E6%A6%82%E5%BF%B5.png">
+
+<link rel="canonical" href="http://tronysh.github.io/2019/10/29/data-structure4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数据结构——栈 | Tronysh</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ad350ecb3c67fc126ff8495447afc90a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tronysh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2019/10/29/data-structure4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/bro.jpg">
+      <meta itemprop="name" content="Tronysh">
+      <meta itemprop="description" content="忠于美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tronysh">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构——栈
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-29 19:15:21" itemprop="dateCreated datePublished" datetime="2019-10-29T19:15:21+08:00">2019-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-23 12:44:54" itemprop="dateModified" datetime="2020-01-23T12:44:54+08:00">2020-01-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">栈是输入与输出操作限制在栈顶位置进行的数据结构。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="栈的概念与特性"><a href="#栈的概念与特性" class="headerlink" title="栈的概念与特性"></a>栈的概念与特性</h3><p>一般的线性表插入和删除位置是没有限制的，而栈和队列对插入与删除的位置有限制，从而在相关操作上有一定的特殊性。</p>
+<p>栈：限制在表尾作插入、删除操作的线性表</p>
+<p><img src="/2019/10/29/data-structure4/栈的概念.png" alt="栈的概念.png"></p>
+<p><img src="/2019/10/29/data-structure4/栈图.png" alt="栈图.png"></p>
+<p>进栈：插入一个元素到栈中。或称：入栈、推入、压入、push。</p>
+<p>出栈：从栈删除一个元素。或称：退栈、上托、弹出、pop。</p>
+<p>栈顶：允许插入、删除元素的一端（表尾）。</p>
+<p>栈顶元素：处在栈顶位置的元素。</p>
+<p>栈底：表中不允许插入、删除元素的一端。</p>
+<p>空栈：不含元素的栈。</p>
+<p>栈的元素的进出原则：“先进后出”。</p>
+<h3 id="栈的基本操作"><a href="#栈的基本操作" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Initstack(s); <span class="comment">//置s为空栈</span></span><br><span class="line">Push(s,e); <span class="comment">//元素e进栈。若s为满，则发生溢出，若不能解决溢出，重新分配空间失败，则插入失败。</span></span><br><span class="line">Pop(s,e); <span class="comment">//删除s的顶元素，并送入e。若s为空栈，发生“下溢”。为空栈时，表某项任务已经完成</span></span><br><span class="line">Gettop(s,e); <span class="comment">//栈s的顶元素拷贝到e。若s为空栈，操作结束。</span></span><br><span class="line">Empty(s); <span class="comment">//判断s是否为空栈。若s为空栈，则Empty(s)为ture；否则为false。</span></span><br></pre></td></tr></table></figure>
+<h3 id="理解栈操作"><a href="#理解栈操作" class="headerlink" title="理解栈操作"></a>理解栈操作</h3><p>栈是输入与输出操作限制在栈顶位置进行的数据结构。</p>
+<p>假设A、B、C进栈，不可能产生CAB的出栈顺序。</p>
+<p>一般地，输入序列$(…, a_i, …, a_j, …, a_k, …)$到栈中，不能得到输出序列$(…, a_k, …, a_i, …, a_j, …)$。</p>
+<h3 id="顺序栈的基本操作"><a href="#顺序栈的基本操作" class="headerlink" title="顺序栈的基本操作"></a>顺序栈的基本操作</h3><p>顺序栈：用顺序空间表示的栈</p>
+<h4 id="设计实现方案时需要考虑的因素："><a href="#设计实现方案时需要考虑的因素：" class="headerlink" title="设计实现方案时需要考虑的因素："></a>设计实现方案时需要考虑的因素：</h4><p>如何分配存储空间</p>
+<ul>
+<li>动态分配或静态分配</li>
+<li>栈空间范围，如：s[0…maxleng-1]</li>
+</ul>
+<p>如何设置进栈和出栈的标志top</p>
+<ul>
+<li>如top指向栈顶元素或指向栈顶元素上一空单元等，作为进栈与出栈的依据。</li>
+</ul>
+<p>分析满栈的条件，用于进栈操作。</p>
+<p>分析空栈的条件，用于出栈操作。</p>
+<h3 id="针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。"><a href="#针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。" class="headerlink" title="针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。"></a>针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。</h3><h4 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h4><p>方案内容 </p>
+<p>栈空间范围为：s[0…maxleng-1]</p>
+<p>顶指针指向顶元素所在位置：</p>
+<p><img src="/2019/10/29/data-structure4/顺序栈1_非.png" alt="顺序栈1_非.png"></p>
+<ol>
+<li><p>非空栈示意图 top≥0 顶元素=s[top]</p>
+</li>
+<li><p>进出栈说明</p>
+<ul>
+<li>进栈操作：先对top加1，指向下一空位置，将新数据送入top指向的位置，完成进栈操作。结束时top指向新栈顶元素所在位置。</li>
+<li>出栈操作：先根据top指向，取出栈顶数据元素；再对top减1。完成出栈操作。结束时top指向去掉原栈顶元素后的新栈顶元素所在位置。</li>
+</ul>
+</li>
+<li><p>满栈条件 <code>top==maxleng-1</code> 若插入元素，将发生溢出。overflow。</p>
+</li>
+</ol>
+<p><img src="/2019/10/29/data-structure4/顺序栈1_空.png" alt="顺序栈1_空.png"></p>
+<ol>
+<li>空栈条件 <code>top==-1</code> 执行操作，则发生下溢。</li>
+</ol>
+<h4 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h4><p>方案内容</p>
+<p>栈空间范围为：s[0…maxleng-1]</p>
+<p>顶指针指向顶元素上的一空位置：</p>
+<p><img src="/2019/10/29/data-structure4/顺序栈2_非.png" alt="顺序栈2_非.png"></p>
+<ol>
+<li><p>非空栈示意图 top≥1 顶元素=s[top-1]</p>
+</li>
+<li><p>进出栈操作说明：</p>
+<ul>
+<li>进栈操作：先将新数据送入top指向的位置，再对top加1，指向下一空位置，完成进栈操作。结束时，top正好指向新栈顶元素所在位置上的一空位置。</li>
+<li>出栈操作：先对top减1，根据top指向取出栈顶数据，完成出栈操作。结束时top指向去掉原栈顶元素后的新栈顶元素所在位置上的一空位置。</li>
+</ul>
+</li>
+<li><p>满栈条件 <code>top==maxleng</code> 若插入元素，将发生“溢出”。</p>
+</li>
+</ol>
+<p><img src="/2019/10/29/data-structure4/顺序栈2_空.png" alt="顺序栈2_空.png"></p>
+<ol>
+<li>空栈条件 <code>top==0</code> 若删除元素，则发生下溢。</li>
+</ol>
+<h3 id="顺序栈的描述"><a href="#顺序栈的描述" class="headerlink" title="顺序栈的描述"></a>顺序栈的描述</h3><p>栈元素与顶指针舍弃定义为一个记录（结构）</p>
+<p>约定：</p>
+<ul>
+<li>栈元素空间为[0…maxleng-1]</li>
+<li>top指向栈元素上一空位置。</li>
+<li>**top是栈顶标志，根据约定由top找栈顶元素。</li>
+</ul>
+<p>存储空间分配方案</p>
+<h4 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType elem[maxleng<span class="number">-1</span>]; <span class="comment">//栈元素空间</span></span><br><span class="line">    <span class="keyword">int</span> top; <span class="comment">//顶指针</span></span><br><span class="line">&#125; SqStack; <span class="comment">//SqStack为结构类型</span></span><br><span class="line">SqStack s; <span class="comment">//s为结构类型变量</span></span><br></pre></td></tr></table></figure>
+<p>其中：s.top——顶指针 s.elem[s.top-1]——顶元素</p>
+<h4 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKINCREMENT 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType *base; <span class="comment">//指向栈元素空间</span></span><br><span class="line">    <span class="keyword">int</span> top; <span class="comment">//顶指针</span></span><br><span class="line">    <span class="keyword">int</span> stacksize; <span class="comment">//栈元素空间大小，相当于maxleng</span></span><br><span class="line">&#125; SqStack; <span class="comment">//SqStack为结构类型</span></span><br><span class="line">SqStack s;</span><br></pre></td></tr></table></figure>
+<h3 id="顺序栈的算法"><a href="#顺序栈的算法" class="headerlink" title="顺序栈的算法"></a>顺序栈的算法</h3><h4 id="初始化栈（动态分配）"><a href="#初始化栈（动态分配）" class="headerlink" title="初始化栈（动态分配）"></a>初始化栈（动态分配）</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(SqStack &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.base=(ElemType *)<span class="built_in">malloc</span>(STACK_INIT_SIZE*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">    s.top=<span class="number">0</span>;</span><br><span class="line">    s.stacksize=STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="进栈算法"><a href="#进栈算法" class="headerlink" title="进栈算法"></a>进栈算法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">push</span><span class="params">(SqStack &amp;s, ElemType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top&gt;=s.stacksize) <span class="comment">//发生溢出，扩充</span></span><br><span class="line">    &#123;</span><br><span class="line">        newbase=(ElemType *)relloc(s.base, (s.stacksize+STACKINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="keyword">if</span>(!newbase)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Overflow"</span>);</span><br><span class="line">            <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(s.base);</span><br><span class="line">        s.base=newbase;</span><br><span class="line">        s.stacksize+=STACKINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    s.base[s.top]=x; <span class="comment">//装入元素x</span></span><br><span class="line">    s.top++; <span class="comment">//修改顶指针</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出栈算法"><a href="#出栈算法" class="headerlink" title="出栈算法"></a>出栈算法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">(SqStack &amp;s, ElemType &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR; <span class="comment">//空栈</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        s.top--; <span class="comment">//修改顶指针</span></span><br><span class="line">        x=s.base[s.top]; <span class="comment">//取走栈顶元素</span></span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">//成功退栈，返回OK</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链式栈的基本操作"><a href="#链式栈的基本操作" class="headerlink" title="链式栈的基本操作"></a>链式栈的基本操作</h3><h4 id="非空链式栈的一般形式"><a href="#非空链式栈的一般形式" class="headerlink" title="非空链式栈的一般形式"></a>非空链式栈的一般形式</h4><p>假定元素进栈次序为：$a_1, a_2, …, a_n$。</p>
+<p>用普通无头结点的单链表：</p>
+<p><img src="/2019/10/29/data-structure4/链式栈_非.png" alt="链式栈_非空.png"></p>
+<p>进栈需要找到最后一个结点；出栈时删除最后一个结点。</p>
+<p>缺点：进出栈时间开销大。</p>
+<p>解决方案：将指针次序颠倒过来，top指向$a_n$。</p>
+<p><img src="/2019/10/29/data-structure4/链式栈反.png" alt="链式栈反.png"></p>
+<p>进栈将新结点作为首结点；出栈时删除首结点。</p>
+<p>优点：进出栈时间为常数。</p>
+<h4 id="链式栈的进栈"><a href="#链式栈的进栈" class="headerlink" title="链式栈的进栈"></a>链式栈的进栈</h4><p>压入元素e到top为顶指针的链式栈。</p>
+<p><img src="/2019/10/29/data-structure4/链式栈进栈.png" alt="链式栈进栈.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p=(struct node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct node));</span><br><span class="line">p-&gt;data=e;</span><br><span class="line">p-&gt;next=top;</span><br><span class="line">top=p;</span><br></pre></td></tr></table></figure>
+<p>进栈算法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct node* <span class="title">push_link</span><span class="params">(struct node *top, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="keyword">int</span> leng=<span class="keyword">sizeof</span>(struct node); <span class="comment">//确认新结点空间大小</span></span><br><span class="line">    p=(struct node *)<span class="built_in">malloc</span>(leng); <span class="comment">//生成新结点</span></span><br><span class="line">    p-&gt;data=e;</span><br><span class="line">    p-&gt;next=top;</span><br><span class="line">    top=p;</span><br><span class="line">    <span class="keyword">return</span> top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="链式栈的退栈"><a href="#链式栈的退栈" class="headerlink" title="链式栈的退栈"></a>链式栈的退栈</h4><p><img src="/2019/10/29/data-structure4/链式栈出栈.png" alt="链式栈出栈.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p=top;</span><br><span class="line">top=top-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
+<p>退栈算法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct node* <span class="title">pop</span><span class="params">(struct node *top, ElemType *e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="keyword">if</span>(top==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">//空栈</span></span><br><span class="line">    p=pop;</span><br><span class="line">    (*e)=p-&gt;data;</span><br><span class="line">    top=top-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">return</span> top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><h4 id="数制转换"><a href="#数制转换" class="headerlink" title="数制转换"></a>数制转换</h4><p>例：给定十进制数N=1348，转换为八进制数R=2504</p>
+<ol>
+<li>依次求余数，并送入栈中，直到商为0。<ol>
+<li>r1=1348%8=4 //求余数 n1=1348/8=168 //求商</li>
+<li>r2=168%8=0 //求余数 n1=168/8=21</li>
+<li>r3=21%8=5 n1=21/8=2</li>
+<li>r4=2%8=2 n1=2/8=0</li>
+</ol>
+</li>
+<li>依次退栈，得2504。</li>
+</ol>
+<h4 id="判定表达式中的括号匹配"><a href="#判定表达式中的括号匹配" class="headerlink" title="判定表达式中的括号匹配"></a>判定表达式中的括号匹配</h4><p>该检查算法的思想如下：</p>
+<ol>
+<li>每碰到一个左括号，把左括号进栈；</li>
+<li>每碰到一个右括号，就将栈顶元素出栈，记作b，检查b是否跟a匹配的左括号。如果是，则继续；否则，返回，提示存在括号不匹配。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/28/stm32-spi-config/" rel="next" title="STM32开发——SPI">
+                  <i class="fa fa-chevron-left"></i> STM32开发——SPI
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/01/23/data-structure5/" rel="prev" title="数据结构——队列">
+                  数据结构——队列 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的概念与特性"><span class="nav-text">栈的概念与特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的基本操作"><span class="nav-text">栈的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解栈操作"><span class="nav-text">理解栈操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序栈的基本操作"><span class="nav-text">顺序栈的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计实现方案时需要考虑的因素："><span class="nav-text">设计实现方案时需要考虑的因素：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。"><span class="nav-text">针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方案1"><span class="nav-text">方案1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方案2"><span class="nav-text">方案2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序栈的描述"><span class="nav-text">顺序栈的描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态分配"><span class="nav-text">静态分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态分配"><span class="nav-text">动态分配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序栈的算法"><span class="nav-text">顺序栈的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化栈（动态分配）"><span class="nav-text">初始化栈（动态分配）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进栈算法"><span class="nav-text">进栈算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出栈算法"><span class="nav-text">出栈算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式栈的基本操作"><span class="nav-text">链式栈的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非空链式栈的一般形式"><span class="nav-text">非空链式栈的一般形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式栈的进栈"><span class="nav-text">链式栈的进栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式栈的退栈"><span class="nav-text">链式栈的退栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的应用"><span class="nav-text">栈的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数制转换"><span class="nav-text">数制转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判定表达式中的括号匹配"><span class="nav-text">判定表达式中的括号匹配</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Tronysh"
+    src="/images/bro.jpg">
+  <p class="site-author-name" itemprop="name">Tronysh</p>
+  <div class="site-description" itemprop="description">忠于美好</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/tronysh_ai@163.com" title="E-Mail &amp;rarr; tronysh_ai@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/tronysh" title="Instagram &amp;rarr; https:&#x2F;&#x2F;instagram.com&#x2F;tronysh" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tronysh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.2.js"></script>
+
+<script src="/js/motion.js?v=7.4.2.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.2.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.2.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+  
+
+</body>
+</html>

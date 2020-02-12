@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":8,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="数组，是有序的元素序列。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构——数组">
+<meta property="og:url" content="http://tronysh.github.io/2020/01/23/data-structure6/index.html">
+<meta property="og:site_name" content="Tronysh">
+<meta property="og:description" content="数组，是有序的元素序列。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tronysh.github.io/2020/01/23/data-structure6/%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA.png">
+<meta property="og:image" content="http://tronysh.github.io/2020/01/23/data-structure6/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E8%A1%8C%E5%BA%8F%E5%AD%98%E5%82%A8.png">
+<meta property="og:image" content="http://tronysh.github.io/2020/01/23/data-structure6/%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8.png">
+<meta property="article:published_time" content="2020-01-23T08:33:52.000Z">
+<meta property="article:modified_time" content="2020-01-23T15:03:50.953Z">
+<meta property="article:author" content="Tronysh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tronysh.github.io/2020/01/23/data-structure6/%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA.png">
+
+<link rel="canonical" href="http://tronysh.github.io/2020/01/23/data-structure6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数据结构——数组 | Tronysh</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ad350ecb3c67fc126ff8495447afc90a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tronysh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/01/23/data-structure6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/bro.jpg">
+      <meta itemprop="name" content="Tronysh">
+      <meta itemprop="description" content="忠于美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tronysh">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构——数组
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-23 16:33:52 / 修改时间：23:03:50" itemprop="dateCreated datePublished" datetime="2020-01-23T16:33:52+08:00">2020-01-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">数组，是有序的元素序列。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><ol>
+<li><p>一维数组：是一个定长线性表$(a_1,a_2,…,a_n)$</p>
+<p>记为：$A=(a_1,a_2,…,a_n)$</p>
+<p>其中：$a_i$为数据元素，$i$为下标/序号，$1\le i\le n$</p>
+</li>
+<li><p>二维数组是一个定长线性表</p>
+<p>$A=(\alpha_1,\alpha_2,…,\alpha_m)$这里每个元素$\alpha_i$代表矩阵的一行</p>
+<p>$A=(\beta_1,\beta_2,…,\beta_n)$这里每个元素$\beta_j$代表矩阵的一列</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+数组\begin{cases}
+数据对象\\
+数据关系\\
+基本操作\\
+\end{cases}</script><h3 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InitArray(&amp;A,n,bound1,...,boundn); <span class="comment">//创建一个n维数组，各维长度通过boundi表示</span></span><br><span class="line">DestroyArray(&amp;A); <span class="comment">//销毁数组A</span></span><br><span class="line">Value(A,&amp;e,index1,...,indexn); <span class="comment">//读取数组指定下标的元素值到e中</span></span><br><span class="line">Assign(A,e,index1,...,indexn); <span class="comment">//将e的值给指定下标的数组元素中</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组的顺序表示和实现"><a href="#数组的顺序表示和实现" class="headerlink" title="数组的顺序表示和实现"></a>数组的顺序表示和实现</h3><h4 id="数组的物理结构"><a href="#数组的物理结构" class="headerlink" title="数组的物理结构"></a>数组的物理结构</h4><p>因素：</p>
+<ol>
+<li>分配连续的存储单元成非连续的存储单元；</li>
+<li>保存全部数组元素成部分的数组元素。</li>
+</ol>
+<h4 id="一维数组的顺序表示"><a href="#一维数组的顺序表示" class="headerlink" title="一维数组的顺序表示"></a>一维数组的顺序表示</h4><p>一维数组$A=(a_1,a_2,…,a_n)$</p>
+<p><img src="/2020/01/23/data-structure6/一维数组的顺序表示.png" alt="一维数组的顺序表示.png"></p>
+<p>一维数组数据元素$a_i$的地址计算公式</p>
+<p>$LOC(i)=b+(i-1)L=LOC(1)+(i-1)L$</p>
+<p>其中：$LOC(i)$为元素$a_i$的存储位置，b是连续存储单元首地址，L是一个数据元素所占的单元数。</p>
+<h4 id="二维数组的顺序表示"><a href="#二维数组的顺序表示" class="headerlink" title="二维数组的顺序表示"></a>二维数组的顺序表示</h4><p>步骤：</p>
+<ol>
+<li><p>计算需要分配多大的连续空间，才能保存所有的数据元素。</p>
+</li>
+<li><p>存放方式，一种是逐行存放，称为行序优先。还有一种是逐列存放，我们也称为列序优先。</p>
+</li>
+</ol>
+<h5 id="以行序为主序的顺序存储方式"><a href="#以行序为主序的顺序存储方式" class="headerlink" title="以行序为主序的顺序存储方式"></a>以行序为主序的顺序存储方式</h5><script type="math/tex; mode=display">
+    \begin{pmatrix}
+    a_{11}&a_{12}\\
+    a_{21}&a_{22}\\
+    a_{31}&a_{32}\\    
+    \end{pmatrix}</script><p><img src="/2020/01/23/data-structure6/二维数组的行序存储.png" alt="二维数组的行序存储.png"></p>
+<p>$A_{m*n}$需要考虑：</p>
+<ol>
+<li><p>分配空间；明确分配多大连续空间。这里共需要开辟$m*n$个数据元素的连续空间。</p>
+</li>
+<li><p>确定存放方式，首先以行序优先逐行存放。</p>
+</li>
+<li><p>分析数据元素$a_{ij}$的计算空间。</p>
+</li>
+</ol>
+<p>当采用逐行存放方式时，前面有$i$行，每行有$n$个数据元素，共有$i*n$个数据元素。</p>
+<p>而在第$i$行中，$a_{ij}$前面还需要存放$j$个数据元素。</p>
+<p>这样在前面存放的数据元素的总个数是$i*n+j$。所以$a_{ij}$的地址计算公式为：</p>
+<script type="math/tex; mode=display">LOC(i,j)=b+(i*n+j)L=LOC(0,0)+(i*n+j)L</script><p>考虑列序优先，逐列存放时，前面有$j$列，每列有$m$个数据元素，共有$j*m$个数据元素。</p>
+<p>而在第$j$列中，$a_{ij}$前面还需要存放$i$个数据元素。</p>
+<p>这样在前面存放的数据元素的总个数是$j*m+i$。所以$a_{ij}$的地址计算公式为：</p>
+<script type="math/tex; mode=display">LOC(i,j)=b+(j*m+i)L=LOC(0,0)+(j*m+i)L</script><p>对任意一个数组元素$A[i_1,i_2,…,i_n]$，可得到行序优先的寻址方式为</p>
+<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a<em>{ij}=a</em>{ji}$，$i\le m,j\le n$</p>
+<p>下三角元素$a_{ij}$满足$i\ge j$</p>
+<p>数据元素的个数$=1+2+…+n=n(n+1)/2$</p>
+<p>假定以行序为主，顺序存储下三角元素到$SA[1…n(n+1)/2]$</p>
+<ol>
+<li><p>设$a_{ij}$在下三角，$i\ge j$</p>
+<p> $\because$第$1$~$i-1$行共有元素$1+2+3+…+(i-1)=i(i-1)/2$个</p>
+<p> 第$i$行中，$a_{ij}$是第$j$个数据元素，共有$j$个元素</p>
+<p> $\therefore$$a_{ij}$的序号为：$k=i(i-1)/2+j$</p>
+</li>
+<li><p>设$a_{ij}$在上三角，$i\lt j$</p>
+<p> $\because$上三角的$a<em>{ij}$等于下三角的$a</em>{ji}$</p>
+<p> 下三角的$a_{ji}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
+<p> $\therefore$上三角的$a_{ij}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
+</li>
+</ol>
+<p>由1和2，任意$a_{ij}$在$SA$中的序号，为</p>
+<script type="math/tex; mode=display">
+k= \begin{cases}
+   i(i-1)/2+j, i\ge j\\
+   j(j-1)/2+i, i<j\\
+   \end{cases}
+   或
+A(i,j)=\begin{cases}
+       SA[i(i-1)/2+j], i\ge j\\
+       SA[j(j-1)/2+i], i<j\\
+       \end{cases}</script><p>该公式称为在$SA$中的映象函数，下标转换公式</p>
+<h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了对角的三条元素，其余为0</p>
+<ol>
+<li><p>元素$a_{ij}$在三对角的条件：$|i-j|\le1$；</p>
+</li>
+<li><p>三对角的元素个数：$3n-2$</p>
+</li>
+</ol>
+<p>假定以行序优先，将三对角元素顺序存储到$SA[1…3n-2]$中</p>
+<p>任意三对角元素$a_{ij}$，在$SA$中的序号：</p>
+<p>$k=(3*(i-1)-i)+(j-i+2)=2i+j-2$</p>
+<script type="math/tex; mode=display">
+A[i,j]=\begin{cases}
+       SA[k], |i-j|\le1\\
+       0, 其它\\
+       \end{cases}</script><h3 id="稀疏矩阵的压缩存储"><a href="#稀疏矩阵的压缩存储" class="headerlink" title="稀疏矩阵的压缩存储"></a>稀疏矩阵的压缩存储</h3><h4 id="三元组表"><a href="#三元组表" class="headerlink" title="三元组表"></a>三元组表</h4><p>在实际应用中，常常会遇到一种矩阵，零元素很多，非零元素很少，且非零元素在矩阵中的位置没有特定的规律，我们称这种矩阵为稀疏矩阵。</p>
+<p>稀疏矩阵没有一个明确的定义，只是从形式上看，非零元素的个数的元素总数的比例低于某特定的定位。</p>
+<p>由于非零元素很少，所以只需保存这些非零元素，没有保存的都是零元素。为了标明每个非零元素在矩阵中的位置，我们可以以（行，列，值）形式的三元组形式来保存非零元素。</p>
+<p>所有的非零元素的三元组序列加上行数和列数称为三元组表。</p>
+<script type="math/tex; mode=display">(i,j,e)</script><h4 id="三元组顺序表"><a href="#三元组顺序表" class="headerlink" title="三元组顺序表"></a>三元组顺序表</h4><p>我们首先考虑的是分配连续的存储空间，保存稀疏矩阵中的三元组表，这种存储结构称之为三元组顺序表。</p>
+<p>在三元组顺序表中，首先需要的是一个足够大的三元组数组空间，将非零元素的三元组按行序优先的次序保存在数组中，再就是矩阵的行数，列数和非零元素的个数。</p>
+<p>这样三元组顺序表就能唯一地确定稀疏矩阵，逻辑上和物理上就对应起来了。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">33</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">36</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">28</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">37</td>
+</tr>
+<tr>
+<td style="text-align:center">///</td>
+<td style="text-align:center">///</td>
+<td style="text-align:center">///</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>行数(mu):6</p>
+<p>列数(nu):7</p>
+<p>非零元(tu):7</p>
+<h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><ol>
+<li><p>假定非零元素的个数最大值能达到10000，定义常量<code>MAXSIZE=10000;</code></p>
+</li>
+<li><p>定义三元组的结构类型triple；包括非零元素的行位置，列位置，元素值这三个属性。</p>
+</li>
+<li><p>定义三元组顺序表的结构类型TSMatrix。包括大小为MAXSIZE的三元组数组，行数，列数和非零元素个数几个属性。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 10000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i,j; <span class="comment">//非零元行，列下标</span></span><br><span class="line">    ElemType e;</span><br><span class="line">&#125;Triple; <span class="comment">//定义三元组</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Triple data[MAXSIZE+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> mu,nu,tu;</span><br><span class="line">&#125;TSMatrix; <span class="comment">//定义三元组表</span></span><br><span class="line">TSMatrix M;</span><br></pre></td></tr></table></figure>
+<h3 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h3><p><img src="/2020/01/23/data-structure6/十字链表.png" alt="十字链表.png"></p>
+<p>我们把这种物理结构称为十字链表。非常形象地表示了每个非零数据元素的水平方向的关系，行关系，以及垂直方向的关系，列关系。这两种关系十字交叉，所以称为十字链表。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> //三元组结点定义</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i,j; <span class="comment">//非零元素行，列位置</span></span><br><span class="line">    ElemType e;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> *<span class="title">right</span>, *<span class="title">down</span>;</span></span><br><span class="line">&#125;OLNode,*OLink;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> //十字链表类型定义</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    OLink *rhead,*chead; <span class="comment">//行列头指针数组</span></span><br><span class="line">    <span class="keyword">int</span> mu,nu,tu; <span class="comment">//稀疏矩阵的行数，列数和非零元个数</span></span><br><span class="line">&#125;CrossList;</span><br></pre></td></tr></table></figure>
+<h3 id="稀疏矩阵的转置算法"><a href="#稀疏矩阵的转置算法" class="headerlink" title="稀疏矩阵的转置算法"></a>稀疏矩阵的转置算法</h3><h4 id="算法1："><a href="#算法1：" class="headerlink" title="算法1："></a>算法1：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransMatrix1</span><span class="params">(TSMatrix M,TSMatrix &amp;T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T.mu=M.nu;</span><br><span class="line">    T.nu=M.mu;</span><br><span class="line">    T.tu=M.tu;</span><br><span class="line">    <span class="keyword">if</span>(T.tu)</span><br><span class="line">    &#123;</span><br><span class="line">        q=<span class="number">1</span>; <span class="comment">//指示向T写时的位置</span></span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">1</span>;col&lt;=M.nu;++col) <span class="comment">//扫描M的三元组表M.nu次</span></span><br><span class="line">            <span class="keyword">for</span>(p=<span class="number">1</span>;p&lt;=M.tu;++p) <span class="comment">//扫描M的长度为M.tu的三元表</span></span><br><span class="line">                <span class="keyword">if</span>(M.data[p].j==col) <span class="comment">//找到一个符合条件的三元组</span></span><br><span class="line">                &#123;</span><br><span class="line">                    T.data[q].i=M.data[p].j;</span><br><span class="line">                    T.data[q].j=M.data[p].i;</span><br><span class="line">                    T.data[q].e=M.data[p].e;</span><br><span class="line">                    q++;</span><br><span class="line">                &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：$O(M.mu*M.tu)$</p>
+<h4 id="算法2：改进算法"><a href="#算法2：改进算法" class="headerlink" title="算法2：改进算法"></a>算法2：改进算法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransMatrix2</span><span class="params">(TSMatrix M,TSMatrix &amp;T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T.mu=M.nu;</span><br><span class="line">    T.nu=M.mu;</span><br><span class="line">    T.tu=M.tu;</span><br><span class="line">    <span class="keyword">if</span>(T.tu)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">1</span>;col&lt;=M.nu;col++)</span><br><span class="line">            num[col]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(t=<span class="number">1</span>;t&lt;=M.tu;t++)</span><br><span class="line">            ++num[M.data[t].j];</span><br><span class="line">        cpot[<span class="number">1</span>]=<span class="number">1</span>; <span class="comment">//计算数组cpot</span></span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">2</span>;col&lt;=M.nu;col++)</span><br><span class="line">            cpot[col]=cpot[col<span class="number">-1</span>]+num[col<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(p=<span class="number">1</span>;p&lt;=M.tu;++p) <span class="comment">//扫描M三元组表</span></span><br><span class="line">        &#123;</span><br><span class="line">            col=M.data[p].j; <span class="comment">//确定M当前元素列号</span></span><br><span class="line">            q=cpot[col];</span><br><span class="line">            T.data[q].j=M.data[p].i;</span><br><span class="line">            T.data[q].i=M.data[p].j;</span><br><span class="line">            T.data[q].e=M.data[p].e;</span><br><span class="line">            ++cpot[col]; <span class="comment">//修改T的当前行下一元素存放位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/23/data-structure5/" rel="next" title="数据结构——队列">
+                  <i class="fa fa-chevron-left"></i> 数据结构——队列
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/01/24/data-structure7/" rel="prev" title="数据结构——广义表">
+                  数据结构——广义表 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的定义"><span class="nav-text">数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的操作"><span class="nav-text">数组的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的顺序表示和实现"><span class="nav-text">数组的顺序表示和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的物理结构"><span class="nav-text">数组的物理结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一维数组的顺序表示"><span class="nav-text">一维数组的顺序表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二维数组的顺序表示"><span class="nav-text">二维数组的顺序表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#以行序为主序的顺序存储方式"><span class="nav-text">以行序为主序的顺序存储方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊矩阵的压缩存储"><span class="nav-text">特殊矩阵的压缩存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#n阶对称矩阵"><span class="nav-text">n阶对称矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三对角矩阵"><span class="nav-text">三对角矩阵</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稀疏矩阵的压缩存储"><span class="nav-text">稀疏矩阵的压缩存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三元组表"><span class="nav-text">三元组表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三元组顺序表"><span class="nav-text">三元组顺序表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十字链表"><span class="nav-text">十字链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稀疏矩阵的转置算法"><span class="nav-text">稀疏矩阵的转置算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#算法1："><span class="nav-text">算法1：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法2：改进算法"><span class="nav-text">算法2：改进算法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Tronysh"
+    src="/images/bro.jpg">
+  <p class="site-author-name" itemprop="name">Tronysh</p>
+  <div class="site-description" itemprop="description">忠于美好</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/tronysh_ai@163.com" title="E-Mail &amp;rarr; tronysh_ai@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/tronysh" title="Instagram &amp;rarr; https:&#x2F;&#x2F;instagram.com&#x2F;tronysh" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tronysh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.2.js"></script>
+
+<script src="/js/motion.js?v=7.4.2.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.2.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.2.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":8,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自适应滤波器——LMS算法">
+<meta property="og:url" content="http://tronysh.github.io/2019/10/23/LMS-math/index.html">
+<meta property="og:site_name" content="Tronysh">
+<meta property="og:description" content="采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/23/LMS-math/%E8%87%AA%E9%80%82%E5%BA%94%E6%BB%A4%E6%B3%A2%E5%99%A8.png">
+<meta property="og:image" content="http://tronysh.github.io/2019/10/23/LMS-math/%E8%87%AA%E9%80%82%E5%BA%94%E6%BB%A4%E6%B3%A2%E5%99%A82.png">
+<meta property="article:published_time" content="2019-10-23T04:20:12.000Z">
+<meta property="article:modified_time" content="2019-10-29T11:09:46.929Z">
+<meta property="article:author" content="Tronysh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="信号">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tronysh.github.io/2019/10/23/LMS-math/%E8%87%AA%E9%80%82%E5%BA%94%E6%BB%A4%E6%B3%A2%E5%99%A8.png">
+
+<link rel="canonical" href="http://tronysh.github.io/2019/10/23/LMS-math/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>自适应滤波器——LMS算法 | Tronysh</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ad350ecb3c67fc126ff8495447afc90a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tronysh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2019/10/23/LMS-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/bro.jpg">
+      <meta itemprop="name" content="Tronysh">
+      <meta itemprop="description" content="忠于美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tronysh">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自适应滤波器——LMS算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-23 12:20:12" itemprop="dateCreated datePublished" datetime="2019-10-23T12:20:12+08:00">2019-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-29 19:09:46" itemprop="dateModified" datetime="2019-10-29T19:09:46+08:00">2019-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>大三课设的选题是2017年电子设计大赛国赛的E题：自适应滤波器，其中比较关键的数据处理部分使用了LMS算法。总体的方案参考了这套方案，可以百度搜得到。时隔一年，现在对算法部分做一个总结。因为没有大数据处理和信号处理的基础，以下都是个人查找文献和书籍做的一些笔记。具体C语言算法的实现参考以下几篇博客：</p>
+<p><a href="https://blog.csdn.net/qq_32065823/article/details/81839325" target="_blank" rel="noopener">雅克比公式求矩阵最大特征值（C语言版）</a></p>
+<p><a href="https://blog.csdn.net/qq_32065823/article/details/81839070" target="_blank" rel="noopener">LMS算法实现自适应滤波器（C语言版）</a></p>
+<h2 id="正弦干扰的自适应噪声消除"><a href="#正弦干扰的自适应噪声消除" class="headerlink" title="正弦干扰的自适应噪声消除"></a>正弦干扰的自适应噪声消除</h2><p>传统方法：使用调整干扰频率的固定陷波器（带通、带阻滤波器），这要求我们必须知道干扰的精确频率，所要求的带通频率非常陡峭。</p>
+<p><img src="/2019/10/23/LMS-math/自适应滤波器.png" alt="自适应滤波器.png"></p>
+<p>基本输入：由携带信息的信号和互不干扰的正弦干扰组成；</p>
+<p>参考输入：相关形式的正弦干扰；</p>
+<h3 id="自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。"><a href="#自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。" class="headerlink" title="自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。"></a>自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。</h3><p>重要特征：</p>
+<ol>
+<li>消除器像自适应陷波器一样工作，其零值点由正弦干扰的角频率$\omega_0$决定。消除器是可调的，其调陷频率随$\omega_0$而变。</li>
+<li>通过选择足够小的$\mu$，可使得消除器频率响应的陷波在正弦干扰处很陡峭。</li>
+</ol>
+<p>假设 输入数据是实数，则</p>
+<p>对于基本输入 </p>
+<script type="math/tex; mode=display">d(n)=s(n)+A_0\cos(\omega_0n+\phi_0)</script><ul>
+<li><p>$s(n)$：承载信息的信号</p>
+</li>
+<li><p>$A_0$：正弦干扰的幅度</p>
+</li>
+<li><p>$\omega_0$：归一化角频率</p>
+</li>
+<li><p>$\phi_0$：相位</p>
+</li>
+</ul>
+<p>参考输入</p>
+<script type="math/tex; mode=display">u(n)=A\cos(\omega_0n+\phi)</script><p>使用实数的LMS算法，则抽头权的更新基于如下：</p>
+<script type="math/tex; mode=display">y(n)=\sum_{i=0}^{M-1}\omega_i(n)u(n-i)</script><script type="math/tex; mode=display">e(n)=d(n)-y(n)</script><script type="math/tex; mode=display">\omega(n+1)=\omega_i(n)+\mu u(n-i)e(n)</script><ul>
+<li><p>$M$：FIR滤波器的长度</p>
+</li>
+<li><p>$\mu$：步长因子常数</p>
+</li>
+</ul>
+<p>假设LMS算法中输入数据和其他信号的抽样周期取为单位时间，用正弦激励作为感兴趣的输入，重建自适应滤波器框图。</p>
+<p><img src="/2019/10/23/LMS-math/自适应滤波器2.png" alt="自适应滤波器2.png"></p>
+<p>可将正弦输入$u(n)$、FIR滤波器和LMS算法的权值更新方程组合为一个单一（开环）的系统。</p>
+<p>输入为$e(n)$、输出为$y(n)$的自适应系统随时间变化。</p>
+<p>由于$z=e^{j\omega}$和$z_0=e^{j\omega_0}$，如令自适应系统的激励为$e(n)=z^n$，则输出$y(n)$包含三个分量：其一正比于$z^n$，其二正比于$z^n(z_0^{2n})^*$，其三正比于$z^n(z_0^{2n})$。</p>
+<p>第一个分量代表转移函数为$G(z)$的时变系统。</p>
+<script type="math/tex; mode=display">u(n-i)=A\cos[\omega_0(n-i)+\phi]=\frac{A}{2}[e^{j(\omega_0n+\phi_i)}+e^{-j(\omega_0n+\phi_i)}]</script><p>其中$\phi_i=\phi-\omega_0i$。</p>
+<p>输入$u(n-i)$与估计误差$e(n)$相乘，对$u(n-i)e(n)$做$z$变换并用$z[·]$表示。</p>
+<script type="math/tex; mode=display">z[u(n-i)e(n)]=\frac{A}{2}e^{j\phi_i}E(ze^{-j\omega_0})+\frac{A}{2}e^{-j\phi_i}E(ze^{j\omega_0})</script><p>$E(ze^{-j\omega_0})$是围绕单位圆逆时针旋转$\omega_0$角度后$e(n)$的$z$变换；</p>
+<p>$E(ze^{j\omega_0})$是围绕单位圆顺时针旋转$\omega_0$后的变换。</p>
+<p>对$\omega_i(n+1)=\omega_i(n)+\mu u(n-i)e(n)$进行$z$变换</p>
+<script type="math/tex; mode=display">z\omega_i(z)=\omega_i(z)+\mu z[u(z-i)e(n)]</script><p>$\omega_i(z)$是$\omega_i(n)$的$z$变换。</p>
+<script type="math/tex; mode=display">\omega_i(z)=\frac{\mu A}{2}\frac{1}{z-1}[e^{j\phi_i}E(ze^{-j\omega_0})+e^{-j\phi_i}E(ze^{j\omega_0})]</script><script type="math/tex; mode=display">y(n)=\frac{A}{2}\sum^{M-1}_{i=0}\omega_i(n)[e^{(j\omega_0n+\phi_i)}+e^{-j(\omega_0n+\phi_i)}]</script><p>$z$变换得</p>
+<script type="math/tex; mode=display">Y(z)=\frac{A}{2}\sum^{M-1}_{i=0}[e^{j\phi_i}\omega_i(ze^{j\omega_0}+e^{j\omega_i}\omega_i(ze^{j\omega_0})]</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E4%BF%A1%E5%8F%B7/" rel="tag"># 信号</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/22/data-structure3/" rel="next" title="数据结构——线性表（二）">
+                  <i class="fa fa-chevron-left"></i> 数据结构——线性表（二）
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/10/28/stm32-clock/" rel="prev" title="STM32开发——时钟详解">
+                  STM32开发——时钟详解 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正弦干扰的自适应噪声消除"><span class="nav-text">正弦干扰的自适应噪声消除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。"><span class="nav-text">自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Tronysh"
+    src="/images/bro.jpg">
+  <p class="site-author-name" itemprop="name">Tronysh</p>
+  <div class="site-description" itemprop="description">忠于美好</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/tronysh_ai@163.com" title="E-Mail &amp;rarr; tronysh_ai@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/tronysh" title="Instagram &amp;rarr; https:&#x2F;&#x2F;instagram.com&#x2F;tronysh" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tronysh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.4.2.js"></script>
+
+<script src="/js/motion.js?v=7.4.2.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.2.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.2.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+  
+<script src="/js/local-search.js?v=7.4.2.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+  
+
+</body>
+</html>

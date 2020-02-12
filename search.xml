@@ -1,0 +1,1584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>数据结构——图</title>
+    <url>/2020/01/30/data-structure10/</url>
+    <content><![CDATA[<h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>图$G$由顶点集$V$和关系集$VR$构成，记为$G=(V,VR)$。$V$是顶点（元素）的有穷非空集，</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——二叉树</title>
+    <url>/2020/01/29/data-structure9/</url>
+    <content><![CDATA[<h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="二叉树的递归定义"><a href="#二叉树的递归定义" class="headerlink" title="二叉树的递归定义"></a>二叉树的递归定义</h4><p>二叉树是$n$个结点的有限集，可分为两种情形：</p>
+<ol>
+<li><p>如果$n=0$；那么它就是一棵空二叉树；</p>
+</li>
+<li><p>如果$n&gt;0$，则它包含一个根结点，而剩下的结点分为两个不相交的子集，分别构成根结点的左子树和右子树。</p>
+</li>
+</ol>
+<p><img src="/2020/01/29/data-structure9/二叉树.png" alt="二叉树.png"></p>
+<p>特点：</p>
+<ul>
+<li>每个结点至多有二棵子树（即不存在度大于$2$的结点）；</li>
+<li>二叉树的子树有左、右之分，且其次序不能任意颠倒。</li>
+</ul>
+<h3 id="二叉树的操作"><a href="#二叉树的操作" class="headerlink" title="二叉树的操作"></a>二叉树的操作</h3><h4 id="二叉树的基本操作"><a href="#二叉树的基本操作" class="headerlink" title="二叉树的基本操作"></a>二叉树的基本操作</h4><ol>
+<li>置$T$为空二叉树：$T={ }$</li>
+<li>销毁二叉树$T$</li>
+<li>生成二叉树$T$：生成哈夫曼树、二叉排序树、平衡二叉树、堆</li>
+<li><p>遍历二叉树$T$:</p>
+<p> 按某种规则访问$T$的每一个结点一次且仅一次的过程。</p>
+</li>
+<li>二叉树$\leftarrow\rightarrow$树</li>
+<li>二叉树$\rightarrow$平衡二叉树</li>
+<li>求结点的层号</li>
+<li>求结点的度</li>
+<li>求二叉树T的深度</li>
+<li>插入一个结点</li>
+<li>删除一个结点</li>
+<li>求二叉树$T$的叶子/非叶子</li>
+</ol>
+<h4 id="查找类"><a href="#查找类" class="headerlink" title="查找类"></a>查找类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Root(T);</span><br><span class="line">Value(T,e);</span><br><span class="line">Parent(T,e);</span><br><span class="line">LeftChild(T,e);</span><br><span class="line">RightChild(T,e);</span><br><span class="line">LeftSibling(T,e);</span><br><span class="line">RightSibling(T,e);</span><br><span class="line">BiTreeEmpty(T);</span><br><span class="line">BiTreeDepth(T;</span><br></pre></td></tr></table></figure>
+<h4 id="插入类"><a href="#插入类" class="headerlink" title="插入类"></a>插入类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">InitBiTree(&amp;T);</span><br><span class="line">Assign(T,&amp;e,value);</span><br><span class="line">CreateBiTree(&amp;T,definition);</span><br><span class="line">InsertChild(T,p.LR,c);</span><br></pre></td></tr></table></figure>
+<h4 id="删除类"><a href="#删除类" class="headerlink" title="删除类"></a>删除类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ClearBiTree(&amp;T);</span><br><span class="line">DestroyBiTree(&amp;T);</span><br><span class="line">DeleteChild(T,p,LR);</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的性质和特殊二叉树"><a href="#二叉树的性质和特殊二叉树" class="headerlink" title="二叉树的性质和特殊二叉树"></a>二叉树的性质和特殊二叉树</h3><p>性质1.在二叉树的第$i$层上至多有$2^{i-1}$个结点$(i\ge1)$。</p>
+<p>性质2.深度为$k$的二叉树最多有$2^k-1$个结点。满二叉树——深度为$k$且有$2^k-1$个结点的二叉树。满二叉树有以下特点：</p>
+<ol>
+<li><p>每一层上结点数都达到最大；叶子结点都在第$k$层。</p>
+</li>
+<li><p>度为$1$的结点$n_1=0$。</p>
+</li>
+<li><p>$n$个结点的满二叉树的深度$=log_2(n+1)$。</p>
+</li>
+</ol>
+<p>性质3.二叉树中，终端结点数$n_0$与度为$2$的结点数$n_2$，有如下关系：$n_0=n_2+1$。</p>
+<p>性质4.结点数为$n$的完全二叉树，其深度为：$[log_2n]+1=[log_2(n+1)]$。</p>
+<p>性质5.若对含$n$个结点的完全二叉树从上到下且从左至右进行$1$至$n$的编号，则对完全二叉树中任意一个编号为$i$的结点：</p>
+<ol>
+<li><p>若$i=1$，则该结点是二叉树的根，无双亲，否则，编号为$[i/2]$的结点为其双亲结点；</p>
+</li>
+<li><p>若$2i&gt;n$，则该结点无左孩子，否则，编号为$2i$的结点为其左孩子结点；</p>
+</li>
+<li><p>若$2i+1&gt;n$，则该结点无右孩子结点，否则，编号为$2i+1$的结点为其右孩子结点。</p>
+</li>
+</ol>
+<h4 id="顺序编号的满二叉树"><a href="#顺序编号的满二叉树" class="headerlink" title="顺序编号的满二叉树"></a>顺序编号的满二叉树</h4><p>设满二叉树有$n$个结点，编号为$1,2,…,n$</p>
+<ul>
+<li>左小孩为偶数，右小孩为奇数；</li>
+<li><p>结点$i$的左小孩是$2i,2i\le n$；</p>
+<p>  结点$i$的右小孩是$2i+1,2i+1\le n$；</p>
+<p>  结点$i$的双亲是$[i/2],2\le i\le n$；</p>
+</li>
+<li>结点$i$的层号$=[log_2i]+1=[log_2(i+1)],1\le i\le n$。</li>
+</ul>
+<h4 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h4><p>深度为$k$有$n$个结点的二叉树，当且仅当每一个结点都与同深度的满二叉树中编号$1$至$n$的结点一一对应，则称之为完全二叉树（或称为顺序二叉树）。</p>
+<p>深度为$k$的完全二叉树的特点或性质：</p>
+<ol>
+<li><p>任意结点$i$，其左右子树的深度分别表示为$Lh_i$与$Rh_i$，则$Lh_i-Rh_i$等于$0$或$1$，其叶结点只可能出现在层次最大或次最大的两层上。</p>
+</li>
+<li><p>完全二叉树结点数$n$满足$2^{k-1}&lt;n\le2^k-1$。</p>
+</li>
+</ol>
+<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h4 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h4><h5 id="使用一堆数组存储完全二叉树："><a href="#使用一堆数组存储完全二叉树：" class="headerlink" title="使用一堆数组存储完全二叉树："></a>使用一堆数组存储完全二叉树：</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_TREE_SIZE 100 <span class="comment">//二叉树的最大结点数</span></span></span><br><span class="line"><span class="keyword">typedef</span> TElemType SqBiTree[MAX_TREE_SIZE]; <span class="comment">//0号单元存储根结点</span></span><br><span class="line">SqBiTree bi;</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/01/29/data-structure9/顺序存储.png" alt="顺序存储.png"></p>
+<p>顺序存储特点：用一组地址连续的存储单元，以层序顺序存放二叉树的数元素，结点的相对位置蕴含着结点之间的关系。</p>
+<p>完全二叉树</p>
+<p><img src="/2020/01/29/data-structure9/完全二叉树.png" alt="完全二叉树.png"><br>若数组从“1”编址，对于$i=3$，$bt[i]$的双亲为$3/2=1$，即在$bt[1]中；其左孩子在$bt[2i]=bt[6]$中；其右孩子$bt[2i+1]=bt[7]$中。</p>
+<p>一般二叉树</p>
+<p>按完全二叉树形式存储，没结点处用$0$表示，表示“虚结点”。</p>
+<p><img src="/2020/01/29/data-structure9/一般二叉树.png" alt="一般二叉树.png"></p>
+<p>右单枝树</p>
+<p><img src="/2020/01/29/data-structure9/右单枝树.png" alt="右单枝树.png"></p>
+<p>缺点：浪费空间；插入、删除不便。</p>
+<p>深度为$k$的二叉树，需长度为$2^k-1$的一堆数组。若是右单枝树，空间利用率为：</p>
+<script type="math/tex; mode=display">\alpha=\frac{k}{2^k-1}</script><h4 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h4><h5 id="二叉链表"><a href="#二叉链表" class="headerlink" title="二叉链表"></a>二叉链表</h5><p><img src="/2020/01/29/data-structure9/二叉链表.png" alt="二叉链表.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> //结点结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span> <span class="comment">//左右孩子指针</span></span><br><span class="line">&#125;BiTNode,*BiTree;</span><br></pre></td></tr></table></figure>
+<p>性质6.含有$n$个结点的二叉链表中，有$n+1$个空链域。</p>
+<h3 id="遍历二叉树"><a href="#遍历二叉树" class="headerlink" title="遍历二叉树"></a>遍历二叉树</h3><p>遍历是按某种规则访问二叉树的每一个结点一次仅一次的过程。</p>
+<p>“遍历”是任何类型均有的操作，对线性结构而言，只有一条搜索路径（因为每个结点均只有一个后继）。</p>
+<p>二叉树是非线性结构，每个结点可能有两个后继，则存在如何遍历即按什么样的搜索路径遍历的问题。</p>
+<p>一次遍历后，使树中结点的非线性排列，按访问的先后顺序变为某种线性排列。</p>
+<p>遍历是树结构插入、删除、修改、查找等运算的基础。</p>
+<p>设：$D$——访问根节点，输出根结点；$L$——递归遍历左二叉树；$R$——递归遍历右二叉树。</p>
+<p>遍历规则（方案）：</p>
+<ul>
+<li><p>先左后右</p>
+<p>  $DLR$——先序遍历（先根，preorder）</p>
+<p>  $LDR$——中序遍历（中根，inorder）</p>
+<p>  $LRD$——后序遍历（后根，postorder）</p>
+</li>
+<li><p>先右后左</p>
+<p>  $DRL$——逆先序遍历</p>
+<p>  $RDL$——逆中序遍历</p>
+<p>  $RLD$——逆后序遍历</p>
+</li>
+</ul>
+<h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><p>先序遍历二叉树递归定义：</p>
+<p>若二叉树为空，则遍历结束；否则，执行下列步骤：</p>
+<ol>
+<li><p>访问根结点；</p>
+</li>
+<li><p>先序遍历根的左子树；</p>
+</li>
+<li><p>先序遍历根的右子树。</p>
+</li>
+</ol>
+<p>先序遍历递归算法（基于二叉链表）：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">BiTree</span>;</span> <span class="comment">//结点指针类型</span></span><br><span class="line"><span class="function">status <span class="title">PreOrderTraverse</span><span class="params">(BiTree T, status(*visit)(TELemType &amp;e))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T)</span><br><span class="line">    &#123;</span><br><span class="line">        vist(T-&gt;data); <span class="comment">//访问结点</span></span><br><span class="line">        PreOrderTraverse(T-&gt;lchild,visit); <span class="comment">//遍历左子树</span></span><br><span class="line">        PreOrderTraverse(T-&gt;rchild,visit); <span class="comment">//遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>中序遍历二叉树递归定义：</p>
+<p>若二叉树为空，则遍历结束；否则，执行下列步骤：</p>
+<ol>
+<li><p>中序遍历根的左子树；</p>
+</li>
+<li><p>访问根结点；</p>
+</li>
+<li><p>中序遍历根的右子树。</p>
+</li>
+</ol>
+<p>中序遍历递归算法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">BiTree</span>;</span> <span class="comment">//结点指针类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse</span><span class="params">(BiTree T)</span> <span class="comment">//T是指向二叉链表根结点的指针</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T)</span><br><span class="line">    &#123;</span><br><span class="line">        InOrderTraverse(T-&gt;lchild); <span class="comment">//递归访问左子树</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,T-&gt;data); <span class="comment">//访问结点</span></span><br><span class="line">        InOrderTraverse(T-&gt;rchild); <span class="comment">//递归访问右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><p>后序遍历二叉树递归定义：</p>
+<p>若二叉树为空，则遍历结束；否则，执行以下步骤：</p>
+<ol>
+<li><p>后序遍历根的左子树；</p>
+</li>
+<li><p>后序遍历根的右子树；</p>
+</li>
+<li><p>访问根结点。</p>
+</li>
+</ol>
+<p>后序遍历递归算法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">BiTree</span>;</span> <span class="comment">//结点指针类型</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrderTraverse</span><span class="params">(BiTree T)</span> <span class="comment">//T是指向二叉链表根结点的指针</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T)</span><br><span class="line">    &#123;</span><br><span class="line">        PostOrderTraverse(T-&gt;lchild); <span class="comment">//递归访问左子树</span></span><br><span class="line">        PostOrderTraverse(T-&gt;rchild); <span class="comment">//递归访问右子树</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,T-&gt;data); <span class="comment">//visit(T-&gt;data)，访问结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="非递归算法（中序遍历）"><a href="#非递归算法（中序遍历）" class="headerlink" title="非递归算法（中序遍历）"></a>非递归算法（中序遍历）</h4><ul>
+<li>递归算法简明精炼，但效率较低；</li>
+<li>某些高级语言不支持递归；</li>
+<li><p>非递归算法思想：</p>
+<ol>
+<li><p>设置栈$S$存放所经过的根节点指针信息；初始化$S$；</p>
+</li>
+<li><p>遇到根节点并不访问，而是入栈；</p>
+</li>
+<li><p>中序遍历它的左子树；左子树遍历结束后，将根结点指针退栈，并访问根结点；然后中序遍历它的右子树。</p>
+</li>
+<li><p>当需要退栈时，如果栈为空则结束。</p>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">status <span class="title">InOrderTraverse</span><span class="params">(BiTree T, status(*visit)(TElemType &amp;e))</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="comment">//中序遍历非递归算法，s为存储二叉树结点的指针栈</span></span><br><span class="line">    InitStacks(S);</span><br><span class="line">    push(S,T); <span class="comment">//根指针进栈（指针也进栈）</span></span><br><span class="line">    <span class="keyword">while</span>(!StackEmpty(S))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(GetTop(S,p)&amp;&amp;p)</span><br><span class="line">            push(S,p-&gt;lchild); <span class="comment">//向左走到尽头</span></span><br><span class="line">        pop(S,p); <span class="comment">//空指针退栈</span></span><br><span class="line">        <span class="keyword">if</span>(!StackEmpty(S)) <span class="comment">//访问结点与其右子树</span></span><br><span class="line">        &#123;</span><br><span class="line">            pop(S,p);</span><br><span class="line">            visit(p-&gt;data);</span><br><span class="line">            push(S,p-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根先进栈，左孩子紧随其后进栈，右孩子在根出栈后入账。</p>
+<p>每个结点都进一次和出一次栈，且总访问栈顶元素，故时间复杂度为$O(n)$。最坏情况时，空间复杂度为$O(n)$。</p>
+<h4 id="层序遍历算法"><a href="#层序遍历算法" class="headerlink" title="层序遍历算法"></a>层序遍历算法</h4><ul>
+<li><p>按从上往下逐层，同层从左至右的次序访问各结点；</p>
+</li>
+<li><p>访问根之后，通过根访问其左孩子，然后右孩子；</p>
+</li>
+<li><p>采用队列暂存没访问过的结点。</p>
+</li>
+</ul>
+<p>循环处理的基本思路是：</p>
+<p>若队非空，队头结点出队，并访问该结点；若该节点左右孩子非空，则依次进队。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LayerOrder</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    InitQueue(Q); <span class="comment">//初始化队列</span></span><br><span class="line">    <span class="keyword">if</span>(T)</span><br><span class="line">        EnQueue(Q,T); <span class="comment">//T非空则入队</span></span><br><span class="line">    <span class="keyword">while</span>(!QueueEmpty(Q))</span><br><span class="line">    &#123;</span><br><span class="line">        DeQueue(Q,&amp;p); <span class="comment">//队首结点出队（送入p）</span></span><br><span class="line">        visit(p); <span class="comment">//出队后即刻访问该结点</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild)</span><br><span class="line">            EnQueue(Q,p-&gt;lchild); <span class="comment">//p的左孩子入队</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild)</span><br><span class="line">            EnQueue(Q,p-&gt;rchild); <span class="comment">//p的右孩子入队</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二叉树的遍历应用"><a href="#二叉树的遍历应用" class="headerlink" title="二叉树的遍历应用"></a>二叉树的遍历应用</h4><h5 id="建立二叉树的存储结构"><a href="#建立二叉树的存储结构" class="headerlink" title="建立二叉树的存储结构"></a>建立二叉树的存储结构</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">status <span class="title">CreatBiTree</span><span class="params">(BiTree &amp;T)</span></span></span><br><span class="line"><span class="function"></span>&#123;   <span class="comment">//按先序次序输入二叉树结点的值（空格符表空树），构造其二叉链表</span></span><br><span class="line">    <span class="built_in">scanf</span>(&amp;ch);</span><br><span class="line">    <span class="keyword">if</span>(ch==<span class="string">' '</span>) T+<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!(T=(BiTNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode))))</span><br><span class="line">            <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">        T-&gt;data=ch; <span class="comment">//生成根结点</span></span><br><span class="line">        CreateBiTree(T-&gt;lchild); <span class="comment">//构造左子树</span></span><br><span class="line">        CreateBiTree(T-&gt;rchild); <span class="comment">//构造右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="求二叉树的深度（后序遍历）"><a href="#求二叉树的深度（后序遍历）" class="headerlink" title="求二叉树的深度（后序遍历）"></a>求二叉树的深度（后序遍历）</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Depth</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!T)</span><br><span class="line">        depthval=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        depthLeft=Depth(T-&gt;lchild);</span><br><span class="line">        depthRight=Depth(T-&gt;rchild);</span><br><span class="line">        depthval=<span class="number">1</span>+(depthLeft&gt;depthRight?depthLeft:depthRight);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depthval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h3><p>遍历二叉树是按某种规则将非线性结构的二叉树结点线性化。</p>
+<ul>
+<li><p>遍历二叉树可得到结点的一个线性序列，在线性序列中，就存在结点的前驱和后继，但是在二叉链表上只能找到结点的左孩子、右孩子。</p>
+</li>
+<li><p>二叉树结点中没有相应前驱和后继的信息。</p>
+</li>
+<li><p>$n$个结点的二叉链表：有$n*2$个指针域，使用：$n-1$个指针，除根以外，每个结点被一个指针指向</p>
+</li>
+<li><p>空指针域数;$n*2-(n-1)=n+1$</p>
+</li>
+<li><p>线索二叉树：利用$n+1$个空链域存放结点的前驱和后继信息。</p>
+</li>
+<li><p>指向先序列中的“前驱”和“后继”的指针，称作“线索”。</p>
+</li>
+</ul>
+<h4 id="结点结构"><a href="#结点结构" class="headerlink" title="结点结构"></a>结点结构</h4><p>在二叉链表中增加$Ltag$和$Rtag$两个标志域。</p>
+<p><img src="/2020/01/29/data-structure9/线索二叉树.png" alt="线索二叉树.png"></p>
+<p>考虑结点的左子树</p>
+<ul>
+<li>若有，则左链域$lchild$指示其左孩子（$Ltag=0$）；</li>
+<li>否则，令左链域指示其前驱（$Ltag=1$）；</li>
+</ul>
+<p>考虑结点的右子树</p>
+<ul>
+<li>若有，则右链域$rchild$指示其左孩子（$Rtag=0$）；</li>
+<li>否则，令右链域指示其前驱（$Rtag=1$）；</li>
+</ul>
+<h4 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h4><ul>
+<li>增设一个头结点，令其$lchild$指向二叉树的根节点，$Ltag=0$、$Rtag=1$；</li>
+<li>并将该结点作为遍历访问的第一个结点的前驱和最后一个结点的后继；</li>
+<li>最后用头指针指示该头结点。</li>
+</ul>
+<h4 id="空二叉树的线索链表"><a href="#空二叉树的线索链表" class="headerlink" title="空二叉树的线索链表"></a>空二叉树的线索链表</h4><p>只有一个头结点，其$Ltag=0$、$Rtag=1$；$lchild$与$rchild$都指向头结点自身。</p>
+<h4 id="线索链表的类型描述"><a href="#线索链表的类型描述" class="headerlink" title="线索链表的类型描述"></a>线索链表的类型描述</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">    Link,Thread</span><br><span class="line">&#125;PointerTag; <span class="comment">//Link==0：指针，Thread==1，线索</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiThrNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span> <span class="comment">//左右指针</span></span><br><span class="line">    PointerTag Ltag,Rtag; <span class="comment">//左右标志</span></span><br><span class="line">&#125;BiThrNode, *BiThrTree;</span><br></pre></td></tr></table></figure>
+<h4 id="线索链表与线索二叉树的概念"><a href="#线索链表与线索二叉树的概念" class="headerlink" title="线索链表与线索二叉树的概念"></a>线索链表与线索二叉树的概念</h4><ul>
+<li>称这种$BiThrNode$结点结构构成的二叉链表为二叉树的线索链表；</li>
+<li>其中指示前驱和后继的链域称为线索；</li>
+<li>其加上线索的二叉树称为线索二叉树；</li>
+<li><p>对二叉树以某规则遍历使其变为线索二叉树的过程称为线索化；</p>
+<p>  按中序遍历得到的线索二叉树称为中序线索二叉树；</p>
+<p>  按先序遍历得到的线索二叉树称为先序线索二叉树；</p>
+<p>  按后序遍历得到的线索二叉树称为后序线索二叉树；</p>
+</li>
+</ul>
+<h4 id="线索链表的遍历算法"><a href="#线索链表的遍历算法" class="headerlink" title="线索链表的遍历算法"></a>线索链表的遍历算法</h4><p>中序线索二叉树遍历步骤</p>
+<ol>
+<li>设置一个搜索指针<code>p</code>；</li>
+<li>先寻找中序遍历之首结点（即最左下角结点），当<code>LTag=0</code>时（表示有左孩子），<code>p=p-&gt;lchild</code>；直到<code>LTag=1</code>（无左孩子，已到最左下角），首先访问<code>p-&gt;data</code>；</li>
+<li><p>接着进入该结点的右子树，检查<code>RTag</code>和<code>p-&gt;rchild</code>；</p>
+<p> ①. 若该结点的<code>RTag=1</code>（表示有后继线索），则<code>p=p-&gt;rchild</code>；访问<code>p-&gt;data</code>；并重复①，直到后继结点的<code>RTag=0</code>；</p>
+<p> ②. 当<code>RTag=0</code>时（表示有右孩子），则应从该结点的右孩子开始（<code>p=p-&gt;rchild</code>）查找左下角的子孙结点；即重复2.</p>
+</li>
+</ol>
+<p>主要规则是：有后继找后继，无后继找右子树的最左子孙。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse_Thr</span><span class="params">(BiThrTree T,<span class="keyword">void</span>(*visit)(TElemType e))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p=T-&gt;lchild; <span class="comment">//p指向根结点</span></span><br><span class="line">    <span class="keyword">while</span>(p!=T) <span class="comment">//空树或遍历结束时，p==T</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;LTag==Link)</span><br><span class="line">            p=p-&gt;lchild; <span class="comment">//第一个结点</span></span><br><span class="line">        <span class="keyword">if</span>(!visit(p-&gt;data))</span><br><span class="line">            <span class="keyword">return</span> ERROR; <span class="comment">//访问其左子树为空的结点</span></span><br><span class="line">        <span class="keyword">while</span>(p-&gt;RTag==Thread&amp;&amp;p-&gt;rchild!=T)</span><br><span class="line">        &#123;</span><br><span class="line">            p=p-&gt;rchild;</span><br><span class="line">            visit(p-&gt;data);</span><br><span class="line">        &#125; <span class="comment">//访问后继结点</span></span><br><span class="line">        p=p-&gt;rchild; <span class="comment">//处理其右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="最优二叉树（Huffman树）"><a href="#最优二叉树（Huffman树）" class="headerlink" title="最优二叉树（Huffman树）"></a>最优二叉树（Huffman树）</h3><p>路径长度:从树中一个结点到另一个结点之间的分支构成这两个结点之间的路径，路径上的分支数目称做路径长度。</p>
+<p>树的路径长度：从树根到每一结点的路径长度之和。</p>
+<ul>
+<li><p>当$n$个结点的二叉树为完全二叉树时，$PL(T)$具有最小值</p>
+</li>
+<li><p>当$n$个结点的二叉树为单枝树时，$PL(T)$具有最大值</p>
+</li>
+</ul>
+<p>树或二叉树$T$的带权路径长度：每个叶子的权与根到该叶子的路径长度的乘积之和，记作$WPL(T)$。</p>
+<script type="math/tex; mode=display">WPL=\sum^n_{k-1}w_kl_k</script><p>其中：$n$——树$T$的叶子数目；$w_k$——叶子$k$的权；$l_k$——树$T$的根到叶子$k$的路径长度。</p>
+<p>在具有$n$个相同叶子的各二叉树中，$WPL$最小的二叉树。称之为Huffman树或者最优二叉树。</p>
+<p>哈夫曼树的几点特征：</p>
+<ol>
+<li>完全二叉树并不一定是Huffman树。</li>
+<li>在哈夫曼树中，权值大的结点离根近。</li>
+<li>哈夫曼树不唯一，但带权路径长度$WPL$一定相等。</li>
+</ol>
+<h4 id="Huffman算法"><a href="#Huffman算法" class="headerlink" title="Huffman算法"></a>Huffman算法</h4><ol>
+<li><p>以权值分别为$W_1,W_2,…,W_n$的n个结点，构成$n$棵二叉树$T_1,T_2,…,T_n$，并组成森林$F={T_1,T_2,…,T_n}$，每棵二叉树$T_i$仅有一个权值为$W_i$的根结点；</p>
+</li>
+<li><p>在$F$中选取两棵结点权值最小的树作为左右子树构造一棵新二叉树，并且置新二叉树根结点权值为左右子树上根结点的权值之和。根结点的权值=左右孩子权值之和，叶结点的权值=$W_i$。</p>
+</li>
+<li><p>从$F$中删除这两棵二叉树，同时将新二叉树加入到$F$中；</p>
+</li>
+<li><p>重复2，3直到$F$中只含一棵二叉树为止（这棵就是Huffman树）。</p>
+</li>
+</ol>
+<h4 id="哈夫曼编码-最小亢余码"><a href="#哈夫曼编码-最小亢余码" class="headerlink" title="哈夫曼编码/最小亢余码"></a>哈夫曼编码/最小亢余码</h4><p>能按字符的使用频率，使文本代码的总长度具有最小值。</p>
+<p>特点：任一编码不是其它编码的前缀。</p>
+<p>Huffman树和编码的特点：</p>
+<ol>
+<li>哈夫曼树中没有度为1的结点。因此若哈夫曼树有$n$个叶子结点，则其共有$2n-1$个结点。</li>
+<li>Huffman编码时是从叶子走到根；而译码时又要从根走到叶子，因此每个结点需要增开双亲指针分量。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> weight; <span class="comment">//权值分量（可放大取整）</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> parent,lchild,rchild; <span class="comment">//双亲和孩子分量</span></span><br><span class="line">&#125;HTNode,*HuffmanTree; <span class="comment">//用动态数组存储Huffman树</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> **HuffmanCode; <span class="comment">//动态数组存储Huffman编码表</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——树</title>
+    <url>/2020/01/29/data-structure8/</url>
+    <content><![CDATA[<h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="树-tree"><a href="#树-tree" class="headerlink" title="树(tree)"></a>树(tree)</h4><p>树是$n(n\ge 0)$个结点的有限集$T$，</p>
+<p>当$n=0$时，$T$为空树；</p>
+<p>当$n&gt;0$时，有且只有一个称为$T$的根的结点，</p>
+<p>当$n&gt;1$时，余下的结点分为$m(m&gt;0)$个互不相关的有限集$T_1,T_2,…,T_m$，每个$T_i(1\le i \le m)$也是一棵树，且称为根的子树。</p>
+<p><img src="/2020/01/29/data-structure8/树.png" alt="树.png"></p>
+<h4 id="结点的度-degree"><a href="#结点的度-degree" class="headerlink" title="结点的度(degree)"></a>结点的度(degree)</h4><p>结点的子树数目。</p>
+<h4 id="树的度"><a href="#树的度" class="headerlink" title="树的度"></a>树的度</h4><p>树中各结点的度的最大值。</p>
+<h4 id="n-度树"><a href="#n-度树" class="headerlink" title="$n$度树"></a>$n$度树</h4><p>度为$n$的树。</p>
+<h4 id="叶子-终端结点"><a href="#叶子-终端结点" class="headerlink" title="叶子(终端结点)"></a>叶子(终端结点)</h4><p>度为$0$的结点。</p>
+<h4 id="分支结点-非终端结点，非叶子"><a href="#分支结点-非终端结点，非叶子" class="headerlink" title="分支结点(非终端结点，非叶子)"></a>分支结点(非终端结点，非叶子)</h4><p>度不为$0$的结点。</p>
+<h4 id="双亲-父母-parent-和孩子-儿子-child"><a href="#双亲-父母-parent-和孩子-儿子-child" class="headerlink" title="双亲(父母,parent)和孩子(儿子,child)"></a>双亲(父母,parent)和孩子(儿子,child)</h4><p>若结点$C$是结点$P$的子树的根，称$P$是$C$的双亲，$C$是$P$的孩子。</p>
+<h4 id="结点的层-level"><a href="#结点的层-level" class="headerlink" title="结点的层(level)"></a>结点的层(level)</h4><p>规定树$T$的根的层为$1$，其余任一结点的层等于其双亲的层加$1$。</p>
+<h4 id="树的深度-depth-高度"><a href="#树的深度-depth-高度" class="headerlink" title="树的深度(depth,高度)"></a>树的深度(depth,高度)</h4><p>树中各结点的层的最大值。</p>
+<h4 id="兄弟-sibling"><a href="#兄弟-sibling" class="headerlink" title="兄弟(sibling)"></a>兄弟(sibling)</h4><p>同一双亲的结点之间互为兄弟。</p>
+<h4 id="堂兄弟"><a href="#堂兄弟" class="headerlink" title="堂兄弟"></a>堂兄弟</h4><p>同一层号的结点互为堂兄弟。</p>
+<h4 id="祖先"><a href="#祖先" class="headerlink" title="祖先"></a>祖先</h4><p>从树根到某结点所经分支上的所有结点为该结点的祖先。</p>
+<h4 id="子孙"><a href="#子孙" class="headerlink" title="子孙"></a>子孙</h4><p>一个结点的所有子树的结点为该结点的子孙。</p>
+<h4 id="有序树"><a href="#有序树" class="headerlink" title="有序树"></a>有序树</h4><p>若任一结点的各棵子树，规定从左至右是有次序的，即不能互换位置，则称该树为有序树。</p>
+<h4 id="无序树"><a href="#无序树" class="headerlink" title="无序树"></a>无序树</h4><p>若任一结点的各棵子树，规定从左至右是无次序的，能互换位置，则称该树为无序树。</p>
+<h4 id="森林"><a href="#森林" class="headerlink" title="森林"></a>森林</h4><p>$m(m\ge 0)$棵互不相关的树的集合。</p>
+<p>任何一棵非空树可以表示为一个元且$Tree=(root,F)$，其中$root$为根结点。</p>
+<h3 id="树的操作"><a href="#树的操作" class="headerlink" title="树的操作"></a>树的操作</h3><h4 id="查找类"><a href="#查找类" class="headerlink" title="查找类"></a>查找类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Root(T); <span class="comment">//求树的根结点</span></span><br><span class="line">Value(T,cur_e); <span class="comment">//求当前结点的元素值</span></span><br><span class="line">Parent(T,cur_e); <span class="comment">//求当前结点的双亲结点</span></span><br><span class="line">LeftChild(T,cur_e); <span class="comment">//求当前结点的最左孩子</span></span><br><span class="line">RightSibling(T,cur_e); <span class="comment">//求当前结点的右兄弟</span></span><br><span class="line">TreeEmpty(T); <span class="comment">//判定树是否为空树</span></span><br><span class="line">TreeDepth(T); <span class="comment">//求树的深度</span></span><br><span class="line">TaverseTree(T,visit()); <span class="comment">//遍历</span></span><br></pre></td></tr></table></figure>
+<h4 id="插入类"><a href="#插入类" class="headerlink" title="插入类"></a>插入类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">InitTree(&amp;T); <span class="comment">//初始化空树</span></span><br><span class="line">CreatTree(&amp;T,definition); <span class="comment">//按定义构造树</span></span><br><span class="line">Assign(T,cur_e,value); <span class="comment">//给当前结点赋值</span></span><br><span class="line">InsertChild(&amp;T,$p,i,c); <span class="comment">//将以C为根的树插入为结点p的第i棵子树</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除类"><a href="#删除类" class="headerlink" title="删除类"></a>删除类</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ClearTree(&amp;T); <span class="comment">//将树清空</span></span><br><span class="line">DestroyTree(&amp;T); <span class="comment">//销毁树的结构</span></span><br><span class="line">DeleteChlid(&amp;T,&amp;p,i); <span class="comment">//删除结点p的第i棵子树</span></span><br></pre></td></tr></table></figure>
+<h3 id="树结构的特点"><a href="#树结构的特点" class="headerlink" title="树结构的特点"></a>树结构的特点</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">线性结构</th>
+<th style="text-align:center">树型结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">第一个数据元素（无前驱）</td>
+<td style="text-align:center">根结点（无前驱）</td>
+</tr>
+<tr>
+<td style="text-align:center">最后一个数据元素（无后继）</td>
+<td style="text-align:center">多个叶子结点（无“后继”）</td>
+</tr>
+<tr>
+<td style="text-align:center">其它数据元素（一个前驱，一个后继）</td>
+<td style="text-align:center">其它数据元素（一个前驱，多个“后继”）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h3><h4 id="双亲表示法-顺序表示法"><a href="#双亲表示法-顺序表示法" class="headerlink" title="双亲表示法/顺序表示法"></a>双亲表示法/顺序表示法</h4><p><img src="/2020/01/29/data-structure8/双亲表示法.png" alt="双亲表示法.png"></p>
+<p>C语言的类型描述：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_TREE_SIZE 100</span></span><br><span class="line"><span class="comment">//结点结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">PTNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="keyword">int</span> parent; <span class="comment">//双亲位置域</span></span><br><span class="line">&#125;PTNode;</span><br><span class="line"><span class="comment">//树结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    PTNode nodes[MAX_TREE_SIZE];</span><br><span class="line">    <span class="keyword">int</span> r,n; <span class="comment">//根节点的位置和结点个数</span></span><br><span class="line">&#125;PTree;</span><br></pre></td></tr></table></figure>
+<h4 id="孩子表示法-链接表表示法"><a href="#孩子表示法-链接表表示法" class="headerlink" title="孩子表示法/链接表表示法"></a>孩子表示法/链接表表示法</h4><ol>
+<li>固定大小的结点格式，设树$T$的度为$n$</li>
+</ol>
+<p><img src="/2020/01/29/data-structure8/孩子表示法.png" alt="孩子表示法.png"></p>
+<ol>
+<li>非固定大小的结点格式</li>
+</ol>
+<p><img src="/2020/01/29/data-structure8/孩子表示法1.png" alt="孩子表示法1.png"></p>
+<h4 id="孩子链表表示法-单链表表示法"><a href="#孩子链表表示法-单链表表示法" class="headerlink" title="孩子链表表示法/单链表表示法"></a>孩子链表表示法/单链表表示法</h4><p><img src="/2020/01/29/data-structure8/孩子链表表示法.png" alt="孩子链表表示法.png"></p>
+<h4 id="带双亲的孩子链表表示法"><a href="#带双亲的孩子链表表示法" class="headerlink" title="带双亲的孩子链表表示法"></a>带双亲的孩子链表表示法</h4><p><img src="/2020/01/29/data-structure8/带双亲的孩子.png" alt="带双亲的孩子.png"></p>
+<h4 id="孩子兄弟表示法-二叉链表"><a href="#孩子兄弟表示法-二叉链表" class="headerlink" title="孩子兄弟表示法/二叉链表"></a>孩子兄弟表示法/二叉链表</h4><p><img src="/2020/01/29/data-structure8/孩子兄弟表示法.png" alt="孩子兄弟表示法.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span> *<span class="title">firstchild</span>,*<span class="title">nextsibling</span>;</span></span><br><span class="line">&#125;CSNode,*CSTree;</span><br></pre></td></tr></table></figure>
+<h3 id="树与二叉树的转换"><a href="#树与二叉树的转换" class="headerlink" title="树与二叉树的转换"></a>树与二叉树的转换</h3><h4 id="树转换成二叉树"><a href="#树转换成二叉树" class="headerlink" title="树转换成二叉树"></a>树转换成二叉树</h4><ol>
+<li><p>加线：在树兄弟结点之间依次加一连线。</p>
+</li>
+<li><p>抹线：对每个结点，除了其左孩子（第一个孩子）外，去掉其与其余孩子之间的关系。</p>
+</li>
+<li><p>旋转：以树的根结点为轴心，将整树顺时针旋转45°</p>
+</li>
+</ol>
+<p>转换之后的二叉树与其对应的二叉链表一样，根结点右子树一定为空，原来树中兄弟关系转换成了二叉树中双亲与右孩子的关系。</p>
+<h4 id="二叉树转换成树"><a href="#二叉树转换成树" class="headerlink" title="二叉树转换成树"></a>二叉树转换成树</h4><ol>
+<li><p>加线：若p结点是双亲结点的左孩子，则将p的右孩子，右孩子的右孩子，以及沿分支找到的所有右孩子，都与p的双亲用线连起来。</p>
+</li>
+<li><p>抹线：抹掉原二叉树中双亲与右孩子之间的连线。</p>
+</li>
+<li><p>调整：将结点按层次排列，形成树结构。</p>
+</li>
+</ol>
+<h4 id="森林转换成二叉树"><a href="#森林转换成二叉树" class="headerlink" title="森林转换成二叉树"></a>森林转换成二叉树</h4><ol>
+<li><p>将各棵树分别转换成二叉树。</p>
+</li>
+<li><p>将每棵二叉树的根用线相连。</p>
+</li>
+<li><p>以第一棵树根结点为二叉树的根，再以根结点为轴心，顺时针旋转，构成二叉树型结构。</p>
+</li>
+</ol>
+<h4 id="二叉树转换成森林"><a href="#二叉树转换成森林" class="headerlink" title="二叉树转换成森林"></a>二叉树转换成森林</h4><ol>
+<li><p>第一步，通过抹线进行分割：将二叉树中根结点与其右孩子连线，及沿右分支搜索到的所有右孩子间连线全部抹掉，使之变成孤立的二叉树。</p>
+</li>
+<li><p>第二步，利用二叉树转换成树的的方法分别将孤立的二叉树还原成树，从而形成森林。</p>
+</li>
+</ol>
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><p>树的遍历要规定根与子树的访问次序，可以分成先根遍历与后根遍历两种遍历规则。</p>
+<p>先根遍历的具体规则为：</p>
+<p>若树为空，则空操作；否则，树非空时，按以下两步处理，</p>
+<ol>
+<li><p>首先，访问树的根结点；</p>
+</li>
+<li><p>然后依次先根遍历每棵子树。</p>
+</li>
+</ol>
+<p>后根遍历的具体规则如下：</p>
+<p>若树为空，则空操作；否则，树非空时按下列两部进行：</p>
+<ol>
+<li><p>首先依次后根遍历每棵子树；</p>
+</li>
+<li><p>然后访问树的根结点。</p>
+</li>
+</ol>
+<h3 id="森林的遍历"><a href="#森林的遍历" class="headerlink" title="森林的遍历"></a>森林的遍历</h3><p>先序遍历森林（相当于对对应的二叉树进行先序遍历）</p>
+<p>若森林为空，则空操作；否则</p>
+<ol>
+<li><p>访问第一棵树的根结点；</p>
+</li>
+<li><p>先序遍历第一棵树中根结点的子树森林；</p>
+</li>
+<li><p>先序遍历除去第一棵树后余下的树构成的森林。</p>
+</li>
+</ol>
+<p>森林中序遍历的递归定义，描述如下：</p>
+<p>若森林为空，则空操作，否则对于非空森林，执行以下三步：</p>
+<ol>
+<li><p>首先中序遍历第一棵树根结点的子树森林；</p>
+</li>
+<li><p>然后访问第一棵树的根结点；</p>
+</li>
+<li><p>接着中序遍历除第一棵树后余下的树构成的森林。</p>
+</li>
+</ol>
+<h3 id="树的遍历和二叉树遍历的对应关系"><a href="#树的遍历和二叉树遍历的对应关系" class="headerlink" title="树的遍历和二叉树遍历的对应关系"></a>树的遍历和二叉树遍历的对应关系</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">树</th>
+<th style="text-align:center">森林</th>
+<th style="text-align:center">二叉树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">先根遍历</td>
+<td style="text-align:center">先序遍历</td>
+<td style="text-align:center">先序遍历</td>
+</tr>
+<tr>
+<td style="text-align:center">后根遍历</td>
+<td style="text-align:center">中序遍历</td>
+<td style="text-align:center">中序遍历</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——广义表</title>
+    <url>/2020/01/24/data-structure7/</url>
+    <content><![CDATA[<h3 id="广义表的定义"><a href="#广义表的定义" class="headerlink" title="广义表的定义"></a>广义表的定义</h3><p>广义表（也称为列表）是$n(n\ge0)$个元素的有限序列。</p>
+<p>记作：$LS=(a_1,a_2,…,a_3)$</p>
+<p>其中：$LS$广义表名  $n$ $LS$的长度</p>
+<p>$a_i(1\le i\le n)$或者是数据元素，或者是广义表。</p>
+<p>通常，用大写字母表示广义表的名称，小写字母表示数据元素。当广义表$LS$中的元素是一个数据元素时，称其为原子，否则称为广义表的子表。</p>
+<p>当广义表非空时，称第一个元素$a_1$为$LS$的表头(head)，称其余部分$(a_1,…,a_n)$为$LS$的表尾(tail)。</p>
+<h4 id="广义表举例"><a href="#广义表举例" class="headerlink" title="广义表举例"></a>广义表举例</h4><ol>
+<li>$A=()$ A是一个空表，长度$n=0$。</li>
+<li><p>$B=(e)$</p>
+<p>$Head(B)=e$  $Tail(B)=()$</p>
+</li>
+<li><p>$C=(a,(b,c))$</p>
+<p> $Head(C)=a$  $Tail(C)=((b,c))$</p>
+</li>
+<li><p>$D=((a,b),c)$</p>
+<p> $Head(D)=(a,b)$ $Tail(D)=(c)$</p>
+</li>
+<li><p>$E=((a,b),c,(d,e))$</p>
+<p> $Head(E)=(a,b)$ $Tail(E)=(c,(d,e))$</p>
+<p> $Head(Tail(E))=(c)$ $Tail(Tail(E))=((d,e))$</p>
+</li>
+</ol>
+<p>结论1：广义表允许共享子表。</p>
+<p>结论2：广义表也允许递归的定义。</p>
+<h3 id="广义表的存储结构"><a href="#广义表的存储结构" class="headerlink" title="广义表的存储结构"></a>广义表的存储结构</h3><p>由于广义表中的元素既可以是原子，也可以是广义表，所以会有原子结点和列表结点。</p>
+<p>每个元素所需的空间大小无法统一，所以很难用顺序存储结构表示，通常采用链式结构表示。</p>
+<p>原子结点：</p>
+<p><img src="/2020/01/24/data-structure7/原子结点.png" alt="原子结点.png"></p>
+<p>只有两个域，标志域与值域。</p>
+<p>列表结点：</p>
+<p><img src="/2020/01/24/data-structure7/列表结点.png" alt="列表结点.png"></p>
+<p>有3个域，标志域，表头指针域与表尾指针域。</p>
+<p>这种链式存储结构中，为了统一管理这2类结点，采用共用体（联合）来定义广义表的结点类型。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GLNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemTag tag; <span class="comment">//标志域，用以区分原子结点和表结点</span></span><br><span class="line">    <span class="keyword">union</span></span><br><span class="line">    &#123;</span><br><span class="line">        AtomType atom; <span class="comment">//原子结点</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            <span class="class"><span class="keyword">struct</span> <span class="title">GLNode</span> *<span class="title">hp</span>,*<span class="title">tp</span>;</span></span><br><span class="line">        &#125;ptr; <span class="comment">//表结点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;*GList;</span><br></pre></td></tr></table></figure>
+<h3 id="广义表的递归算法"><a href="#广义表的递归算法" class="headerlink" title="广义表的递归算法"></a>广义表的递归算法</h3><h4 id="求广义表的长度-int-GListLength-GList-L"><a href="#求广义表的长度-int-GListLength-GList-L" class="headerlink" title="求广义表的长度 int GListLength(GList L)"></a>求广义表的长度 <code>int GListLength(GList L)</code></h4><script type="math/tex; mode=display">
+递归定义为\begin{cases}
+    0, \text{L==NULL}\\
+    1+GListLength(L->ptr.tp), \text{L!=NULL}
+\end{cases}</script><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GListlength</span><span class="params">(GList L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!L)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>+GListLength(L-&gt;ptr.tp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="求广义表的深度-int-GListDepth-GList-L"><a href="#求广义表的深度-int-GListDepth-GList-L" class="headerlink" title="求广义表的深度 int GListDepth(GList L)"></a>求广义表的深度 <code>int GListDepth(GList L)</code></h4><p>广义表：$LS=(a_1,a_2,…,a_n)$</p>
+<script type="math/tex; mode=display">
+递归定义为\begin{cases}
+    1, \text{L==NULL(空表)}\\
+    0, \text{L->tag==0(原子结点)}\\
+    1+Max(a_i), \text{L!=NULL(非空表)}\\
+\end{cases}</script><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GListDepth</span><span class="params">(GList L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!L)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(L-&gt;tag==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">max</span>=<span class="number">0</span>,p=L;p;p=p-&gt;ptr.tp)</span><br><span class="line">    &#123;</span><br><span class="line">        dep=GListDepth(p-&gt;ptr.hp);</span><br><span class="line">        <span class="keyword">if</span>(dep&gt;<span class="built_in">max</span>)</span><br><span class="line">            <span class="built_in">max</span>=dep;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——数组</title>
+    <url>/2020/01/23/data-structure6/</url>
+    <content><![CDATA[<h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><ol>
+<li><p>一维数组：是一个定长线性表$(a_1,a_2,…,a_n)$</p>
+<p>记为：$A=(a_1,a_2,…,a_n)$</p>
+<p>其中：$a_i$为数据元素，$i$为下标/序号，$1\le i\le n$</p>
+</li>
+<li><p>二维数组是一个定长线性表</p>
+<p>$A=(\alpha_1,\alpha_2,…,\alpha_m)$这里每个元素$\alpha_i$代表矩阵的一行</p>
+<p>$A=(\beta_1,\beta_2,…,\beta_n)$这里每个元素$\beta_j$代表矩阵的一列</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+数组\begin{cases}
+数据对象\\
+数据关系\\
+基本操作\\
+\end{cases}</script><h3 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">InitArray(&amp;A,n,bound1,...,boundn); <span class="comment">//创建一个n维数组，各维长度通过boundi表示</span></span><br><span class="line">DestroyArray(&amp;A); <span class="comment">//销毁数组A</span></span><br><span class="line">Value(A,&amp;e,index1,...,indexn); <span class="comment">//读取数组指定下标的元素值到e中</span></span><br><span class="line">Assign(A,e,index1,...,indexn); <span class="comment">//将e的值给指定下标的数组元素中</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组的顺序表示和实现"><a href="#数组的顺序表示和实现" class="headerlink" title="数组的顺序表示和实现"></a>数组的顺序表示和实现</h3><h4 id="数组的物理结构"><a href="#数组的物理结构" class="headerlink" title="数组的物理结构"></a>数组的物理结构</h4><p>因素：</p>
+<ol>
+<li>分配连续的存储单元成非连续的存储单元；</li>
+<li>保存全部数组元素成部分的数组元素。</li>
+</ol>
+<h4 id="一维数组的顺序表示"><a href="#一维数组的顺序表示" class="headerlink" title="一维数组的顺序表示"></a>一维数组的顺序表示</h4><p>一维数组$A=(a_1,a_2,…,a_n)$</p>
+<p><img src="/2020/01/23/data-structure6/一维数组的顺序表示.png" alt="一维数组的顺序表示.png"></p>
+<p>一维数组数据元素$a_i$的地址计算公式</p>
+<p>$LOC(i)=b+(i-1)L=LOC(1)+(i-1)L$</p>
+<p>其中：$LOC(i)$为元素$a_i$的存储位置，b是连续存储单元首地址，L是一个数据元素所占的单元数。</p>
+<h4 id="二维数组的顺序表示"><a href="#二维数组的顺序表示" class="headerlink" title="二维数组的顺序表示"></a>二维数组的顺序表示</h4><p>步骤：</p>
+<ol>
+<li><p>计算需要分配多大的连续空间，才能保存所有的数据元素。</p>
+</li>
+<li><p>存放方式，一种是逐行存放，称为行序优先。还有一种是逐列存放，我们也称为列序优先。</p>
+</li>
+</ol>
+<h5 id="以行序为主序的顺序存储方式"><a href="#以行序为主序的顺序存储方式" class="headerlink" title="以行序为主序的顺序存储方式"></a>以行序为主序的顺序存储方式</h5><script type="math/tex; mode=display">
+    \begin{pmatrix}
+    a_{11}&a_{12}\\
+    a_{21}&a_{22}\\
+    a_{31}&a_{32}\\    
+    \end{pmatrix}</script><p><img src="/2020/01/23/data-structure6/二维数组的行序存储.png" alt="二维数组的行序存储.png"></p>
+<p>$A_{m*n}$需要考虑：</p>
+<ol>
+<li><p>分配空间；明确分配多大连续空间。这里共需要开辟$m*n$个数据元素的连续空间。</p>
+</li>
+<li><p>确定存放方式，首先以行序优先逐行存放。</p>
+</li>
+<li><p>分析数据元素$a_{ij}$的计算空间。</p>
+</li>
+</ol>
+<p>当采用逐行存放方式时，前面有$i$行，每行有$n$个数据元素，共有$i*n$个数据元素。</p>
+<p>而在第$i$行中，$a_{ij}$前面还需要存放$j$个数据元素。</p>
+<p>这样在前面存放的数据元素的总个数是$i*n+j$。所以$a_{ij}$的地址计算公式为：</p>
+<script type="math/tex; mode=display">LOC(i,j)=b+(i*n+j)L=LOC(0,0)+(i*n+j)L</script><p>考虑列序优先，逐列存放时，前面有$j$列，每列有$m$个数据元素，共有$j*m$个数据元素。</p>
+<p>而在第$j$列中，$a_{ij}$前面还需要存放$i$个数据元素。</p>
+<p>这样在前面存放的数据元素的总个数是$j*m+i$。所以$a_{ij}$的地址计算公式为：</p>
+<script type="math/tex; mode=display">LOC(i,j)=b+(j*m+i)L=LOC(0,0)+(j*m+i)L</script><p>对任意一个数组元素$A[i_1,i_2,…,i_n]$，可得到行序优先的寻址方式为</p>
+<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a<em>{ij}=a</em>{ji}$，$i\le m,j\le n$</p>
+<p>下三角元素$a_{ij}$满足$i\ge j$</p>
+<p>数据元素的个数$=1+2+…+n=n(n+1)/2$</p>
+<p>假定以行序为主，顺序存储下三角元素到$SA[1…n(n+1)/2]$</p>
+<ol>
+<li><p>设$a_{ij}$在下三角，$i\ge j$</p>
+<p> $\because$第$1$~$i-1$行共有元素$1+2+3+…+(i-1)=i(i-1)/2$个</p>
+<p> 第$i$行中，$a_{ij}$是第$j$个数据元素，共有$j$个元素</p>
+<p> $\therefore$$a_{ij}$的序号为：$k=i(i-1)/2+j$</p>
+</li>
+<li><p>设$a_{ij}$在上三角，$i\lt j$</p>
+<p> $\because$上三角的$a<em>{ij}$等于下三角的$a</em>{ji}$</p>
+<p> 下三角的$a_{ji}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
+<p> $\therefore$上三角的$a_{ij}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
+</li>
+</ol>
+<p>由1和2，任意$a_{ij}$在$SA$中的序号，为</p>
+<script type="math/tex; mode=display">
+k= \begin{cases}
+   i(i-1)/2+j, i\ge j\\
+   j(j-1)/2+i, i<j\\
+   \end{cases}
+   或
+A(i,j)=\begin{cases}
+       SA[i(i-1)/2+j], i\ge j\\
+       SA[j(j-1)/2+i], i<j\\
+       \end{cases}</script><p>该公式称为在$SA$中的映象函数，下标转换公式</p>
+<h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了对角的三条元素，其余为0</p>
+<ol>
+<li><p>元素$a_{ij}$在三对角的条件：$|i-j|\le1$；</p>
+</li>
+<li><p>三对角的元素个数：$3n-2$</p>
+</li>
+</ol>
+<p>假定以行序优先，将三对角元素顺序存储到$SA[1…3n-2]$中</p>
+<p>任意三对角元素$a_{ij}$，在$SA$中的序号：</p>
+<p>$k=(3*(i-1)-i)+(j-i+2)=2i+j-2$</p>
+<script type="math/tex; mode=display">
+A[i,j]=\begin{cases}
+       SA[k], |i-j|\le1\\
+       0, 其它\\
+       \end{cases}</script><h3 id="稀疏矩阵的压缩存储"><a href="#稀疏矩阵的压缩存储" class="headerlink" title="稀疏矩阵的压缩存储"></a>稀疏矩阵的压缩存储</h3><h4 id="三元组表"><a href="#三元组表" class="headerlink" title="三元组表"></a>三元组表</h4><p>在实际应用中，常常会遇到一种矩阵，零元素很多，非零元素很少，且非零元素在矩阵中的位置没有特定的规律，我们称这种矩阵为稀疏矩阵。</p>
+<p>稀疏矩阵没有一个明确的定义，只是从形式上看，非零元素的个数的元素总数的比例低于某特定的定位。</p>
+<p>由于非零元素很少，所以只需保存这些非零元素，没有保存的都是零元素。为了标明每个非零元素在矩阵中的位置，我们可以以（行，列，值）形式的三元组形式来保存非零元素。</p>
+<p>所有的非零元素的三元组序列加上行数和列数称为三元组表。</p>
+<script type="math/tex; mode=display">(i,j,e)</script><h4 id="三元组顺序表"><a href="#三元组顺序表" class="headerlink" title="三元组顺序表"></a>三元组顺序表</h4><p>我们首先考虑的是分配连续的存储空间，保存稀疏矩阵中的三元组表，这种存储结构称之为三元组顺序表。</p>
+<p>在三元组顺序表中，首先需要的是一个足够大的三元组数组空间，将非零元素的三元组按行序优先的次序保存在数组中，再就是矩阵的行数，列数和非零元素的个数。</p>
+<p>这样三元组顺序表就能唯一地确定稀疏矩阵，逻辑上和物理上就对应起来了。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">33</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">36</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">28</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">37</td>
+</tr>
+<tr>
+<td style="text-align:center">///</td>
+<td style="text-align:center">///</td>
+<td style="text-align:center">///</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>行数(mu):6</p>
+<p>列数(nu):7</p>
+<p>非零元(tu):7</p>
+<h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><ol>
+<li><p>假定非零元素的个数最大值能达到10000，定义常量<code>MAXSIZE=10000;</code></p>
+</li>
+<li><p>定义三元组的结构类型triple；包括非零元素的行位置，列位置，元素值这三个属性。</p>
+</li>
+<li><p>定义三元组顺序表的结构类型TSMatrix。包括大小为MAXSIZE的三元组数组，行数，列数和非零元素个数几个属性。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 10000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i,j; <span class="comment">//非零元行，列下标</span></span><br><span class="line">    ElemType e;</span><br><span class="line">&#125;Triple; <span class="comment">//定义三元组</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Triple data[MAXSIZE+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> mu,nu,tu;</span><br><span class="line">&#125;TSMatrix; <span class="comment">//定义三元组表</span></span><br><span class="line">TSMatrix M;</span><br></pre></td></tr></table></figure>
+<h3 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h3><p><img src="/2020/01/23/data-structure6/十字链表.png" alt="十字链表.png"></p>
+<p>我们把这种物理结构称为十字链表。非常形象地表示了每个非零数据元素的水平方向的关系，行关系，以及垂直方向的关系，列关系。这两种关系十字交叉，所以称为十字链表。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> //三元组结点定义</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i,j; <span class="comment">//非零元素行，列位置</span></span><br><span class="line">    ElemType e;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">OLNode</span> *<span class="title">right</span>, *<span class="title">down</span>;</span></span><br><span class="line">&#125;OLNode,*OLink;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> //十字链表类型定义</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    OLink *rhead,*chead; <span class="comment">//行列头指针数组</span></span><br><span class="line">    <span class="keyword">int</span> mu,nu,tu; <span class="comment">//稀疏矩阵的行数，列数和非零元个数</span></span><br><span class="line">&#125;CrossList;</span><br></pre></td></tr></table></figure>
+<h3 id="稀疏矩阵的转置算法"><a href="#稀疏矩阵的转置算法" class="headerlink" title="稀疏矩阵的转置算法"></a>稀疏矩阵的转置算法</h3><h4 id="算法1："><a href="#算法1：" class="headerlink" title="算法1："></a>算法1：</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransMatrix1</span><span class="params">(TSMatrix M,TSMatrix &amp;T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T.mu=M.nu;</span><br><span class="line">    T.nu=M.mu;</span><br><span class="line">    T.tu=M.tu;</span><br><span class="line">    <span class="keyword">if</span>(T.tu)</span><br><span class="line">    &#123;</span><br><span class="line">        q=<span class="number">1</span>; <span class="comment">//指示向T写时的位置</span></span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">1</span>;col&lt;=M.nu;++col) <span class="comment">//扫描M的三元组表M.nu次</span></span><br><span class="line">            <span class="keyword">for</span>(p=<span class="number">1</span>;p&lt;=M.tu;++p) <span class="comment">//扫描M的长度为M.tu的三元表</span></span><br><span class="line">                <span class="keyword">if</span>(M.data[p].j==col) <span class="comment">//找到一个符合条件的三元组</span></span><br><span class="line">                &#123;</span><br><span class="line">                    T.data[q].i=M.data[p].j;</span><br><span class="line">                    T.data[q].j=M.data[p].i;</span><br><span class="line">                    T.data[q].e=M.data[p].e;</span><br><span class="line">                    q++;</span><br><span class="line">                &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：$O(M.mu*M.tu)$</p>
+<h4 id="算法2：改进算法"><a href="#算法2：改进算法" class="headerlink" title="算法2：改进算法"></a>算法2：改进算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TransMatrix2</span><span class="params">(TSMatrix M,TSMatrix &amp;T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T.mu=M.nu;</span><br><span class="line">    T.nu=M.mu;</span><br><span class="line">    T.tu=M.tu;</span><br><span class="line">    <span class="keyword">if</span>(T.tu)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">1</span>;col&lt;=M.nu;col++)</span><br><span class="line">            num[col]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(t=<span class="number">1</span>;t&lt;=M.tu;t++)</span><br><span class="line">            ++num[M.data[t].j];</span><br><span class="line">        cpot[<span class="number">1</span>]=<span class="number">1</span>; <span class="comment">//计算数组cpot</span></span><br><span class="line">        <span class="keyword">for</span>(col=<span class="number">2</span>;col&lt;=M.nu;col++)</span><br><span class="line">            cpot[col]=cpot[col<span class="number">-1</span>]+num[col<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(p=<span class="number">1</span>;p&lt;=M.tu;++p) <span class="comment">//扫描M三元组表</span></span><br><span class="line">        &#123;</span><br><span class="line">            col=M.data[p].j; <span class="comment">//确定M当前元素列号</span></span><br><span class="line">            q=cpot[col];</span><br><span class="line">            T.data[q].j=M.data[p].i;</span><br><span class="line">            T.data[q].i=M.data[p].j;</span><br><span class="line">            T.data[q].e=M.data[p].e;</span><br><span class="line">            ++cpot[col]; <span class="comment">//修改T的当前行下一元素存放位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——队列</title>
+    <url>/2020/01/23/data-structure5/</url>
+    <content><![CDATA[<h3 id="队列的相关概念"><a href="#队列的相关概念" class="headerlink" title="队列的相关概念"></a>队列的相关概念</h3><h4 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h4><p>队列：只允许在表的一端删除元素，在另一端插入元素的线性表；</p>
+<p>空队列：不含元素的队列；</p>
+<p>队首：队列中只允许删除元素的一端，head，front；</p>
+<p>队尾：队列中只允许插入元素的一端，rear，tail；</p>
+<p>队首元素：处于队首的元素；</p>
+<p>队尾元素：处于队尾的元素；</p>
+<p>进队：插入一个元素到队列中；</p>
+<p>出队：从队列中删除一个元素。</p>
+<h4 id="先进先出"><a href="#先进先出" class="headerlink" title="先进先出"></a>先进先出</h4><h4 id="队列及其操作"><a href="#队列及其操作" class="headerlink" title="队列及其操作"></a>队列及其操作</h4><p>队列的进队和出队</p>
+<p>将新元素插入到队尾，出队将队首元素删除</p>
+<p><img src="/2020/01/23/data-structure5/出队入队.png" alt="出队入队.png"></p>
+<h4 id="队列的基本操作"><a href="#队列的基本操作" class="headerlink" title="队列的基本操作"></a>队列的基本操作</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">InitQueue(q);  <span class="comment">//初始化，将q置为空队列</span></span><br><span class="line">QueueEmpty(q);  <span class="comment">//判断q是否为空队列</span></span><br><span class="line">EnQueue(q,e);  <span class="comment">//将e插入队列q的尾端</span></span><br><span class="line">DeQueue(q,e);  <span class="comment">//取走队列q的首元素，送e</span></span><br><span class="line">GetHead(q,e);  <span class="comment">//读取队列q的首元素，送e</span></span><br><span class="line">QueueClear(q);  <span class="comment">//置q为空队列</span></span><br></pre></td></tr></table></figure>
+<h3 id="链式队列"><a href="#链式队列" class="headerlink" title="链式队列"></a>链式队列</h3><h4 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h4><p><code>Q.front</code> 队首指针，指向表头结点</p>
+<p><code>Q.rear</code> 队尾指针，指向队尾结点</p>
+<p><code>Q.front-&gt;data</code>  不放元素</p>
+<h4 id="空队列"><a href="#空队列" class="headerlink" title="空队列"></a>空队列</h4><p><img src="/2020/01/23/data-structure5/链式空队列.png" alt="链式空队列.png"></p>
+<h4 id="非空队列"><a href="#非空队列" class="headerlink" title="非空队列"></a>非空队列</h4><p><img src="/2020/01/23/data-structure5/链式非空队列.png" alt="链式非空队列.png"></p>
+<h4 id="定义结点类型"><a href="#定义结点类型" class="headerlink" title="定义结点类型"></a>定义结点类型</h4><ul>
+<li>存放元素的结点类型</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Qnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Qnode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;Qnode,*QueuePtr;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由头尾指针组成的结点类型</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Qnode *front; <span class="comment">//头指针</span></span><br><span class="line">    Qnode *rear; <span class="comment">//尾指针</span></span><br><span class="line">&#125;LinkQueue; <span class="comment">//链式队列类型</span></span><br></pre></td></tr></table></figure>
+<h4 id="生成空队列算法：初始化队列"><a href="#生成空队列算法：初始化队列" class="headerlink" title="生成空队列算法：初始化队列"></a>生成空队列算法：初始化队列</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LENG sizeof(Qnode) <span class="comment">//求解点所占单元数</span></span></span><br><span class="line"><span class="function">LinkQueue <span class="title">InitQueue</span><span class="params">()</span> <span class="comment">//生成仅带表头结点的空队列</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LinkQueue Q; <span class="comment">//说明变量Q</span></span><br><span class="line">    Q.front=Q.rear=(QueuePtr)<span class="built_in">malloc</span>(LENG); <span class="comment">//生成表头结点</span></span><br><span class="line">    Q.front-&gt;next=<span class="literal">NULL</span>; <span class="comment">//表头结点的next为空指针</span></span><br><span class="line">    <span class="keyword">return</span> Q; <span class="comment">//返回Q的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    LinkQueue que;</span><br><span class="line">    que=InitQueue();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="（空队列时）插入新元素x"><a href="#（空队列时）插入新元素x" class="headerlink" title="（空队列时）插入新元素x"></a>（空队列时）插入新元素x</h4><p><img src="/2020/01/23/data-structure5/空队列插队.png" alt="空队列插队.png"></p>
+<h4 id="插入新元素e的算法"><a href="#插入新元素e的算法" class="headerlink" title="插入新元素e的算法"></a>插入新元素e的算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">LinkQueue <span class="title">EnQueue</span><span class="params">(LinkQueue Q, ELemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Qnode *p; <span class="comment">//说明变量p</span></span><br><span class="line">    p=(Qnode *)<span class="built_in">malloc</span>(LENG); <span class="comment">//生成新元素结点</span></span><br><span class="line">    p-&gt;data=e; <span class="comment">//装入元素e</span></span><br><span class="line">    p-&gt;next=<span class="literal">NULL</span>; <span class="comment">//为队尾结点</span></span><br><span class="line">    Q.rear-&gt;next=p; <span class="comment">//插入</span></span><br><span class="line">    Q.rear=p; <span class="comment">//修改尾指针</span></span><br><span class="line">    <span class="keyword">return</span> Q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="例：插入一个新元素10"><a href="#例：插入一个新元素10" class="headerlink" title="例：插入一个新元素10"></a>例：插入一个新元素10</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    LinkQueue que;</span><br><span class="line">    que=InitQueue();</span><br><span class="line">    que=EnQueue(que,<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="元素的删除"><a href="#元素的删除" class="headerlink" title="元素的删除"></a>元素的删除</h4><p>队列删除元素时都是删除队首元素</p>
+<p>若原队列有2个或2个以上结点</p>
+<p>执行：<code>Q.front-&gt;next=p-&gt;next;</code></p>
+<p><img src="/2020/01/23/data-structure5/非空队列出队.png" alt="非空队列出队.png"></p>
+<p>若原队列只有1个结点</p>
+<p>执行`free(p); Q.rear=Q.front;</p>
+<p><img src="/2020/01/23/data-structure5/链式空队列.png" alt="链式空队列.png"></p>
+<h4 id="链式队列的出队算法"><a href="#链式队列的出队算法" class="headerlink" title="链式队列的出队算法"></a>链式队列的出队算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">LinkQueue <span class="title">DelQueue</span><span class="params">(LinkQueue Q,Elemtype *e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Qnode *p; <span class="comment">//说明变量p</span></span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear) <span class="comment">//若原队列为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty queue"</span>);</span><br><span class="line">        <span class="keyword">return</span> Q;</span><br><span class="line">    &#125;</span><br><span class="line">    p=Q.front-&gt;next; <span class="comment">//p指向对头结点</span></span><br><span class="line">    (*e)=p-&gt;data; <span class="comment">//取出e指向它</span></span><br><span class="line">    Q.front-&gt;next=p-&gt;next; <span class="comment">//删除队头结点</span></span><br><span class="line">    <span class="keyword">if</span>(Q.rear==p) <span class="comment">//若原队列只有1个结点</span></span><br><span class="line">        Q.rear=Q.front;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">return</span> Q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="顺序队列与“假溢出”"><a href="#顺序队列与“假溢出”" class="headerlink" title="顺序队列与“假溢出”"></a>顺序队列与“假溢出”</h3><p>假设用一维数组Q[0…5]表示顺序队列</p>
+<p>设f指向队头元素，r指向队尾元素的后一单元</p>
+<ol>
+<li>初始化后</li>
+</ol>
+<p><img src="/2020/01/23/data-structure5/初始化.png" alt="初始化.png"></p>
+<ol>
+<li>A进队后</li>
+</ol>
+<p><img src="/2020/01/23/data-structure5/A进队.png" alt="A进队.png"></p>
+<ol>
+<li>A出队后</li>
+</ol>
+<p><img src="/2020/01/23/data-structure5/A出队.png" alt="A出队.png"></p>
+<ol>
+<li>B进队后</li>
+</ol>
+<p><img src="/2020/01/23/data-structure5/B进队.png" alt="B进队.png"></p>
+<p>移动元素开销大</p>
+<h4 id="方法二：将Q当循环表使用"><a href="#方法二：将Q当循环表使用" class="headerlink" title="方法二：将Q当循环表使用"></a>方法二：将Q当循环表使用</h4><p>当f=r时，如何分辨是空队列和满队列？</p>
+<h4 id="解决方案：增加一个标识变量"><a href="#解决方案：增加一个标识变量" class="headerlink" title="解决方案：增加一个标识变量"></a>解决方案：增加一个标识变量</h4><p>方案二：还剩最后一个单元不使用，可避免满队列时出现的二义性。</p>
+<p>即：进队前测试</p>
+<p>若r+1=f，表明还剩最后一个单元，认为此时就是满队列</p>
+<h4 id="定义队列的C类型"><a href="#定义队列的C类型" class="headerlink" title="定义队列的C类型"></a>定义队列的C类型</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLENG 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType elem[MAXLENG];</span><br><span class="line">    <span class="keyword">int</span> front,rear;</span><br><span class="line">&#125;SeQueue;</span><br><span class="line">SeQueue Q;</span><br></pre></td></tr></table></figure>
+<h4 id="进队算法"><a href="#进队算法" class="headerlink" title="进队算法"></a>进队算法</h4><p>假设Q表示顺序队列，头指针front指向队头元素，rear指向队尾元素的后一个空位，e为进队元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">En_Queue</span><span class="params">(SeQueue &amp;Q,ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((Q.rear+<span class="number">1</span>)%MAXLENG==Q.front) <span class="comment">//若Q满，退出</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    Q.elem[Q.rear]=e; <span class="comment">//装入新元素e</span></span><br><span class="line">    Q.rear++;</span><br><span class="line">    Q.rear=Q.rear%MAXLENG; <span class="comment">//循环队列</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出队算法"><a href="#出队算法" class="headerlink" title="出队算法"></a>出队算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">De_Queue</span><span class="params">(SeQueue &amp;Q,ElemType &amp;e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear) <span class="comment">//空队列，退出</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    e=Q.elem[Q.front]; <span class="comment">//取走头元素，送e</span></span><br><span class="line">    Q.front=(Q.front+<span class="number">1</span>)%MAXLENG;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>提醒：f指向队首元素，r指向队尾元素后一单元。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——栈</title>
+    <url>/2019/10/29/data-structure4/</url>
+    <content><![CDATA[<h3 id="栈的概念与特性"><a href="#栈的概念与特性" class="headerlink" title="栈的概念与特性"></a>栈的概念与特性</h3><p>一般的线性表插入和删除位置是没有限制的，而栈和队列对插入与删除的位置有限制，从而在相关操作上有一定的特殊性。</p>
+<p>栈：限制在表尾作插入、删除操作的线性表</p>
+<p><img src="/2019/10/29/data-structure4/栈的概念.png" alt="栈的概念.png"></p>
+<p><img src="/2019/10/29/data-structure4/栈图.png" alt="栈图.png"></p>
+<p>进栈：插入一个元素到栈中。或称：入栈、推入、压入、push。</p>
+<p>出栈：从栈删除一个元素。或称：退栈、上托、弹出、pop。</p>
+<p>栈顶：允许插入、删除元素的一端（表尾）。</p>
+<p>栈顶元素：处在栈顶位置的元素。</p>
+<p>栈底：表中不允许插入、删除元素的一端。</p>
+<p>空栈：不含元素的栈。</p>
+<p>栈的元素的进出原则：“先进后出”。</p>
+<h3 id="栈的基本操作"><a href="#栈的基本操作" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Initstack(s); <span class="comment">//置s为空栈</span></span><br><span class="line">Push(s,e); <span class="comment">//元素e进栈。若s为满，则发生溢出，若不能解决溢出，重新分配空间失败，则插入失败。</span></span><br><span class="line">Pop(s,e); <span class="comment">//删除s的顶元素，并送入e。若s为空栈，发生“下溢”。为空栈时，表某项任务已经完成</span></span><br><span class="line">Gettop(s,e); <span class="comment">//栈s的顶元素拷贝到e。若s为空栈，操作结束。</span></span><br><span class="line">Empty(s); <span class="comment">//判断s是否为空栈。若s为空栈，则Empty(s)为ture；否则为false。</span></span><br></pre></td></tr></table></figure>
+<h3 id="理解栈操作"><a href="#理解栈操作" class="headerlink" title="理解栈操作"></a>理解栈操作</h3><p>栈是输入与输出操作限制在栈顶位置进行的数据结构。</p>
+<p>假设A、B、C进栈，不可能产生CAB的出栈顺序。</p>
+<p>一般地，输入序列$(…, a_i, …, a_j, …, a_k, …)$到栈中，不能得到输出序列$(…, a_k, …, a_i, …, a_j, …)$。</p>
+<h3 id="顺序栈的基本操作"><a href="#顺序栈的基本操作" class="headerlink" title="顺序栈的基本操作"></a>顺序栈的基本操作</h3><p>顺序栈：用顺序空间表示的栈</p>
+<h4 id="设计实现方案时需要考虑的因素："><a href="#设计实现方案时需要考虑的因素：" class="headerlink" title="设计实现方案时需要考虑的因素："></a>设计实现方案时需要考虑的因素：</h4><p>如何分配存储空间</p>
+<ul>
+<li>动态分配或静态分配</li>
+<li>栈空间范围，如：s[0…maxleng-1]</li>
+</ul>
+<p>如何设置进栈和出栈的标志top</p>
+<ul>
+<li>如top指向栈顶元素或指向栈顶元素上一空单元等，作为进栈与出栈的依据。</li>
+</ul>
+<p>分析满栈的条件，用于进栈操作。</p>
+<p>分析空栈的条件，用于出栈操作。</p>
+<h3 id="针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。"><a href="#针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。" class="headerlink" title="针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。"></a>针对top指向栈顶元素或指向栈顶元素下一空单元分别进行基本操作的讲解。</h3><h4 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h4><p>方案内容 </p>
+<p>栈空间范围为：s[0…maxleng-1]</p>
+<p>顶指针指向顶元素所在位置：</p>
+<p><img src="/2019/10/29/data-structure4/顺序栈1_非.png" alt="顺序栈1_非.png"></p>
+<ol>
+<li><p>非空栈示意图 top≥0 顶元素=s[top]</p>
+</li>
+<li><p>进出栈说明</p>
+<ul>
+<li>进栈操作：先对top加1，指向下一空位置，将新数据送入top指向的位置，完成进栈操作。结束时top指向新栈顶元素所在位置。</li>
+<li>出栈操作：先根据top指向，取出栈顶数据元素；再对top减1。完成出栈操作。结束时top指向去掉原栈顶元素后的新栈顶元素所在位置。</li>
+</ul>
+</li>
+<li><p>满栈条件 <code>top==maxleng-1</code> 若插入元素，将发生溢出。overflow。</p>
+</li>
+</ol>
+<p><img src="/2019/10/29/data-structure4/顺序栈1_空.png" alt="顺序栈1_空.png"></p>
+<ol>
+<li>空栈条件 <code>top==-1</code> 执行操作，则发生下溢。</li>
+</ol>
+<h4 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h4><p>方案内容</p>
+<p>栈空间范围为：s[0…maxleng-1]</p>
+<p>顶指针指向顶元素上的一空位置：</p>
+<p><img src="/2019/10/29/data-structure4/顺序栈2_非.png" alt="顺序栈2_非.png"></p>
+<ol>
+<li><p>非空栈示意图 top≥1 顶元素=s[top-1]</p>
+</li>
+<li><p>进出栈操作说明：</p>
+<ul>
+<li>进栈操作：先将新数据送入top指向的位置，再对top加1，指向下一空位置，完成进栈操作。结束时，top正好指向新栈顶元素所在位置上的一空位置。</li>
+<li>出栈操作：先对top减1，根据top指向取出栈顶数据，完成出栈操作。结束时top指向去掉原栈顶元素后的新栈顶元素所在位置上的一空位置。</li>
+</ul>
+</li>
+<li><p>满栈条件 <code>top==maxleng</code> 若插入元素，将发生“溢出”。</p>
+</li>
+</ol>
+<p><img src="/2019/10/29/data-structure4/顺序栈2_空.png" alt="顺序栈2_空.png"></p>
+<ol>
+<li>空栈条件 <code>top==0</code> 若删除元素，则发生下溢。</li>
+</ol>
+<h3 id="顺序栈的描述"><a href="#顺序栈的描述" class="headerlink" title="顺序栈的描述"></a>顺序栈的描述</h3><p>栈元素与顶指针舍弃定义为一个记录（结构）</p>
+<p>约定：</p>
+<ul>
+<li>栈元素空间为[0…maxleng-1]</li>
+<li>top指向栈元素上一空位置。</li>
+<li>**top是栈顶标志，根据约定由top找栈顶元素。</li>
+</ul>
+<p>存储空间分配方案</p>
+<h4 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType elem[maxleng<span class="number">-1</span>]; <span class="comment">//栈元素空间</span></span><br><span class="line">    <span class="keyword">int</span> top; <span class="comment">//顶指针</span></span><br><span class="line">&#125; SqStack; <span class="comment">//SqStack为结构类型</span></span><br><span class="line">SqStack s; <span class="comment">//s为结构类型变量</span></span><br></pre></td></tr></table></figure>
+<p>其中：s.top——顶指针 s.elem[s.top-1]——顶元素</p>
+<h4 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKINCREMENT 10</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType *base; <span class="comment">//指向栈元素空间</span></span><br><span class="line">    <span class="keyword">int</span> top; <span class="comment">//顶指针</span></span><br><span class="line">    <span class="keyword">int</span> stacksize; <span class="comment">//栈元素空间大小，相当于maxleng</span></span><br><span class="line">&#125; SqStack; <span class="comment">//SqStack为结构类型</span></span><br><span class="line">SqStack s;</span><br></pre></td></tr></table></figure>
+<h3 id="顺序栈的算法"><a href="#顺序栈的算法" class="headerlink" title="顺序栈的算法"></a>顺序栈的算法</h3><h4 id="初始化栈（动态分配）"><a href="#初始化栈（动态分配）" class="headerlink" title="初始化栈（动态分配）"></a>初始化栈（动态分配）</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(SqStack &amp;s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s.base=(ElemType *)<span class="built_in">malloc</span>(STACK_INIT_SIZE*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">    s.top=<span class="number">0</span>;</span><br><span class="line">    s.stacksize=STACK_INIT_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="进栈算法"><a href="#进栈算法" class="headerlink" title="进栈算法"></a>进栈算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">push</span><span class="params">(SqStack &amp;s, ElemType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top&gt;=s.stacksize) <span class="comment">//发生溢出，扩充</span></span><br><span class="line">    &#123;</span><br><span class="line">        newbase=(ElemType *)relloc(s.base, (s.stacksize+STACKINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="keyword">if</span>(!newbase)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Overflow"</span>);</span><br><span class="line">            <span class="keyword">return</span> ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(s.base);</span><br><span class="line">        s.base=newbase;</span><br><span class="line">        s.stacksize+=STACKINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    s.base[s.top]=x; <span class="comment">//装入元素x</span></span><br><span class="line">    s.top++; <span class="comment">//修改顶指针</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出栈算法"><a href="#出栈算法" class="headerlink" title="出栈算法"></a>出栈算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">(SqStack &amp;s, ElemType &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.top==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR; <span class="comment">//空栈</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        s.top--; <span class="comment">//修改顶指针</span></span><br><span class="line">        x=s.base[s.top]; <span class="comment">//取走栈顶元素</span></span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">//成功退栈，返回OK</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链式栈的基本操作"><a href="#链式栈的基本操作" class="headerlink" title="链式栈的基本操作"></a>链式栈的基本操作</h3><h4 id="非空链式栈的一般形式"><a href="#非空链式栈的一般形式" class="headerlink" title="非空链式栈的一般形式"></a>非空链式栈的一般形式</h4><p>假定元素进栈次序为：$a_1, a_2, …, a_n$。</p>
+<p>用普通无头结点的单链表：</p>
+<p><img src="/2019/10/29/data-structure4/链式栈_非.png" alt="链式栈_非空.png"></p>
+<p>进栈需要找到最后一个结点；出栈时删除最后一个结点。</p>
+<p>缺点：进出栈时间开销大。</p>
+<p>解决方案：将指针次序颠倒过来，top指向$a_n$。</p>
+<p><img src="/2019/10/29/data-structure4/链式栈反.png" alt="链式栈反.png"></p>
+<p>进栈将新结点作为首结点；出栈时删除首结点。</p>
+<p>优点：进出栈时间为常数。</p>
+<h4 id="链式栈的进栈"><a href="#链式栈的进栈" class="headerlink" title="链式栈的进栈"></a>链式栈的进栈</h4><p>压入元素e到top为顶指针的链式栈。</p>
+<p><img src="/2019/10/29/data-structure4/链式栈进栈.png" alt="链式栈进栈.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p=(struct node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct node));</span><br><span class="line">p-&gt;data=e;</span><br><span class="line">p-&gt;next=top;</span><br><span class="line">top=p;</span><br></pre></td></tr></table></figure>
+<p>进栈算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node* <span class="title">push_link</span><span class="params">(struct node *top, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="keyword">int</span> leng=<span class="keyword">sizeof</span>(struct node); <span class="comment">//确认新结点空间大小</span></span><br><span class="line">    p=(struct node *)<span class="built_in">malloc</span>(leng); <span class="comment">//生成新结点</span></span><br><span class="line">    p-&gt;data=e;</span><br><span class="line">    p-&gt;next=top;</span><br><span class="line">    top=p;</span><br><span class="line">    <span class="keyword">return</span> top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="链式栈的退栈"><a href="#链式栈的退栈" class="headerlink" title="链式栈的退栈"></a>链式栈的退栈</h4><p><img src="/2019/10/29/data-structure4/链式栈出栈.png" alt="链式栈出栈.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p=top;</span><br><span class="line">top=top-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
+<p>退栈算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node* <span class="title">pop</span><span class="params">(struct node *top, ElemType *e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">p</span>;</span></span><br><span class="line">    <span class="keyword">if</span>(top==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">//空栈</span></span><br><span class="line">    p=pop;</span><br><span class="line">    (*e)=p-&gt;data;</span><br><span class="line">    top=top-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">return</span> top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><h4 id="数制转换"><a href="#数制转换" class="headerlink" title="数制转换"></a>数制转换</h4><p>例：给定十进制数N=1348，转换为八进制数R=2504</p>
+<ol>
+<li>依次求余数，并送入栈中，直到商为0。<ol>
+<li>r1=1348%8=4 //求余数 n1=1348/8=168 //求商</li>
+<li>r2=168%8=0 //求余数 n1=168/8=21</li>
+<li>r3=21%8=5 n1=21/8=2</li>
+<li>r4=2%8=2 n1=2/8=0</li>
+</ol>
+</li>
+<li>依次退栈，得2504。</li>
+</ol>
+<h4 id="判定表达式中的括号匹配"><a href="#判定表达式中的括号匹配" class="headerlink" title="判定表达式中的括号匹配"></a>判定表达式中的括号匹配</h4><p>该检查算法的思想如下：</p>
+<ol>
+<li>每碰到一个左括号，把左括号进栈；</li>
+<li>每碰到一个右括号，就将栈顶元素出栈，记作b，检查b是否跟a匹配的左括号。如果是，则继续；否则，返回，提示存在括号不匹配。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32开发——SPI</title>
+    <url>/2019/10/28/stm32-spi-config/</url>
+    <content><![CDATA[<h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><p>SPI是英语Serial Peripheral interface的缩写，顾名思义就是串行外围设备接口。是Motorola首先在其MC68HCXX系列处理器上定义的。SPI接口主要应用在 EEPROM，FLASH，实时时钟，AD转换器，还有数字信号处理器和数字信号解码器之间。SPI，是一种高速的，全双工，同步的通信总线，并且在芯片的管脚上只占用四根线，节约了芯片的管脚，同时为PCB 的布局上节省空间，提供方便。</p>
+<p><img src="/2019/10/28/stm32-spi-config/SPI.png" alt="SPI.png"></p>
+<p>SPI 接口一般使用4 条线通信：</p>
+<ul>
+<li>MISO 主设备数据输入，从设备数据输出。</li>
+<li>MOSI 主设备数据输出，从设备数据输入。</li>
+<li>SCLK 时钟信号，由主设备产生。</li>
+<li>CS 从设备片选信号，由主设备控制。</li>
+</ul>
+<p>从图中可以看出，主机和从机都有一个串行移位寄存器，主机通过向它的SPI 串行寄存器写入一个字节来发起一次传输。寄存器通过MOSI信号线将字节传送给从机，从机也将自己的移位寄存器中的内容通过MISO信号线返回给主机。这样，两个移位寄存器中的内容就被交换。外设的写操作和读操作是同步完成的。如果只进行写操作，主机只需忽略接收到的字节；反之，若主机要读取从机的一个字节，就必须发送一个空字节来引发从机的传输。</p>
+<h3 id="SPI主要特点有："><a href="#SPI主要特点有：" class="headerlink" title="SPI主要特点有："></a>SPI主要特点有：</h3><p>可以同时发出和接收串行数据；可以当作主机或从机工作；提供频率可编程时钟；发送结束中断标志；写冲突保护；总线竞争保护等。</p>
+<ul>
+<li>3线全双工同步传输</li>
+<li>8或16位传输帧格式选择</li>
+<li>主或从操作</li>
+<li>支持多主模式</li>
+<li>8个主模式波特率预分频系数（最大为$f_{pclk}/2$）</li>
+<li>主模式和从模式下均可以由软件或硬件进行NSS管理；主/从操作模式的动态改变</li>
+<li>可编程的时钟极性和相位</li>
+<li>可编程的数据顺序，MSB在前或LSB在前</li>
+<li>可触发中断的专用发送和接收标志</li>
+<li>SPI总线忙状态标志</li>
+<li>支持可靠通信的硬件CRC</li>
+</ul>
+<h3 id="SPI总线四种工作方式SPI模块为了和外设进行数据交换，根据外设工作要求，其输出串行同步时钟极性和相位可以进行配置，时钟极性（CPOL）对传输协议没有重大的影响。"><a href="#SPI总线四种工作方式SPI模块为了和外设进行数据交换，根据外设工作要求，其输出串行同步时钟极性和相位可以进行配置，时钟极性（CPOL）对传输协议没有重大的影响。" class="headerlink" title="SPI总线四种工作方式SPI模块为了和外设进行数据交换，根据外设工作要求，其输出串行同步时钟极性和相位可以进行配置，时钟极性（CPOL）对传输协议没有重大的影响。"></a>SPI总线四种工作方式SPI模块为了和外设进行数据交换，根据外设工作要求，其输出串行同步时钟极性和相位可以进行配置，时钟极性（CPOL）对传输协议没有重大的影响。</h3><p>如果CPOL=0，串行同步时钟的空闲状态为低电平；</p>
+<p>如果CPOL=1，串行同步时钟的空闲状态为高电平。时钟相位（CPHA）能够配置用于选择两种不同的传输协议之一进行数据传输。</p>
+<p>如果CPHA=0，在串行同步时钟的第一个跳变沿（上升或下降）数据被采样；</p>
+<p>如果CPHA=1，在串行同步时钟的第二个跳变沿（上升或下降）数据被采样。</p>
+<p>SPI主模块和与之通信的外设备时钟相位和极性应该一致。</p>
+<p>不同时钟相位下的总线数据传输时序：</p>
+<p><img src="/2019/10/28/stm32-spi-config/SPI_detail.png" alt="SPI_detail.png"></p>
+<h2 id="SPI程序"><a href="#SPI程序" class="headerlink" title="SPI程序"></a>SPI程序</h2><p>SPI时钟频率最大为18MHz。</p>
+<h3 id="SPI参数结构体"><a href="#SPI参数结构体" class="headerlink" title="SPI参数结构体"></a>SPI参数结构体</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_Direction;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_Mode;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_DataSize;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_CPOL;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_CPHA;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_NSS;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_BaudRatePrescaler;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_FirstBit;</span><br><span class="line">    <span class="keyword">uint16_t</span> SPI_CRCPolynomial;</span><br><span class="line">&#125; SPI_InitTypeDef;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第一个参数SPI_Direction是用来设置SPI的通信方式 ，可以选择为半双工，全双工，及串行发和串行收方式。</p>
+</li>
+<li><p>第二个参数SPI_Mode用来设置SPI的主从模式。</p>
+</li>
+<li><p>第三个参数SPI_DataSize为8位还是16位帧格式选择项。</p>
+</li>
+<li><p>第四个参数SPI_CPOL用来设置时钟极性。</p>
+</li>
+<li><p>第五个参数SPI_CPHA用来设置时钟相位，用来设置时钟相位，也就是选择在串行同步时钟的第几个跳变沿（上升或下降）数据被采样，可以为第一个或者二条边沿采集。</p>
+</li>
+<li><p>第六个参数SPI_NSS设置NSS信号由硬件（NSS管脚）还是软件控制。</p>
+<ul>
+<li>软件NSS模式：可以通过设置SPI_CR1寄存器的SSM位来使能这种模式，在这种模式下NSS引脚可以用作它讲，而内部NSS信号电平可以通过写SPI_CR1的SSI位来驱动。</li>
+<li>硬件NSS模式，分两种情况：<ul>
+<li>NSS输出被使能，当STM32F10xx工作为主SPI，并且NSS输出已经通过SPI_CR2寄存器的SSOE位使能，这时NSS引脚被拉低，所有NSS引脚与这个主SPI的NSS引脚相连并配置位硬件NSS的SPI设备，将自动变成从SPI设备。当一个SPI设备需要发送广播数据，它必须拉低NSS信号，以通知所有其它的设备它是主设备；如果它不能拉低NSS，这意味着总线上有另外一个主设备在通信，这时将产生一个硬件失败错误(Hard Fault)</li>
+<li>NSS输出被关闭：允许操作于多主环境。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>第七个参数SPI_BaudRatePrescaler很关键，就是设置SPI波特率预分频值就是决定SPI的时钟的参数，从不分频道256分频8个可选值。</p>
+</li>
+<li><p>第八个参数SPI_FirstBit设置数据传输顺序是MSB位在前还是LSB位在前。</p>
+</li>
+<li><p>第九个参数SPI_CRCPolynomial是用来设置CRC校验多项式，提高通信可靠性， 大于1即可。</p>
+</li>
+</ul>
+<h3 id="初始化的范例格式"><a href="#初始化的范例格式" class="headerlink" title="初始化的范例格式"></a>初始化的范例格式</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SPI_InitTypeDef InitStructure;</span><br><span class="line">SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;  <span class="comment">//设置SPI单向或者双向的数据模式:SPI设置为双线双向全双工</span></span><br><span class="line">SPI_InitStructure.SPI_Mode = SPI_Mode_Master;		<span class="comment">//设置SPI工作模式:设置为主SPI</span></span><br><span class="line">SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;		<span class="comment">//设置SPI的数据大小:SPI发送接收8位帧结构</span></span><br><span class="line">SPI_InitStructure.SPI_CPOL = SPI_CPOL_High;		<span class="comment">//串行同步时钟的空闲状态为高电平</span></span><br><span class="line">SPI_InitStructure.SPI_CPHA = SPI_CPHA_2Edge;	<span class="comment">//串行同步时钟的第二个跳变沿（上升或下降）数据被采样</span></span><br><span class="line">SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;		<span class="comment">//NSS信号由硬件（NSS管脚）还是软件（使用SSI位）管理:内部NSS信号有SSI位控制</span></span><br><span class="line">SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_256;		<span class="comment">//定义波特率预分频的值:波特率预分频值为256  36M/256=140.625KHz</span></span><br><span class="line">SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;	<span class="comment">//指定数据传输从MSB位还是LSB位开始:数据传输从MSB位开始</span></span><br><span class="line">SPI_InitStructure.SPI_CRCPolynomial = <span class="number">7</span>;	<span class="comment">//CRC值计算的多项式</span></span><br><span class="line">SPI_Init(SPI2, &amp;SPI_InitStructure);  <span class="comment">//根据SPI_InitStruct中指定的参数初始化外设SPIx寄存器</span></span><br></pre></td></tr></table></figure>
+<h3 id="使能SPI外设"><a href="#使能SPI外设" class="headerlink" title="使能SPI外设"></a>使能SPI外设</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SPI_Cmd(SPI2, ENABLE); <span class="comment">//使能SPI外设</span></span><br></pre></td></tr></table></figure>
+<h3 id="SPI传输数据"><a href="#SPI传输数据" class="headerlink" title="SPI传输数据"></a>SPI传输数据</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_SendData</span><span class="params">(TypeDef* SPIx, <span class="keyword">uint16_t</span> Data)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查看SPI传输状态"><a href="#查看SPI传输状态" class="headerlink" title="查看SPI传输状态"></a>查看SPI传输状态</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">FlagStatus <span class="title">SPI_I2S_GetFlagStatus</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> SPI_I2S_FLAG)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="SPI相关的函数"><a href="#SPI相关的函数" class="headerlink" title="SPI相关的函数"></a>SPI相关的函数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_DeInit</span><span class="params">(SPI_TypeDef* SPIx)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_Init</span><span class="params">(SPI_TypeDef* SPIx, SPI_InitTypeDef* SPI_InitStruct)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_Cmd</span><span class="params">(SPI_TypeDef* SPIx, FunctionalState NewState)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_ITConfig</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint8_t</span> SPI_I2S_IT, FunctionalState NewState)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_DMACmd</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> SPI_I2S_DMAReq, FunctionalState NewState)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_SendData</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> Data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">uint16_t</span> <span class="title">SPI_I2S_ReceiveData</span><span class="params">(SPI_TypeDef* SPIx)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_DataSizeConfig</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> SPI_DataSize)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">FlagStatus <span class="title">SPI_I2S_GetFlagStatus</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> SPI_I2S_FLAG)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_ClearFlag</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint16_t</span> SPI_I2S_FLAG)</span></span>;</span><br><span class="line"><span class="function">ITStatus <span class="title">SPI_I2S_GetITStatus</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint8_t</span> SPI_I2S_IT)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPI_I2S_ClearITPendingBit</span><span class="params">(SPI_TypeDef* SPIx, <span class="keyword">uint8_t</span> SPI_I2S_IT)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="SPI中断"><a href="#SPI中断" class="headerlink" title="SPI中断"></a>SPI中断</h3><p><img src="/2019/10/28/stm32-spi-config/SPI_Interupt.png" alt="SPI_Interupt.png"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPIx_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>ARM</tag>
+        <tag>Hardware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UART与USART的区别</title>
+    <url>/2019/10/28/uart-usart/</url>
+    <content><![CDATA[<h2 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>UART是一种通用串行数据总线，用于异步通信。该总线双向通信，可以实现全双工传输和接收。在嵌入式设计中，UART用于主机与辅助设备通信，如汽车音响与外接AP之间的通信，与PC机通信包括与监控调试器和其它器件，如EEPROM通信。<br><a id="more"></a></p>
+<p>通用异步收发传输器（Universal Asynchronous Receiver/Transmitter），通常称作UART，是一种异步收发传输器，是电脑硬件的一部分。它将要传输的资料在串行通信与并行通信之间加以转换。作为把并行输入信号转成串行输出信号的芯片，UART通常被集成于其他通讯接口的连结上。</p>
+<p>具体实物表现为独立的模块化芯片，或作为集成于微处理器中的周边设备。一般是RS-232C规格的，与类似Maxim的MAX232之类的标准信号幅度变换芯片进行搭配，作为连接外部设备的接口。在UART上追加同步方式的序列信号变换电路的产品，被称为USART（Universal Synchronous Asynchronous Receiver Transmitter）。</p>
+<h2 id="USART"><a href="#USART" class="headerlink" title="USART"></a>USART</h2><p>USART：（Universal Synchronous/Asynchronous Receiver/Transmitter）通用同步/异步串行接收/发送器USART是一个全双工通用同步/异步串行收发模块，该接口是一个高度灵活的串行通信设备。</p>
+<h3 id="结构组成"><a href="#结构组成" class="headerlink" title="结构组成"></a>结构组成</h3><p>USART收发模块一般分为三大部分：时钟发生器、数据发送器和接收器。控制寄存器为所有的模块共享。</p>
+<p>时钟发生器由同步逻辑电路（在同步从模式下由外部时钟输入驱动）和波特率发生器组成。发送时钟引脚XCK仅用于同步发送模式下，</p>
+<p>发送器部分由一个单独的写入缓冲器（发送UDR）、一个串行移位寄存器、校验位发生器和用于处理不同桢结构的控制逻辑电路构成。使用写入缓冲器，实现了连续发送多帧数据无延时的通信。</p>
+<p>接收器是USART模块最复杂的部分，最主要的是时钟和数据接收单元。数据接收单元用作异步数据的接收。除了接收单元，接收器还包括校验位校验器、控制逻辑、移位寄存器和两级接收缓冲器（接收UDR）。接收器支持与发送器相同的帧结构，同时支持帧错误、数据溢出和校验错误的检测。</p>
+<h2 id="UART和USART的区别"><a href="#UART和USART的区别" class="headerlink" title="UART和USART的区别"></a>UART和USART的区别</h2><p>UART与USART都是单片机上的串口通信，他们之间的区别如下：</p>
+<h3 id="首先从名字上看："><a href="#首先从名字上看：" class="headerlink" title="首先从名字上看："></a>首先从名字上看：</h3><p>UART：universal asynchronous receiver and transmitter通用异步收/发器</p>
+<p>USART:universal synchronous asynchronous receiver and transmitter通用同步/异步收/发器</p>
+<p>从名字上可以看出，USART在UART基础上增加了同步功能，即USART是UART的增强型，事实也确实是这样。但是具体增强到了什么地方呢？</p>
+<p>其实当我们使用USART在异步通信的时候，它与UART没有什么区别，但是用在同步通信的时候，区别就很明显了：大家都知道同步通信需要时钟来触发数据传输，也就是说USART相对UART的区别之一就是能提供主动时钟。如STM32的USART可以提供时钟支持ISO7816的智能卡接口。</p>
+<h2 id="当进行异步通信时-这两者是没有区别的。区别在于USART比UART多了同步通信功能。"><a href="#当进行异步通信时-这两者是没有区别的。区别在于USART比UART多了同步通信功能。" class="headerlink" title="当进行异步通信时,这两者是没有区别的。区别在于USART比UART多了同步通信功能。"></a>当进行异步通信时,这两者是没有区别的。区别在于USART比UART多了同步通信功能。</h2><p>这个同步通信功能可以把USART当做SPI来用，比如用USART来驱动SPI设备。 </p>
+<p>同步是指：发送方发出数据后，等接收方发回响应以后才发下一个数据包的通讯方式。  </p>
+<p>异步是指：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式。</p>
+<p>同步是阻塞模式，异步是非阻塞模式。</p>
+<p>其中SPI IIC为同步通信  UART为异步通信, usart为同步&amp;异步通信</p>
+<h2 id="单工、半双工、全双工"><a href="#单工、半双工、全双工" class="headerlink" title="单工、半双工、全双工"></a>单工、半双工、全双工</h2><p>单工数据传输只支持数据在一个方向上传输；</p>
+<p>半双工数据传输允许数据在两个方向上传输，但是，在某一时刻，只允许数据在一个方向上传输，它实际上是一种切换方向的单工通信；</p>
+<p>全双工数据通信允许数据同时在两个方向上传输，因此，全双工通信是两个单工通信方式的结合，它要求发送设备和接收设备都有独立的接收和发送能力。</p>
+<h3 id="IIC是半双工，SPI的全双工，uart是全双工。"><a href="#IIC是半双工，SPI的全双工，uart是全双工。" class="headerlink" title="IIC是半双工，SPI的全双工，uart是全双工。"></a>IIC是半双工，SPI的全双工，uart是全双工。</h3>]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>ARM</tag>
+        <tag>Hardware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STM32开发——时钟详解</title>
+    <url>/2019/10/28/stm32-clock/</url>
+    <content><![CDATA[<p>本文在<a href="https://blog.csdn.net/qq_29350001/article/details/81558649" target="_blank" rel="noopener">STM32开发——时钟详解</a>做了一定修改。</p>
+<h2 id="一、时钟系统框图"><a href="#一、时钟系统框图" class="headerlink" title="一、时钟系统框图"></a>一、时钟系统框图</h2><p><img src="/2019/10/28/stm32-clock/20180810185348721.jpg" alt="20180810185348721.jpg"></p>
+<h2 id="二、时钟系统"><a href="#二、时钟系统" class="headerlink" title="二、时钟系统"></a>二、时钟系统</h2><p><img src="/2019/10/28/stm32-clock/clock.png" alt="clock.png"></p>
+<ol>
+<li><p>STM32 有5个时钟源:HSI、HSE、LSI、LSE、PLL。</p>
+<p>  ①、HSI是高速内部时钟，RC振荡器，频率为8MHz，精度不高。</p>
+<p>  ②、HSE是高速外部时钟，可接石英/陶瓷谐振器，或者接外部时钟源，频率范围为4MHz~16MHz。</p>
+<p>  ③、LSI是低速内部时钟，RC振荡器，频率为40kHz，提供低功耗时钟。　</p>
+<p>  ④、LSE是低速外部时钟，接频率为32.768kHz的石英晶体。</p>
+<p>  ⑤、PLL为锁相环倍频输出，其时钟输入源可选择为HSI/2、HSE或者HSE/2。倍频可选择为2~16倍，但是其输出频率最大不得超过72MHz。</p>
+</li>
+<li><p>系统时钟SYSCLK可来源于三个时钟源：</p>
+<p>  ①、HSI振荡器时钟</p>
+<p>  ②、HSE振荡器时钟</p>
+<p>  ③、PLL时钟</p>
+</li>
+<li><p>STM32可以选择一个时钟信号输出到MCO脚(PA8)上，可以选择为PLL输出的2分频、HSI、HSE、或者系统时钟。</p>
+</li>
+<li><p>任何一个外设在使用之前，必须首先使能其相应的时钟。</p>
+</li>
+</ol>
+<h3 id="几个重要的时钟"><a href="#几个重要的时钟" class="headerlink" title="几个重要的时钟"></a>几个重要的时钟</h3><ul>
+<li>SYSCLK(系统时钟) </li>
+<li>AHB总线时钟</li>
+<li>APB1总线时钟(低速): 速度最高36MHz</li>
+<li>APB2总线时钟(高速): 速度最高72MHz</li>
+<li>PLL时钟</li>
+</ul>
+<h2 id="三、RCC相关配置寄存器"><a href="#三、RCC相关配置寄存器" class="headerlink" title="三、RCC相关配置寄存器"></a>三、RCC相关配置寄存器</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">          * @brief Reset and Clock Control</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">        <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CR;           <span class="comment">// HSI,HSE,CSS,PLL等的使能和就绪标志位 </span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CFGR;         <span class="comment">// PLL等的时钟源选择，分频系数设定</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CIR;          <span class="comment">// 清除/使能 时钟就绪中断</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> APB2RSTR;     <span class="comment">// APB2线上外设复位寄存器</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> APB1RSTR;     <span class="comment">// APB1线上外设复位寄存器</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> AHBENR;       <span class="comment">// DMA，SDIO等时钟使能</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> APB2ENR;      <span class="comment">// APB2线上外设时钟使能</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> APB1ENR;      <span class="comment">// APB1线上外设时钟使能</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> BDCR;         <span class="comment">// 备份域控制寄存器</span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CSR;          <span class="comment">// 控制状态寄存器</span></span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">ifdef</span> STM32F10X_CL  </span></span><br><span class="line">          __IO <span class="keyword">uint32_t</span> AHBRSTR;</span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CFGR2;</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span> </span></span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">if</span> defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)   </span></span><br><span class="line">          <span class="keyword">uint32_t</span> RESERVED0;</span><br><span class="line">          __IO <span class="keyword">uint32_t</span> CFGR2;</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_LD_VL || STM32F10X_MD_VL || STM32F10X_HD_VL */</span> </span></span><br><span class="line">        &#125; RCC_TypeDef;</span><br></pre></td></tr></table></figure>
+<h2 id="四、RCC相关头文件和固件库源文件"><a href="#四、RCC相关头文件和固件库源文件" class="headerlink" title="四、RCC相关头文件和固件库源文件"></a>四、RCC相关头文件和固件库源文件</h2><p>所在文件：stm32f10x_rcc.c</p>
+<h3 id="时钟使能配置"><a href="#时钟使能配置" class="headerlink" title="时钟使能配置:"></a>时钟使能配置:</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_LSEConfig() 、RCC_HSEConfig()、</span><br><span class="line">RCC_HSICmd() 、 RCC_LSICmd() 、 RCC_PLLCmd() ……</span><br></pre></td></tr></table></figure>
+<h3 id="时钟源相关配置："><a href="#时钟源相关配置：" class="headerlink" title="时钟源相关配置："></a>时钟源相关配置：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_PLLConfig ()、 RCC_SYSCLKConfig() 、</span><br><span class="line">RCC_RTCCLKConfig() …</span><br></pre></td></tr></table></figure>
+<h3 id="分频系数选择配置："><a href="#分频系数选择配置：" class="headerlink" title="分频系数选择配置："></a>分频系数选择配置：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_HCLKConfig() 、 RCC_PCLK1Config() 、 RCC_PCLK2Config()…</span><br></pre></td></tr></table></figure>
+<h3 id="外设时钟使能："><a href="#外设时钟使能：" class="headerlink" title="外设时钟使能："></a>外设时钟使能：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_APB1PeriphClockCmd():  <span class="comment">//APB1线上外设时钟使能</span></span><br><span class="line">RCC_APB2PeriphClockCmd();  <span class="comment">//APB2线上外设时钟使能</span></span><br><span class="line">RCC_AHBPeriphClockCmd();   <span class="comment">//AHB线上外设时钟使能</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他外设时钟配置："><a href="#其他外设时钟配置：" class="headerlink" title="其他外设时钟配置："></a>其他外设时钟配置：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_ADCCLKConfig ();  RCC_RTCCLKConfig();</span><br></pre></td></tr></table></figure>
+<h3 id="状态参数获取参数："><a href="#状态参数获取参数：" class="headerlink" title="状态参数获取参数："></a>状态参数获取参数：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_GetClocksFreq();</span><br><span class="line">RCC_GetSYSCLKSource();</span><br><span class="line">RCC_GetFlagStatus()</span><br></pre></td></tr></table></figure>
+<h3 id="RCC中断相关函数"><a href="#RCC中断相关函数" class="headerlink" title="RCC中断相关函数 :"></a>RCC中断相关函数 :</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC_ITConfig() 、 RCC_GetITStatus() 、 RCC_ClearITPendingBit()…</span><br></pre></td></tr></table></figure>
+<h2 id="五、系统时钟初始化函数"><a href="#五、系统时钟初始化函数" class="headerlink" title="五、系统时钟初始化函数"></a>五、系统时钟初始化函数</h2><p>系统时钟初始化函数：<code>SystemInit();</code></p>
+<h3 id="使用V3-5版本的库函数，该函数在系统启动之后会自动调用："><a href="#使用V3-5版本的库函数，该函数在系统启动之后会自动调用：" class="headerlink" title="使用V3.5版本的库函数，该函数在系统启动之后会自动调用："></a>使用V3.5版本的库函数，该函数在系统启动之后会自动调用：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">; Reset handler</span><br><span class="line">Reset_Handler    PROC</span><br><span class="line">                 EXPORT  Reset_Handler             [WEAK]</span><br><span class="line">        IMPORT  SystemInit</span><br><span class="line">        IMPORT  __main</span><br><span class="line">                 LDR     R0, &#x3D;SystemInit</span><br><span class="line">                 BLX     R0</span><br><span class="line">                 LDR     R0, &#x3D;__main</span><br><span class="line">                 BX      R0</span><br><span class="line">                 ENDP</span><br></pre></td></tr></table></figure>
+<p>系统复位后先执行SystemInit,再执行main函数<br>　通过修改SystemInit函数名称,可以自定义系统初始化过程</p>
+<h3 id="在system-stm32f10x-c文件中找到SystemInit-void-源码"><a href="#在system-stm32f10x-c文件中找到SystemInit-void-源码" class="headerlink" title="在system_stm32f10x.c文件中找到SystemInit(void)源码:"></a>在system_stm32f10x.c文件中找到SystemInit(void)源码:</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Setup the microcontroller system</span></span><br><span class="line"><span class="comment">  *         Initialize the Embedded Flash Interface, the PLL and update the</span></span><br><span class="line"><span class="comment">  *         SystemCoreClock variable.</span></span><br><span class="line"><span class="comment">  * @note   This function should be used only after reset.</span></span><br><span class="line"><span class="comment">  * @param  None</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SystemInit</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/* Reset the RCC clock configuration to the default reset state(for debug purpose) */</span></span><br><span class="line">  <span class="comment">/* Set HSION bit */</span></span><br><span class="line">  RCC-&gt;CR |= (<span class="keyword">uint32_t</span>)<span class="number">0x00000001</span>;　　　　<span class="comment">//RCC_CR寄存器最低位置1:打开HSI(内部高速时钟8M)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset SW, HPRE, PPRE1, PPRE2, ADCPRE and MCO bits */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> STM32F10X_CL</span></span><br><span class="line">  RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xF8FF0000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>　　　　　　　　　　　　　　　　　　　　　　<span class="comment">//stm32f103ZET6为大容量芯片HD</span></span></span><br><span class="line">  RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xF0FF0000</span>;     <span class="comment">//RCC_CFGR寄存器初始化</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset HSEON, CSSON and PLLON bits */</span></span><br><span class="line">  RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFEF6FFFF</span>;　　　　<span class="comment">//将RCC_CR寄存器HSEON,CSSON,PLLON位置0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset HSEBYP bit */</span></span><br><span class="line">  RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFFFBFFFF</span>;　　　　<span class="comment">//将RCC_CR寄存器HSEBYP位置0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE/OTGFSPRE bits */</span></span><br><span class="line">  RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFF80FFFF</span>;　　　<span class="comment">//将RCC_CFGR寄存器PLLSRC, PLLXTPRE, 　　　　　　　　　　　　　　　　　　　　　　　　//PLLMUL,USBPRE/OTGFSPRE位置0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> STM32F10X_CL</span></span><br><span class="line">  <span class="comment">/* Reset PLL2ON and PLL3ON bits */</span></span><br><span class="line">  RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xEBFFFFFF</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x00FF0000</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset CFGR2 register */</span></span><br><span class="line">  RCC-&gt;CFGR2 = <span class="number">0x00000000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)</span></span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x009F0000</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Reset CFGR2 register */</span></span><br><span class="line">  RCC-&gt;CFGR2 = <span class="number">0x00000000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>     　　　　　　　　　　　　　　　　　<span class="comment">//stm32f103ZET6为大容量芯片HD</span></span></span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x009F0000</span>;　　　　　　　　<span class="comment">//关闭所有的中断和对应的位(初始化中断)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined (STM32F10X_HD) || (defined STM32F10X_XL) || (defined STM32F10X_HD_VL)</span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">ifdef</span> DATA_IN_ExtSRAM</span></span><br><span class="line">    SystemInit_ExtMemCtl();</span><br><span class="line">  <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* DATA_IN_ExtSRAM */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers */</span></span><br><span class="line">  <span class="comment">/* Configure the Flash Latency cycles and enable prefetch buffer */</span></span><br><span class="line">  SetSysClock();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> VECT_TAB_SRAM</span></span><br><span class="line">  SCB-&gt;VTOR = SRAM_BASE | VECT_TAB_OFFSET; <span class="comment">/* Vector Table Relocation in Internal SRAM. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  SCB-&gt;VTOR = FLASH_BASE | VECT_TAB_OFFSET; <span class="comment">/* Vector Table Relocation in Internal FLASH. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析:"></a>源码解析:</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">RCC-&gt;CR |= (<span class="keyword">uint32_t</span>)<span class="number">0x00000001</span>;</span><br></pre></td></tr></table></figure>
+<p>操作时钟控制寄存器，将内部8M高速时钟使能，从这里可以看出系统启动后是首先依靠内部时钟源而工作的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> STM32F10X_CL</span></span><br><span class="line">  RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xF8FF0000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xF0FF0000</span>;</span><br></pre></td></tr></table></figure>
+<p>这两行代码则是操作时钟配置寄存器，其主要设置了MCO（微控制器时钟输出）PLL相关（PLL倍频系数，PLL输入时钟源），ADCPRE（ADC时钟），PPRE2（高速APB分频系数），PPRE1（低速APB分频系数），HPRE（AHB预分频系数），SW（系统时钟切换），开始时，系统时钟切换到HSI，由它作为系统初始化时钟。宏STM32F10X_CL是跟具体STM32芯片相关的一个宏。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Reset HSEON, CSSON and PLLON bits */</span></span><br><span class="line"> RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFEF6FFFF</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/* Reset HSEBYP bit */</span></span><br><span class="line"> RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFFFBFFFF</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE/OTGFSPRE bits */</span></span><br><span class="line"> RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xFF80FFFF</span>;</span><br></pre></td></tr></table></figure>
+<p>这几句话则是在先关闭HSE、CSS、PLL等的情况下配置好与之相关参数然后开启，达到生效的目的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> STM32F10X_CL</span></span><br><span class="line">  <span class="comment">/* Reset PLL2ON and PLL3ON bits */</span></span><br><span class="line">  RCC-&gt;CR &amp;= (<span class="keyword">uint32_t</span>)<span class="number">0xEBFFFFFF</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x00FF0000</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* Reset CFGR2 register */</span></span><br><span class="line">  RCC-&gt;CFGR2 = <span class="number">0x00000000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)</span></span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x009F0000</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* Reset CFGR2 register */</span></span><br><span class="line">  RCC-&gt;CFGR2 = <span class="number">0x00000000</span>;      </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="comment">/* Disable all interrupts and clear pending bits  */</span></span><br><span class="line">  RCC-&gt;CIR = <span class="number">0x009F0000</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span></span></span><br></pre></td></tr></table></figure>
+<p>这段主要是跟中断设置有关。开始时，我们需要禁止所有中断并且清除所有中断标志位。不同硬件有不同之处。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined (STM32F10X_HD) || (defined STM32F10X_XL) || (defined STM32F10X_HD_VL)</span></span><br><span class="line">  <span class="meta">#<span class="meta-keyword">ifdef</span> DATA_IN_ExtSRAM</span></span><br><span class="line">    SystemInit_ExtMemCtl(); </span><br><span class="line">  <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* DATA_IN_ExtSRAM */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>这段跟设置外部RAM有关。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">SetSysClock();</span><br></pre></td></tr></table></figure>
+<p>此函数主要是配置系统时钟频率。HCLK,PCLK2,PCLK1的分频值，分别代表AHB,APB2,和APB1。当然还干了其它的事情，配置FLASH延时周期和使能预取缓冲区。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Configures the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers.</span></span><br><span class="line"><span class="comment">  * @param  None</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetSysClock</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> SYSCLK_FREQ_HSE</span></span><br><span class="line">  SetSysClockToHSE();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_24MHz</span></span><br><span class="line">  SetSysClockTo24();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_36MHz</span></span><br><span class="line">  SetSysClockTo36();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_48MHz</span></span><br><span class="line">  SetSysClockTo48();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_56MHz</span></span><br><span class="line">  SetSysClockTo56();  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_72MHz</span></span><br><span class="line">  SetSysClockTo72();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* If none of the define above is enabled, the HSI is used as System clock</span></span><br><span class="line"><span class="comment">    source (default after reset) */</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查看可得默认定义系统时钟为72MHz</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)</span></span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_HSE    HSE_VALUE */</span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">define</span> SYSCLK_FREQ_24MHz  24000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_HSE    HSE_VALUE */</span></span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_24MHz  24000000 */</span> </span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_36MHz  36000000 */</span></span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_48MHz  48000000 */</span></span><br><span class="line"><span class="comment">/* #define SYSCLK_FREQ_56MHz  56000000 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSCLK_FREQ_72MHz  72000000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>通过SystemCoreClock获取当前系统时钟频率</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*******************************************************************************</span></span><br><span class="line"><span class="comment">*  Clock Definitions</span></span><br><span class="line"><span class="comment">*******************************************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> SYSCLK_FREQ_HSE</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_HSE;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_24MHz</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_24MHz;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_36MHz</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_36MHz;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_48MHz</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_48MHz;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_56MHz</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_56MHz;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> defined SYSCLK_FREQ_72MHz</span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = SYSCLK_FREQ_72MHz;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/*!&lt; HSI Selected as System Clock source */</span></span></span><br><span class="line">  <span class="keyword">uint32_t</span> SystemCoreClock         = HSI_VALUE;        <span class="comment">/*!&lt; System Clock Frequency (Core Clock) */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>然后我们再看一下 SetSysClockTo72() 函数：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Sets System clock frequency to 72MHz and configure HCLK, PCLK2</span></span><br><span class="line"><span class="comment">  *          and PCLK1 prescalers.</span></span><br><span class="line"><span class="comment">  * @note   This function should be used only after reset.</span></span><br><span class="line"><span class="comment">  * @param  None</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetSysClockTo72</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __IO <span class="keyword">uint32_t</span> StartUpCounter = <span class="number">0</span>, HSEStatus = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* SYSCLK, HCLK, PCLK2 and PCLK1 configuration ---------------------------*/</span></span><br><span class="line">  <span class="comment">/* Enable HSE */</span></span><br><span class="line">  RCC-&gt;CR |= ((<span class="keyword">uint32_t</span>)RCC_CR_HSEON);    <span class="comment">//使能HSE:RCC_CR_HSEON=0x00010000(修改的是第16位HSEON)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Wait till HSE is ready and if Time out is reached exit */</span></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = RCC-&gt;CR &amp; RCC_CR_HSERDY;     <span class="comment">//开启并就绪:RCC_CR_HSERDY=0x00020000(第17位HSERDY置1)</span></span><br><span class="line">    StartUpCounter++;</span><br><span class="line">  &#125; <span class="keyword">while</span>((HSEStatus == <span class="number">0</span>) &amp;&amp; (StartUpCounter != HSE_STARTUP_TIMEOUT)); <span class="comment">//循环直到HSE稳定</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ((RCC-&gt;CR &amp; RCC_CR_HSERDY) != RESET)</span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x01</span>;               <span class="comment">//就绪后赋值标志位HSEStatus</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    HSEStatus = (<span class="keyword">uint32_t</span>)<span class="number">0x00</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (HSEStatus == (<span class="keyword">uint32_t</span>)<span class="number">0x01</span>) <span class="comment">//判断就绪</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* Enable Prefetch Buffer */</span></span><br><span class="line">    FLASH-&gt;ACR |= FLASH_ACR_PRFTBE;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Flash 2 wait state */</span></span><br><span class="line">    FLASH-&gt;ACR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~FLASH_ACR_LATENCY);</span><br><span class="line">    FLASH-&gt;ACR |= (<span class="keyword">uint32_t</span>)FLASH_ACR_LATENCY_2;     <span class="comment">//cpu的速度比芯片速度快的多        设置FLASH等待:两个等待状态</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* HCLK = SYSCLK */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_HPRE_DIV1;<span class="comment">//配置AHB预分频器分频系数为1,使HCLK = SYSCLK=72M</span></span><br><span class="line">                                                                                      <span class="comment">//RCC_CFGR_HPRE_DIV1=0x00000000(见手册)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* PCLK2 = HCLK */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE2_DIV1;<span class="comment">//配置PCLK2预分频器分频系数为1,使PCLK2 = HCLK=72M</span></span><br><span class="line">                                                                                        <span class="comment">//RCC_CFGR_PPRE2_DIV1=0x00000000(见手册)</span></span><br><span class="line">    <span class="comment">/* PCLK1 = HCLK/2 */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_PPRE1_DIV2;<span class="comment">//设置PCLK1预分频器分频系数为2,使PCLK1 = HCLK/2=36M</span></span><br><span class="line">                                                                                       <span class="comment">//RCC_CFGR_PPRE1_DIV2=0x00000400(见手册)</span></span><br><span class="line">                                                                                       <span class="comment">//RCC-&gt;CFGR第10,9,8位设置为100 (设置为2分频)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> STM32F10X_CL</span></span><br><span class="line">    <span class="comment">/* Configure PLLs ------------------------------------------------------*/</span></span><br><span class="line">    <span class="comment">/* PLL2 configuration: PLL2CLK = (HSE / 5) * 8 = 40 MHz */</span></span><br><span class="line">    <span class="comment">/* PREDIV1 configuration: PREDIV1CLK = PLL2 / 5 = 8 MHz */</span></span><br><span class="line"></span><br><span class="line">    RCC-&gt;CFGR2 &amp;= (<span class="keyword">uint32_t</span>)~(RCC_CFGR2_PREDIV2 | RCC_CFGR2_PLL2MUL |</span><br><span class="line">                              RCC_CFGR2_PREDIV1 | RCC_CFGR2_PREDIV1SRC);</span><br><span class="line">    RCC-&gt;CFGR2 |= (<span class="keyword">uint32_t</span>)(RCC_CFGR2_PREDIV2_DIV5 | RCC_CFGR2_PLL2MUL8 |</span><br><span class="line">                             RCC_CFGR2_PREDIV1SRC_PLL2 | RCC_CFGR2_PREDIV1_DIV5);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Enable PLL2 */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLL2ON;</span><br><span class="line">    <span class="comment">/* Wait till PLL2 is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLL2RDY) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* PLL configuration: PLLCLK = PREDIV1 * 9 = 72 MHz */</span></span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)~(RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLSRC | RCC_CFGR_PLLMULL);</span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)(RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLSRC_PREDIV1 |</span><br><span class="line">                            RCC_CFGR_PLLMULL9);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">//stm32f103ZET6为大容量芯片HD</span></span></span><br><span class="line">    <span class="comment">/*  PLL configuration: PLLCLK = HSE * 9 = 72 MHz */</span></span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE |</span><br><span class="line">                                        RCC_CFGR_PLLMULL));</span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)(RCC_CFGR_PLLSRC_HSE | RCC_CFGR_PLLMULL9);<span class="comment">//HSE为时钟源且PLL倍频系数为9(8*9=72兆)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* STM32F10X_CL */</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Enable PLL */</span></span><br><span class="line">    RCC-&gt;CR |= RCC_CR_PLLON; 　　　　　　　　　<span class="comment">//使能PLL时钟,RCC-&gt;CR寄存器第24位置1</span></span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">//RCC_CR_PLLON=0x01000000</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is ready */</span></span><br><span class="line">    <span class="keyword">while</span>((RCC-&gt;CR &amp; RCC_CR_PLLRDY) == <span class="number">0</span>) 　<span class="comment">//等待PLL时钟源就绪  　　</span></span><br><span class="line">    　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">//RCC_CR_PLLRDYRCC-&gt;CR寄存器第25位</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Select PLL as system clock source */</span></span><br><span class="line">    RCC-&gt;CFGR &amp;= (<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)~(RCC_CFGR_SW));<span class="comment">//配置PLL作为系统时钟来源</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="keyword">uint32_t</span>)RCC_CFGR_SW_PLL;    　　　　<span class="comment">//RCC_CFGR_SW_PLL=0x00000002(RCC-&gt;CFGR第1,0位设置为10,见手册)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Wait till PLL is used as system clock source */</span></span><br><span class="line">    <span class="keyword">while</span> ((RCC-&gt;CFGR &amp; (<span class="keyword">uint32_t</span>)RCC_CFGR_SWS) != (<span class="keyword">uint32_t</span>)<span class="number">0x08</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123; <span class="comment">/* If HSE fails to start-up, the application will have wrong clock</span></span><br><span class="line"><span class="comment">         configuration. User can add here some code to deal with this error */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后源码部分：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> VECT_TAB_SRAM</span></span><br><span class="line">  SCB-&gt;VTOR = SRAM_BASE | VECT_TAB_OFFSET; <span class="comment">/* Vector Table Relocation in Internal SRAM. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  SCB-&gt;VTOR = FLASH_BASE | VECT_TAB_OFFSET; <span class="comment">/* Vector Table Relocation in Internal FLASH. */</span></span><br></pre></td></tr></table></figure>
+<p>这段代码主要是实现向量表的重定位。依据你想要将向量表定位在内部SRAM中还是内部FLASH中。这个SCB开始没在STM32参考手册中发现，原来它是跟Cortex-M3内核相关的东西。所以ST公司就没有把它包含进来吧。</p>
+<h2 id="六、总结系统初始化函数流程"><a href="#六、总结系统初始化函数流程" class="headerlink" title="六、总结系统初始化函数流程"></a>六、总结系统初始化函数流程</h2><p><img src="/2019/10/28/stm32-clock/20180813143916649.jpg" alt="20180813143916649.jpg"></p>
+<ol>
+<li>打开HSE,等待就绪后,设置Flash等待操作</li>
+<li>设置AHB,APB1,APB2分频系数,确定他们各自和系统时钟的关系</li>
+<li>设置CFGR寄存器确定PLL的时钟来源和倍频系数(HSE外部8M*9倍=72MHz)</li>
+<li>使能PLL,将系统时钟源切换到PLL</li>
+</ol>
+<p>注：</p>
+<p>APB(Advanced Peripheral Bus)，片上外设总线。主要用于慢速片上外设与ARM核的通讯</p>
+<p>AHB(Advanced High performance Bus)，高性能总线。主要用于系统高性能、高时钟速率模块间通信</p>
+]]></content>
+      <categories>
+        <category>STM32</category>
+      </categories>
+      <tags>
+        <tag>ARM</tag>
+        <tag>Hardware</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自适应滤波器——LMS算法</title>
+    <url>/2019/10/23/LMS-math/</url>
+    <content><![CDATA[<p>大三课设的选题是2017年电子设计大赛国赛的E题：自适应滤波器，其中比较关键的数据处理部分使用了LMS算法。总体的方案参考了这套方案，可以百度搜得到。时隔一年，现在对算法部分做一个总结。因为没有大数据处理和信号处理的基础，以下都是个人查找文献和书籍做的一些笔记。具体C语言算法的实现参考以下几篇博客：</p>
+<p><a href="https://blog.csdn.net/qq_32065823/article/details/81839325" target="_blank" rel="noopener">雅克比公式求矩阵最大特征值（C语言版）</a></p>
+<p><a href="https://blog.csdn.net/qq_32065823/article/details/81839070" target="_blank" rel="noopener">LMS算法实现自适应滤波器（C语言版）</a></p>
+<h2 id="正弦干扰的自适应噪声消除"><a href="#正弦干扰的自适应噪声消除" class="headerlink" title="正弦干扰的自适应噪声消除"></a>正弦干扰的自适应噪声消除</h2><p>传统方法：使用调整干扰频率的固定陷波器（带通、带阻滤波器），这要求我们必须知道干扰的精确频率，所要求的带通频率非常陡峭。</p>
+<p><img src="/2019/10/23/LMS-math/自适应滤波器.png" alt="自适应滤波器.png"></p>
+<p>基本输入：由携带信息的信号和互不干扰的正弦干扰组成；</p>
+<p>参考输入：相关形式的正弦干扰；</p>
+<h3 id="自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。"><a href="#自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。" class="headerlink" title="自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。"></a>自适应滤波器：采用基于LMS算法进行抽头权值自适应的FIR滤波器，使用参考输入，对包含在基本输入端的正弦信号进行估计，从基本输入中减去自适应滤波器输出。</h3><p>重要特征：</p>
+<ol>
+<li>消除器像自适应陷波器一样工作，其零值点由正弦干扰的角频率$\omega_0$决定。消除器是可调的，其调陷频率随$\omega_0$而变。</li>
+<li>通过选择足够小的$\mu$，可使得消除器频率响应的陷波在正弦干扰处很陡峭。</li>
+</ol>
+<p>假设 输入数据是实数，则</p>
+<p>对于基本输入 </p>
+<script type="math/tex; mode=display">d(n)=s(n)+A_0\cos(\omega_0n+\phi_0)</script><ul>
+<li><p>$s(n)$：承载信息的信号</p>
+</li>
+<li><p>$A_0$：正弦干扰的幅度</p>
+</li>
+<li><p>$\omega_0$：归一化角频率</p>
+</li>
+<li><p>$\phi_0$：相位</p>
+</li>
+</ul>
+<p>参考输入</p>
+<script type="math/tex; mode=display">u(n)=A\cos(\omega_0n+\phi)</script><p>使用实数的LMS算法，则抽头权的更新基于如下：</p>
+<script type="math/tex; mode=display">y(n)=\sum_{i=0}^{M-1}\omega_i(n)u(n-i)</script><script type="math/tex; mode=display">e(n)=d(n)-y(n)</script><script type="math/tex; mode=display">\omega(n+1)=\omega_i(n)+\mu u(n-i)e(n)</script><ul>
+<li><p>$M$：FIR滤波器的长度</p>
+</li>
+<li><p>$\mu$：步长因子常数</p>
+</li>
+</ul>
+<p>假设LMS算法中输入数据和其他信号的抽样周期取为单位时间，用正弦激励作为感兴趣的输入，重建自适应滤波器框图。</p>
+<p><img src="/2019/10/23/LMS-math/自适应滤波器2.png" alt="自适应滤波器2.png"></p>
+<p>可将正弦输入$u(n)$、FIR滤波器和LMS算法的权值更新方程组合为一个单一（开环）的系统。</p>
+<p>输入为$e(n)$、输出为$y(n)$的自适应系统随时间变化。</p>
+<p>由于$z=e^{j\omega}$和$z_0=e^{j\omega_0}$，如令自适应系统的激励为$e(n)=z^n$，则输出$y(n)$包含三个分量：其一正比于$z^n$，其二正比于$z^n(z_0^{2n})^*$，其三正比于$z^n(z_0^{2n})$。</p>
+<p>第一个分量代表转移函数为$G(z)$的时变系统。</p>
+<script type="math/tex; mode=display">u(n-i)=A\cos[\omega_0(n-i)+\phi]=\frac{A}{2}[e^{j(\omega_0n+\phi_i)}+e^{-j(\omega_0n+\phi_i)}]</script><p>其中$\phi_i=\phi-\omega_0i$。</p>
+<p>输入$u(n-i)$与估计误差$e(n)$相乘，对$u(n-i)e(n)$做$z$变换并用$z[·]$表示。</p>
+<script type="math/tex; mode=display">z[u(n-i)e(n)]=\frac{A}{2}e^{j\phi_i}E(ze^{-j\omega_0})+\frac{A}{2}e^{-j\phi_i}E(ze^{j\omega_0})</script><p>$E(ze^{-j\omega_0})$是围绕单位圆逆时针旋转$\omega_0$角度后$e(n)$的$z$变换；</p>
+<p>$E(ze^{j\omega_0})$是围绕单位圆顺时针旋转$\omega_0$后的变换。</p>
+<p>对$\omega_i(n+1)=\omega_i(n)+\mu u(n-i)e(n)$进行$z$变换</p>
+<script type="math/tex; mode=display">z\omega_i(z)=\omega_i(z)+\mu z[u(z-i)e(n)]</script><p>$\omega_i(z)$是$\omega_i(n)$的$z$变换。</p>
+<script type="math/tex; mode=display">\omega_i(z)=\frac{\mu A}{2}\frac{1}{z-1}[e^{j\phi_i}E(ze^{-j\omega_0})+e^{-j\phi_i}E(ze^{j\omega_0})]</script><script type="math/tex; mode=display">y(n)=\frac{A}{2}\sum^{M-1}_{i=0}\omega_i(n)[e^{(j\omega_0n+\phi_i)}+e^{-j(\omega_0n+\phi_i)}]</script><p>$z$变换得</p>
+<script type="math/tex; mode=display">Y(z)=\frac{A}{2}\sum^{M-1}_{i=0}[e^{j\phi_i}\omega_i(ze^{j\omega_0}+e^{j\omega_i}\omega_i(ze^{j\omega_0})]</script>]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>信号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——线性表（二）</title>
+    <url>/2019/10/22/data-structure3/</url>
+    <content><![CDATA[<h2 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h2><p>单链表指的是线性表的每个结点，分散地存储在内存空间中，向后依次用一个指针串联起来。</p>
+<h3 id="单链表的一般形式"><a href="#单链表的一般形式" class="headerlink" title="单链表的一般形式"></a>单链表的一般形式</h3><h4 id="不带表头结点"><a href="#不带表头结点" class="headerlink" title="不带表头结点"></a>不带表头结点</h4><p><img src="/2019/10/22/data-structure3/不带表头结点.png" alt="不带表头结点.png"></p>
+<p>其中：<code>data</code>称为数据域，<code>next</code>称为指针域/链域；当<code>head==NULL</code>时，为空表；否则为非空表，表为一个非空表时，在首结点，<code>*head</code>中会存放数据。</p>
+<h4 id="带表头结点"><a href="#带表头结点" class="headerlink" title="带表头结点"></a>带表头结点</h4><h5 id="非空表"><a href="#非空表" class="headerlink" title="非空表"></a>非空表</h5><p><img src="/2019/10/22/data-structure3/带表头结点_1.png" alt="带表头结点_1.png"></p>
+<h5 id="空表"><a href="#空表" class="headerlink" title="空表"></a>空表</h5><p><img src="/2019/10/22/data-structure3/带表头结点_2.png" alt="带表头结点_2.png"></p>
+<p>其中：<code>head</code>指向表头结点，<code>head-&gt;data</code>不放元素，<code>head-&gt;next</code>指向首结点$a_1$，当<code>head-&gt;next==NULL</code>时，为空表。</p>
+<h3 id="单链表的结点结构"><a href="#单链表的结点结构" class="headerlink" title="单链表的结点结构"></a>单链表的结点结构</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;    <span class="comment">//data为抽象元素类型</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span>    <span class="comment">//next为指针类型</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//指向结点的指针变量head、p、q说明</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">head</span>, *<span class="title">p</span>, *<span class="title">q</span>;</span></span><br></pre></td></tr></table></figure>
+<h3 id="生成单链表"><a href="#生成单链表" class="headerlink" title="生成单链表"></a>生成单链表</h3><p>例1：输入一列整数，以0为结束标志，生成“先进先出”单链表</p>
+<p><img src="/2019/10/22/data-structure3/单链表.png" alt="单链表.png"></p>
+<p>这个单链表之所以称为先进先出单链表就是因为先进来的元素；通过变化表头指针可以先被删除。</p>
+<p>首先定义结点空间所占大小，结点的数据域为整型数，然后定义指针域<code>next</code>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LENG sizeof(struct node)    <span class="comment">//结点所占单元数</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>    //定义结点类型</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>每次输入元素后：</p>
+<ol>
+<li>生产新结点：<code>p=malloc(结点大小); p-&gt;data=e; p-&gt;next=NULL;</code></li>
+<li>添加到表尾：<code>tail-&gt;next=p;</code></li>
+<li>设置新表尾：<code>tail=p;</code></li>
+</ol>
+<h4 id="生成“先进先出”单链表（链式队列）"><a href="#生成“先进先出”单链表（链式队列）" class="headerlink" title="生成“先进先出”单链表（链式队列）"></a>生成“先进先出”单链表（链式队列）</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node *<span class="title">creat1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">head</span>, *<span class="title">tail</span>, *<span class="title">p</span>;</span></span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">    head=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成表头结点</span></span><br><span class="line">    tail=head;    <span class="comment">//尾指针指向表头</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//输入第一个数</span></span><br><span class="line">    <span class="keyword">while</span>(e!=<span class="number">0</span>);    <span class="comment">//不为0</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成新结点</span></span><br><span class="line">        p-&gt;data=e;    <span class="comment">//装入输入的元素e</span></span><br><span class="line">        tail-&gt;next=p;    <span class="comment">//新结点链接到表尾</span></span><br><span class="line">        tail=p;    <span class="comment">//尾指针指向新结点</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//再输入一个数</span></span><br><span class="line">    &#125;</span><br><span class="line">    tail-&gt;next=<span class="literal">NULL</span>;    <span class="comment">//尾结点的next置为空指针</span></span><br><span class="line">    <span class="keyword">return</span> head;    <span class="comment">//返回头指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="生成“先进后出”单链表（链式栈）"><a href="#生成“先进后出”单链表（链式栈）" class="headerlink" title="生成“先进后出”单链表（链式栈）"></a>生成“先进后出”单链表（链式栈）</h4><p><img src="/2019/10/22/data-structure3/先进后出.png" alt="先进后出.png"></p>
+<p>每次插入新元素后：</p>
+<ol>
+<li>生成新结点：<code>p=malloc(结点大小); p-&gt;data=e;</code></li>
+<li>新结点指针指向原首结点：<code>p-&gt;next=head-&gt;next;</code></li>
+<li>新结点作为首元素：<code>head-&gt;next=p;</code></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node *<span class="title">creat2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">head</span>, *<span class="title">p</span>;</span></span><br><span class="line">    head=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成表头结点</span></span><br><span class="line">    head-&gt;next=<span class="literal">NULL</span>;    <span class="comment">//置为空表</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//输入第一个数</span></span><br><span class="line">    <span class="keyword">while</span>(e!=<span class="number">0</span>);    <span class="comment">//不为0</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成新结点</span></span><br><span class="line">        p-&gt;data=e;    <span class="comment">//输入数送新结点的data</span></span><br><span class="line">        p-&gt;next=head-&gt;next;    <span class="comment">//新结点指向原首结点</span></span><br><span class="line">        head-&gt;next=p;    <span class="comment">//表头结点的指针指向新结点</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//再输入一个数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> data；    <span class="comment">//返回头指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入一个结点"><a href="#插入一个结点" class="headerlink" title="插入一个结点"></a>插入一个结点</h3><p>例1：在已知<code>p</code>指针指向的结点后插入一个元素<code>x</code></p>
+<p>首先用一个指针<code>f</code>指向新结点，该结点中的数据域为<code>x</code>，然后此新结点<code>next</code>域赋值为<code>p</code>指针指向结点的<code>next</code>域，最后<code>p</code>指针指向结点的<code>next</code>域赋值为<code>f</code>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">f=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成</span></span><br><span class="line">f-&gt;data=x;    <span class="comment">//装入元素x</span></span><br><span class="line">f-&gt;next=p-&gt;next;    <span class="comment">//新结点指向p的后继</span></span><br><span class="line">f-&gt;next=f;    <span class="comment">//新结点成为p的后继</span></span><br></pre></td></tr></table></figure>
+<p>例2：在已知<code>p</code>指针指向的结点前插入以一个元素<code>x</code></p>
+<p>因为单链表每个结点只有一个指针指向其后继结点，如果在结点前插入一个新结点，就需要得到指向<code>p</code>结点前驱结点的指针。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">f=(struct node *)<span class="built_in">malloc</span>(LENG);</span><br><span class="line">f-&gt;data=x;</span><br><span class="line">f-&gt;next=p;    <span class="comment">//新结点成为p的前驱</span></span><br><span class="line">q-&gt;next=f;    <span class="comment">//新结点成为p的前驱结束的后继</span></span><br></pre></td></tr></table></figure>
+<h3 id="单链表的算法"><a href="#单链表的算法" class="headerlink" title="单链表的算法"></a>单链表的算法</h3><h4 id="表头结点的作用"><a href="#表头结点的作用" class="headerlink" title="表头结点的作用"></a>表头结点的作用</h4><p>例：输入一列整数，以0为结束标志，生成递增有序单链表。</p>
+<p><img src="/2019/10/22/data-structure3/表头结点的作用.png" alt="表头结点的作用.png"></p>
+<p>可以分为以下几种情况：</p>
+<ol>
+<li><code>p</code>、<code>q</code>同时空，意味着往空表中插入第一个结点；</li>
+<li>仅<code>p</code>为空，<code>q</code>不为空，尾部插入，即数据插入到链表的尾部；</li>
+<li>（仅<code>q</code>为空）首部插入，即插入的数据作为单链表的第一个结点。
+　　</li>
+</ol>
+<p><code>p</code>、<code>q</code>可能为NULL</p>
+<ol>
+<li>（<code>p</code>、<code>q</code>同时空）空表插入；<code>f-&gt;next=p;</code></li>
+<li>（仅<code>p</code>为空）尾部插入；<code>q-&gt;next=f;</code></li>
+<li>（仅<code>q</code>为空）首部插入；<code>q</code>不可能为空。
+　　</li>
+</ol>
+<p>注意一点每次扫描已经存在的单链表确定数据插入的位置之前，做如下的初始化：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node *<span class="title">creat3_1</span><span class="params">(struct node *head, <span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=<span class="literal">NULL</span>;</span><br><span class="line">    p=head;    <span class="comment">//p、q扫描，查找插入位置</span></span><br><span class="line">    <span class="keyword">while</span>(p&amp;&amp;e&gt;p-&gt;data)    <span class="comment">//未扫描完，且e大于当前结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        q=p;</span><br><span class="line">        p=p-&gt;next; </span><br><span class="line">    &#125;</span><br><span class="line">    f=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成新结点</span></span><br><span class="line">    f-&gt;data=e;    装入元素e</span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        f-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(q==<span class="literal">NULL</span>)    <span class="comment">//对空表的插入</span></span><br><span class="line">            head=f;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            q-&gt;next=f;</span><br><span class="line">    &#125;    <span class="comment">//作为最后一个结点插入</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(q==<span class="literal">NULL</span>)    <span class="comment">//作为第一个结点插入</span></span><br><span class="line">    &#123;</span><br><span class="line">        f-&gt;next=p;</span><br><span class="line">        q-&gt;next=f;    <span class="comment">//一般情况插入新结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主函数算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">head</span>;</span>    <span class="comment">//定义头指针</span></span><br><span class="line">    head=<span class="literal">NULL</span>;    <span class="comment">//置为空表</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//输入整数</span></span><br><span class="line">    <span class="keyword">while</span>(e!=<span class="number">0</span>)    <span class="comment">//不为0，未结束</span></span><br><span class="line">    &#123;</span><br><span class="line">        head=creat3_1(head, e)    <span class="comment">//插入递增有序单链表</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="生成带头结点的递增有序单链表（不包括0）"><a href="#生成带头结点的递增有序单链表（不包括0）" class="headerlink" title="生成带头结点的递增有序单链表（不包括0）"></a>生成带头结点的递增有序单链表（不包括0）</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">creat3_2</span><span class="params">(struct node *head, <span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=head;</span><br><span class="line">    p=head-&gt;next;    <span class="comment">//p、q扫描，查找插入位置</span></span><br><span class="line">    <span class="keyword">while</span>(p&amp;&amp;e-&gt;p-&gt;data)    <span class="comment">//未扫描完，且e大于当前结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        q=p;</span><br><span class="line">        p=p-&gt;next;    <span class="comment">//q、p后移，查下一个位置</span></span><br><span class="line">    &#125;</span><br><span class="line">    f=(struct node *)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成新结点</span></span><br><span class="line">    f-&gt;data=e;    <span class="comment">//装入新元素e</span></span><br><span class="line">    f-&gt;next=p;</span><br><span class="line">    q-&gt;next=f;    <span class="comment">//插入新结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主函数算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">head</span>;</span>    <span class="comment">//定义头指针</span></span><br><span class="line">    head=<span class="literal">NULL</span>;    <span class="comment">//置为空表</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);    <span class="comment">//输入整数</span></span><br><span class="line">    <span class="keyword">while</span>(e!=<span class="number">0</span>)    <span class="comment">//不为0，未结束</span></span><br><span class="line">    &#123;</span><br><span class="line">        head=creat3_2(head, e)    <span class="comment">//插入递增有序单链表</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="单链表的指定位置插入新元素"><a href="#单链表的指定位置插入新元素" class="headerlink" title="单链表的指定位置插入新元素"></a>单链表的指定位置插入新元素</h4><p>　　<br>输入：头指针<code>L</code>、位置<code>i</code>、数据元素<code>e</code></p>
+<p>输出：成功返回OK，失败返回ERROR</p>
+<p>计数如果在第<code>i</code>个位置上结束，<code>p</code>指向第<code>i</code>个位置，新元素就要插入到<code>p</code>指向的结点之前，我们之前分析过，如果插入到某个结点之前，就需要另一个复制指针<code>q</code>来指向<code>p</code>的前驱结点。</p>
+<p><img src="/2019/10/22/data-structure3/单链表的指定位置插入新元素.png" alt="单链表的指定位置插入新元素.png"></p>
+<p>执行：<code>p=L</code></p>
+<p>当<code>p</code>不为空，执行<code>p=p-&gt;next</code> <code>i-1</code>次</p>
+<p>定位到第<code>i-1</code>个结点</p>
+<p>当<code>i&lt;1</code>或<code>p</code>为空时插入点错</p>
+<p>否则新结点加到<code>p</code>指向结点之后</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(Linklist &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p=L;</span><br><span class="line">    j=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(p&amp;&amp;j&lt;i)</span><br><span class="line">    &#123;</span><br><span class="line">        p=p-&gt;next;    <span class="comment">//p后移，指向下一个位置</span></span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||p==<span class="literal">NULL</span>)    <span class="comment">//插入点错误</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    f=(Linklist)<span class="built_in">malloc</span>(LENG);    <span class="comment">//生成新结点</span></span><br><span class="line">    f-&gt;data=e;    <span class="comment">//装入元素e</span></span><br><span class="line">    f-&gt;next=p-&gt;next;</span><br><span class="line">    p-&gt;next=f;    <span class="comment">//插入新结点</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主要是三个大的部分：</p>
+<ol>
+<li>扫描定位；</li>
+<li>判断插入点位置为合法性；</li>
+<li>在 p 指定的位置后面插入到新的结点。</li>
+</ol>
+<h4 id="在单链表中删除一个结点"><a href="#在单链表中删除一个结点" class="headerlink" title="在单链表中删除一个结点"></a>在单链表中删除一个结点</h4><p><img src="/2019/10/22/data-structure3/删除结点.png" alt="删除结点.png"></p>
+<ol>
+<li>执行：<code>q-&gt;next=p-&gt;next;　　//A的next域=C的地址(B的next)</code></li>
+<li>执行：<code>free(p);　　//释放 p 所指向的结点空间</code></li>
+</ol>
+<h5 id="算法1：在带表头结点的单链表中删除元素值为e的结点"><a href="#算法1：在带表头结点的单链表中删除元素值为e的结点" class="headerlink" title="算法1：在带表头结点的单链表中删除元素值为e的结点"></a>算法1：在带表头结点的单链表中删除元素值为e的结点</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Delete1</span><span class="params">(Linklist head, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">q</span>, *<span class="title">p</span>;</span></span><br><span class="line">    q=head;</span><br><span class="line">    p=head-&gt;next;    <span class="comment">//q、p扫描</span></span><br><span class="line">    <span class="keyword">while</span>(p&amp;&amp;p-&gt;data!=e)    <span class="comment">//查找元素为e的结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        q=p;    <span class="comment">//记住前一个结点</span></span><br><span class="line">        p=p-&gt;next;    查找下一个结点</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p)    <span class="comment">//有元素为e的结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        q-&gt;next=p-&gt;next;    <span class="comment">//删除该结点</span></span><br><span class="line">        <span class="built_in">free</span>(p);    <span class="comment">//释放结点所占的空间</span></span><br><span class="line">        <span class="keyword">return</span> YES;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> NO;    <span class="comment">//没有删除结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="算法2：在单链表中删除指定位置的元素"><a href="#算法2：在单链表中删除指定位置的元素" class="headerlink" title="算法2：在单链表中删除指定位置的元素"></a>算法2：在单链表中删除指定位置的元素</h5><p><img src="/2019/10/22/data-structure3/删除指定结点.png" alt="删除指定结点.png"></p>
+<p>执行：<code>p=L</code>;</p>
+<p>当<code>p</code>不为空，执行<code>p=p-&gt;next</code> <code>i-1</code>次，定位到第<code>i-1</code>个结点</p>
+<p>当<code>i&lt;1</code>时或<code>p-&gt;next</code>为空时删除点错，否则<code>p</code>指向后继结点的后继跳过原后继</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Delete2</span><span class="params">(Linklist &amp;L, <span class="keyword">int</span> i, ElemType &amp;e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p=L;</span><br><span class="line">    j=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(p-&gt;next&amp;&amp;j&lt;i)    <span class="comment">//循环结束时p不可能为空</span></span><br><span class="line">    &#123;</span><br><span class="line">        p=p-&gt;next;    <span class="comment">//p后移，指向下一个位置</span></span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||p-&gt;next==<span class="literal">NULL</span>)    <span class="comment">//删除点错误</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    q=p-&gt;next;    <span class="comment">//q指向删除结点</span></span><br><span class="line">    p-&gt;next=q-&gt;next;    <span class="comment">//从链表中指出</span></span><br><span class="line">    e=q-&gt;data;    <span class="comment">//取走数据元素值</span></span><br><span class="line">    <span class="built_in">free</span>(p);    <span class="comment">//释放结点空间</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="单链表的合并"><a href="#单链表的合并" class="headerlink" title="单链表的合并"></a>单链表的合并</h3><p>两个有序单链表的合并算法</p>
+<p>将两个有序单链表<code>La</code>和<code>Lb</code>合并为有序单链表<code>Lc</code>；（该算法利用原单链表的结点）</p>
+<p><img src="/2019/10/22/data-structure3/合并.png" alt="合并.png"></p>
+<p>输入：两单链表的头指针</p>
+<p>输出：合并后的单链表的头指针</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">struct node *<span class="title">merge</span><span class="params">(struct node *La, struct node *Lb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">pa</span>, *<span class="title">pb</span>, *<span class="title">pc</span>;</span></span><br><span class="line">    pa=La-&gt;next;    <span class="comment">//pa指向表La的首结点</span></span><br><span class="line">    pb=Lb-&gt;next;    <span class="comment">//pb指向表Lb的首结点</span></span><br><span class="line">    pc=La；    <span class="comment">//使用表La的头结点，pc为尾指针</span></span><br><span class="line">    <span class="built_in">free</span>(Lb);    <span class="comment">//释放表Lb的头结点</span></span><br><span class="line"><span class="comment">//比较pa指向pb指向结点的数据域值大小</span></span><br><span class="line">    <span class="keyword">while</span>(pa&amp;&amp;pb)    <span class="comment">//表La表Lb均有结点</span></span><br><span class="line">    <span class="keyword">if</span>(pa-&gt;data&lt;=pb-&gt;data)    <span class="comment">//取表La的一个结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        pc-&gt;next=pa;    <span class="comment">//插在表Lc的尾结点之后</span></span><br><span class="line">        pc=pa;    <span class="comment">//变为表Lc新的尾结点</span></span><br><span class="line">        pa=pa-&gt;next;    <span class="comment">//移向表La下一个结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>    <span class="comment">//取表Lb的一个结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        pc-&gt;next=pb;    <span class="comment">//插在表Lc的尾结点之后</span></span><br><span class="line">        pc=pb;</span><br><span class="line">        pb=pb-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pa)</span><br><span class="line">        pc-next=pa;    <span class="comment">//插入表La的剩余段</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        pc-&gt;next=pb;    <span class="comment">//插入表Lb的剩余段</span></span><br><span class="line">    <span class="keyword">return</span> La;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h2><h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><h4 id="带表头结点的非空循环单链表"><a href="#带表头结点的非空循环单链表" class="headerlink" title="带表头结点的非空循环单链表"></a>带表头结点的非空循环单链表</h4><p><img src="/2019/10/22/data-structure3/非空循环单链.png" alt="非空循环单链.png"></p>
+<p>有：<code>H-&gt;next≠H，H≠NULL</code>。</p>
+<h4 id="带表头结点的空循环单链表"><a href="#带表头结点的空循环单链表" class="headerlink" title="带表头结点的空循环单链表"></a>带表头结点的空循环单链表</h4><p><img src="/2019/10/22/data-structure3/空循环单链.png" alt="空循环单链.png"></p>
+<p>有：<code>H-&gt;next≠H，H≠NULL</code>。</p>
+<h3 id="只设尾指针的循环链表"><a href="#只设尾指针的循环链表" class="headerlink" title="只设尾指针的循环链表"></a>只设尾指针的循环链表</h3><h4 id="非空表-1"><a href="#非空表-1" class="headerlink" title="非空表"></a>非空表</h4><p><img src="/2019/10/22/data-structure3/非空表.png" alt="非空表.png"></p>
+<p>有：<code>tail</code>指向表尾结点</p>
+<p><code>tail-&gt;data=an</code></p>
+<p><code>tail-&gt;next</code>指向表头结点</p>
+<p><code>tail-&gt;next-&gt;next</code>指向首结点</p>
+<p><code>tail-&gt;next-&gt;next-&gt;data=a1</code></p>
+<h4 id="空表-1"><a href="#空表-1" class="headerlink" title="空表"></a>空表</h4><p><img src="/2019/10/22/data-structure3/空表.png" alt="空表.png"></p>
+<p>有：tail-&gt;next=tail</p>
+<h4 id="例：两循环链表首尾相连"><a href="#例：两循环链表首尾相连" class="headerlink" title="例：两循环链表首尾相连"></a>例：两循环链表首尾相连</h4><p>如果是带头指针，时间复杂度$O(m+n)$</p>
+<p>如果使用只设尾指针的循环链表</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p2=tail2-&gt;next;</span><br><span class="line">tail-&gt;next=tail-&gt;next;</span><br><span class="line">tail1-&gt;next=p2-&gt;next;</span><br><span class="line"><span class="built_in">free</span>(p2);</span><br></pre></td></tr></table></figure>
+<p>时间复杂度$O(1)$</p>
+<h3 id="循环链表算法举例"><a href="#循环链表算法举例" class="headerlink" title="循环链表算法举例"></a>循环链表算法举例</h3><p>　　<br>例：求以head为头指针的循环单链表的长度，并依次输出结点的值。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">(struct node *head)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leng=<span class="number">0</span>;    <span class="comment">//长度变量初值为0</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">p</span>;</span>    </span><br><span class="line">    p=head-&gt;next;    <span class="comment">//p指向首结点</span></span><br><span class="line">    <span class="keyword">while</span>(p!=head)    <span class="comment">//p未移回到表头结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, p-&gt;data);    <span class="comment">//输出</span></span><br><span class="line">        leng++;    <span class="comment">//计数</span></span><br><span class="line">        p=p-&gt;next;    <span class="comment">//p移向下一个结点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> leng;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p><img src="/2019/10/22/data-structure3/双向.png" alt="双向.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//结点类型定义</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Dnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;    <span class="comment">//data为抽象元素类型</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Dnode</span> *<span class="title">prior</span>, *<span class="title">next</span>;</span>    <span class="comment">//prior，next为指针类型</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Dnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data; </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Dnode</span> *<span class="title">prior</span>, *<span class="title">next</span>;</span></span><br><span class="line">&#125; *DList</span><br></pre></td></tr></table></figure>
+<h4 id="一般形式-1"><a href="#一般形式-1" class="headerlink" title="一般形式"></a>一般形式</h4><h5 id="非空表-2"><a href="#非空表-2" class="headerlink" title="非空表"></a>非空表</h5><p><img src="/2019/10/22/data-structure3/双向非空表.png" alt="双向非空表.png"></p>
+<p>有：<code>L</code>为头指针，<code>L</code>指向表头结点，<code>L-&gt;next</code>指向首结点</p>
+<p><code>L-&gt;next-&gt;data=a1</code></p>
+<p><code>L-&gt;prior</code>指向尾结点，<code>L-&gt;prior-&gt;data=an</code></p>
+<p><code>L-&gt;next-&gt;prior=L-&gt;prior-&gt;next=NULL</code></p>
+<h5 id="空表-2"><a href="#空表-2" class="headerlink" title="空表"></a>空表</h5><p><img src="/2019/10/22/data-structure3/双向空表.png" alt="双向空表.png"></p>
+<p>有：<code>L-&gt;next=L-&gt;prior=NULL</code></p>
+<h4 id="双向循环链表"><a href="#双向循环链表" class="headerlink" title="双向循环链表"></a>双向循环链表</h4><h5 id="空表-3"><a href="#空表-3" class="headerlink" title="空表"></a>空表</h5><p><img src="/2019/10/22/data-structure3/双向循环链表空.png" alt="双向循环链表空.png"></p>
+<p>有：<code>L-&gt;next=L-&gt;prior=L</code></p>
+<h5 id="非空表-3"><a href="#非空表-3" class="headerlink" title="非空表"></a>非空表</h5><p><img src="/2019/10/22/data-structure3/双向循环链表非空.png" alt="双向循环链表非空.png"></p>
+<p>设<code>p</code>指向<code>a1</code>，有：</p>
+<p><code>p-&gt;next</code>指向<code>a2</code>，<code>p-&gt;next-&gt;prior</code>指向<code>a1</code></p>
+<p>所以，<code>p=p-&gt;next-&gt;prior</code></p>
+<p>同理，<code>p=p-&gt;prior-&gt;next</code></p>
+<h5 id="已知指针p指向结点B，删除B"><a href="#已知指针p指向结点B，删除B" class="headerlink" title="已知指针p指向结点B，删除B"></a>已知指针p指向结点B，删除B</h5><p><img src="/2019/10/22/data-structure3/删除B.png" alt="删除B.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//执行</span></span><br><span class="line">p-&gt;prior-&gt;next=p-&gt;next;    <span class="comment">//结点A的next指向结点C</span></span><br><span class="line">p-&gt;next-&gt;prior=p-&gt;prior;    <span class="comment">//结点C的prior指向结点A</span></span><br><span class="line"><span class="built_in">free</span>(p);    <span class="comment">//释放结点B占有的空间</span></span><br></pre></td></tr></table></figure>
+<h5 id="已知指针p指向结点C，在A，C之间插入B"><a href="#已知指针p指向结点C，在A，C之间插入B" class="headerlink" title="已知指针p指向结点C，在A，C之间插入B"></a>已知指针p指向结点C，在A，C之间插入B</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">f-&gt;prior=p-&gt;prior;    <span class="comment">//结点B的prior指向结点A</span></span><br><span class="line">f-&gt;next=p;    <span class="comment">//结点B的next指向结点C</span></span><br><span class="line">p-&gt;prior-&gt;next=f;    <span class="comment">//结点A的next指向结点B</span></span><br><span class="line">p-&gt;prior=f;    <span class="comment">//结点C的prior指向结点B</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构——线性表（一）</title>
+    <url>/2019/10/22/data-structure2/</url>
+    <content><![CDATA[<h2 id="线性表的定义"><a href="#线性表的定义" class="headerlink" title="线性表的定义"></a>线性表的定义</h2><p>由$n(n≥0)$个数据元素$(a_1, a_2, …, a_n)$构成的有限序列。记作：$L=(a_1, a_2, …, a_n)$。$a_1$——首元素，$a_n$——尾元素。</p>
+<p>表的长度（表长）——线性表中数据元素的数目。</p>
+<p>空表——不含数据元素的线性表（表长为0）。</p>
+<h2 id="线性表的特征"><a href="#线性表的特征" class="headerlink" title="线性表的特征"></a>线性表的特征</h2><p>对于$L=(a<em>1, a_2, …, a</em>{i-1} , a<em>i, a</em>{i+1} , …, a_n)$</p>
+<ol>
+<li><p>$a<em>{i-1}$在$a_i$之前，称$a</em>{i-1}$是$a_i$的直接前驱$(1&lt;i≤n)$</p>
+</li>
+<li><p>$a<em>{i+1}$在$a_i$之后，称$a</em>{i+1}$是$a_i$的直接后继$(1≤i&lt;n)$</p>
+</li>
+<li><p>$a_1$没有前驱</p>
+</li>
+<li><p>$a_n$没有后继</p>
+</li>
+<li><p>$a_i(1&lt;i&lt;n)$有且仅有一个直接前驱和一个直接后继</p>
+</li>
+</ol>
+<h2 id="抽象数据类型线性表的定义"><a href="#抽象数据类型线性表的定义" class="headerlink" title="抽象数据类型线性表的定义"></a>抽象数据类型线性表的定义</h2><p>ADT List</p>
+<p>{ 数据对象：$D=\lbrace a_i|a_i∈ElemSet，i=1,2,…,n,n≥0\rbrace$</p>
+<p>  数据关系：$R<em>1=\lbrace&lt; a</em>{i-1} ,a<em>i&gt;| a</em>{i-1} ,a_i∈D,i=1,2,…,n  \rbrace$</p>
+<p>　基本操作：</p>
+<ol>
+<li><code>InitList(&amp;L) 　　//构造空表L</code></li>
+<li><code>ListLength(L)　　//求表的长度</code></li>
+<li><code>GetElem(L, i, &amp;e)　　//取元素ai，由e返回ai</code></li>
+<li><code>PriorElem(L, ce, &amp;pre_e)　　//求ce的前驱，由pre_e返回</code></li>
+<li><code>InsertElem(&amp;L, i, e)　　//在元素ai之前插入新元素e</code></li>
+<li><code>DeleteElem(&amp;L, i)　　//删除第i个元素</code></li>
+<li><code>EmptyList(L)　　//判断是否为空表</code>
+　　　</li>
+</ol>
+<p>……</p>
+<p>　　} ADT List</p>
+<p>说明：</p>
+<ol>
+<li>删除表$L$中第$i$个数据元素$(1\leq i\leq n)$，记作：<code>DeleteElem(&amp;L, i)</code>；指定序号，删除$a_i$</li>
+<li>指定元素值$x$，删除表$L$中的值为$x$的元素，记作：<code>DeleteElem(&amp;L, x)</code>；若$a_i=x$，删除$a_i$</li>
+<li>在元素$a_i$之前插入新元素$e(1\leq i\leq n+1)$，记作：<code>InsertElem(&amp;L, i, e)</code></li>
+<li>查找——确定元素值（或数据项的值）为$e$的元素。若有一个$a_i=e$，则称“查找成功”$(i=1,2,…,n)$</li>
+<li>排序——按元素值或某个数据项值的递增（或递减）次序重新排列表中各元素的位置</li>
+<li>将表$L_a$和$L_b$合并为$L_c$</li>
+<li>表$L_a$复制为表$L_b$</li>
+</ol>
+<h2 id="线性表的顺序表示"><a href="#线性表的顺序表示" class="headerlink" title="线性表的顺序表示"></a>线性表的顺序表示</h2><p>　　<br>顺序分配：$(a_1,a_2,…,a_n)$顺序存储结构的一般形式</p>
+<p><img src="https://i.loli.net/2019/10/22/yqDBGN1VFPahQW3.png" alt="memory.png"></p>
+<p>b表示表的首/基地址</p>
+<p>p表示1个数据元素所占存储单元的数目</p>
+<h4 id="例1：分别定义元素所占空间、表长、尾元素的位置"><a href="#例1：分别定义元素所占空间、表长、尾元素的位置" class="headerlink" title="例1：分别定义元素所占空间、表长、尾元素的位置"></a>例1：分别定义元素所占空间、表长、尾元素的位置</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxleng 100</span></span><br><span class="line">&#123;</span><br><span class="line">    ElemType la[maxleng+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> length;    <span class="comment">//当前长度</span></span><br><span class="line">    <span class="keyword">int</span> last;    <span class="comment">//an的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="静态分配"><a href="#静态分配" class="headerlink" title="静态分配"></a>静态分配</h3><p>例2：元素所占空间和表长合并为C语言的一个结构类型</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxleng 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType elem[maxleng];</span><br><span class="line">    <span class="keyword">int</span> length;    <span class="comment">//表长</span></span><br><span class="line">&#125; Sqlist;</span><br><span class="line">Sqlist La;</span><br></pre></td></tr></table></figure>
+<p>其中：typedef——别名定义，Sqlist——结构类型名，La——结构类型变量名，La.length——表长，La.elem[0]——$a_1$，La[La.length-1]——$a_n$。</p>
+<h3 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType *elem;    <span class="comment">//存储空间基地址</span></span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> listsize;    <span class="comment">//当前分配的存储容量 以 sizeof(ElemType)为单位</span></span><br><span class="line">&#125; Sqlist;</span><br><span class="line">Sqlist Lb;</span><br></pre></td></tr></table></figure>
+<h3 id="寻址公式"><a href="#寻址公式" class="headerlink" title="寻址公式"></a>寻址公式</h3><p>假设：线性表的首地址为b，每个数据元素占p个存储单元，则表中任意元素$(1\leq i\leq n)$的存储地址是：$LOC(i)=LOC(1)+(i-1)<em>p=b+(i-1)</em>p，(1&lt;=i&lt;=n)$。</p>
+<h3 id="顺序表的插入算法"><a href="#顺序表的插入算法" class="headerlink" title="顺序表的插入算法"></a>顺序表的插入算法</h3><p>在线性表$L=(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中的第$i$个元素前插入元素$x$。 </p>
+<p>移动元素下标范围：$i - 1$ ~ $n - 1$ 或 $i - 1$ ~ $L.length - 1$。</p>
+<h4 id="算法1：静态分配线性表空间，用指针指向被操作的线性表"><a href="#算法1：静态分配线性表空间，用指针指向被操作的线性表" class="headerlink" title="算法1：静态分配线性表空间，用指针指向被操作的线性表"></a>算法1：静态分配线性表空间，用指针指向被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Insert</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i值不合法</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=maxleng)</span><br><span class="line">        <span class="keyword">return</span> OVERLOW;    <span class="comment">//溢出</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];    <span class="comment">//向后移动元素</span></span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//插入新元素</span></span><br><span class="line">    L.length++;    <span class="comment">// 长度变量增1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本思想：</p>
+<ul>
+<li>判断插入的位置是否合理；</li>
+<li>判断表长是否达到分配空间的最大值；</li>
+<li>从线性表中的最后一个元素到插入位置的所有元素，依次往后移动一个元素的位置，这样给待插入的元素留出了一个空位置；</li>
+<li>把新增元素插入到这个空位置，表长增加1，返回。</li>
+</ul>
+<h4 id="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"><a href="#算法2：动态分配线性表空间，用引用参数表示被操作的线性表" class="headerlink" title="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"></a>算法2：动态分配线性表空间，用引用参数表示被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Insert</span><span class="params">(Sqlist &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i的合法取值为1至n+1</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=L.listsize)    <span class="comment">//溢出时扩充</span></span><br><span class="line">    &#123;</span><br><span class="line">        ElemType *newbase;</span><br><span class="line">        newbase=(ElemType *)<span class="built_in">realloc</span>(L.elem, L.listsize+LISTINCREMENT*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="keyword">if</span>(newbase==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> OVERFLOW;</span><br><span class="line">        L.elem=newbase;</span><br><span class="line">        L.length+=LISTINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//向后移动元素，空出第i个元素的分量elem[i-1]</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];</span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//新元素插入</span></span><br><span class="line">    L.length++;    <span class="comment">//线性表长度加1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入操作移动元素次数的分析"><a href="#插入操作移动元素次数的分析" class="headerlink" title="插入操作移动元素次数的分析"></a>插入操作移动元素次数的分析</h3><p>在$(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中$a_i$之前插入新元素$e(1\leq i\leq n)$。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">当插入点为</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">i</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">n</th>
+<th style="text-align:center">n+1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需移动元素个数</td>
+<td style="text-align:center">n</td>
+<td style="text-align:center">n-1</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">n-i+1</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假定$P<em>i$是在各位置插入元素的概率，且$P_1=P_2=…=P_n=P</em>{n+1}=\frac{1}{n+1}$</p>
+<p>则插入一个元素时移动元素的平均值是：</p>
+<script type="math/tex; mode=display">E_{is}=\sum_{i=1}^{n+1}P_i(n-i+1)=\frac{n}{2}</script><h3 id="顺序表的删除算法"><a href="#顺序表的删除算法" class="headerlink" title="顺序表的删除算法"></a>顺序表的删除算法</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||L-&gt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"not exits"</span>);</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(j=i;j&lt;=L-&gt;length<span class="number">-1</span>;j++)</span><br><span class="line">            L-&gt;elem[j<span class="number">-1</span>]=L-&gt;elem[j];</span><br><span class="line">    L-&gt;length--;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本思想：</p>
+<ul>
+<li>判断删除元素的下标是否存在；</li>
+<li>用一个for循环来移动元素，移动元素下标范围为 i 到 length-1；</li>
+<li>修改表长为原表长减1。</li>
+</ul>
+<h3 id="删除操作及移动元素次数的分析"><a href="#删除操作及移动元素次数的分析" class="headerlink" title="删除操作及移动元素次数的分析"></a>删除操作及移动元素次数的分析</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">被删除元素位置</th>
+<th style="text-align:center">i=1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">i</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需移动元素个数</td>
+<td style="text-align:center">n-1</td>
+<td style="text-align:center">n-2</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">n-i</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>假定$q<em>i$是在各位置插入元素的概率，且$q_1=q_2=…=q_n=q</em>{n+1}=\frac{1}{n}$</p>
+<p>则删除一个元素时移动的平均值是：</p>
+<script type="math/tex; mode=display">E_{dl}=\sum_{i=1}^{n+1}q_i(n-i)=\frac{n-1}{2}</script><h3 id="顺序结构的优缺点"><a href="#顺序结构的优缺点" class="headerlink" title="顺序结构的优缺点"></a>顺序结构的优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>是一种随机存储结构，存取任何元素的时间是一个常数，速度快；</li>
+<li>结构简单，逻辑上相邻元素在物理上也是相邻的；</li>
+<li>不需要使用指针，节省存储空间。</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>插入和删除元素要移动大量元素，消耗大量时间；</li>
+<li>需要一块连续的存储空间；</li>
+<li>插入元素可能发生溢出；</li>
+<li>自由区中的存储空间不能被其他数据占用（共享），存在浪费空间的问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/10/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据结构——绪论</title>
+    <url>/2019/10/20/data-structure-1/</url>
+    <content><![CDATA[<h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><p>算法 + 数据结构 = 程序设计<br><a id="more"></a><br>基本数据结构：</p>
+<ul>
+<li>线性结构：线性表；栈，队列，双队列；数组，串；</li>
+<li>非线性结构：树，二叉树；图，网。</li>
+</ul>
+<p>用计算机解决具体问题的步骤主要是：</p>
+<ol>
+<li>首先从具体问题抽象出一个适当的数字模型；</li>
+<li>设计一个解决此数学模型的算法；</li>
+<li>编程序，进行测试，调整直至得到最终解答。</li>
+</ol>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>所有能输入到计算机中并被计算机程序加工、处理的符号的总称。如：整数、实数、字符、声音、图像、图形等。</p>
+<h3 id="数据元素"><a href="#数据元素" class="headerlink" title="数据元素"></a>数据元素</h3><p>数据的基本单位。在计算机程序中通常作为一个整体进行考虑和处理。也被称为记录。</p>
+<h3 id="数据项"><a href="#数据项" class="headerlink" title="数据项"></a>数据项</h3><p>是数据的不可分割的最小单位。如：姓名、年龄等。一个元素可由一个或多个数据项组成。</p>
+<h3 id="数据对象"><a href="#数据对象" class="headerlink" title="数据对象"></a>数据对象</h3><p>由性质相同（类型相同）的数据元素组成的集合。数据对象是数据的一个子集。</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>相互之间存在一种或多种特定关系的数据关系的数据元素的集合。数据元素之间的关系称为结构。四类基本结构：集合、线性结构、树形结构、图状结构。</p>
+<h3 id="数据的存储结构"><a href="#数据的存储结构" class="headerlink" title="数据的存储结构"></a>数据的存储结构</h3><p>数据结构在计算机存储器中的映像。存储结构也称为：存储表示、物理结构、物理表示。</p>
+<ul>
+<li>顺序存储结构（向量、一维数组）；</li>
+<li>非顺序存储结构（链接表）。</li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>一个值的集合和定义在这个值上的一组操作的总称。</p>
+<ul>
+<li>原子类型（如：int, char, float等）</li>
+<li>结构类型（如：线性表、数组、树等）</li>
+</ul>
+<h3 id="抽象数据类型"><a href="#抽象数据类型" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h3><p>抽象数据类型一般是指一个数学模型以及定义在该模型上的一组操作，它是对数据结构逻辑上的定义，与计算机的实现无关。</p>
+<p>一个抽象数据类型可用一个三元组来表示：（D，S，P）。D表示数据对象，S表示数据元素之间的关系集，P是对D中数据元素的基本操作。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h3><p>所谓算法是对特定问题求解步骤的一种描述，换言之，算法给出了求解一个问题的大致思路和步骤，但它还不是程序。</p>
+<ol>
+<li>有穷性：在有限步（或有限时间）之后算法终止；</li>
+<li>确定性：每条指令或步骤都无二次元性，具有明确的含义；</li>
+<li>可行性：算法中的操作都是已经实现的基本运算执行有限次实现的；</li>
+<li>输入：有零或多个输入量；</li>
+<li>输出：至少有一个输出量。</li>
+</ol>
+<h3 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h3><ol>
+<li>正确性：<ul>
+<li>无语法错误；</li>
+<li>对几组输入产生正确结果；</li>
+<li>对特殊输入产生正确结果；</li>
+<li>对所有输入产生正确结果。</li>
+</ul>
+</li>
+<li>可读性：算法主要是为了人的阅读与交流</li>
+<li>健壮性：不同的输入都要有相应的反应；</li>
+<li>高效性与低存储量。</li>
+</ol>
+<h3 id="描述工具"><a href="#描述工具" class="headerlink" title="描述工具"></a>描述工具</h3><ol>
+<li>自然语言；</li>
+<li>程序设计语言；</li>
+<li>流程图（框图）；</li>
+<li>伪码语言：一种包括高级程序设计语言的三种基本结构（顺序、选择、循环）和自然语言成分的“面向读者”的语言；</li>
+<li>类C语言：介于伪码语言和程序设计语言之间的一种表示形式。保留了C语言的精华；不拘泥于C语言的语法细节；同时也添加了一些C++的成分。有着便于理解、阅读；能方便地转换成C语言的特点。</li>
+</ol>
+<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><h4 id="函数：用以表示算法"><a href="#函数：用以表示算法" class="headerlink" title="函数：用以表示算法"></a>函数：用以表示算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">函数类型 函数名 (函数参数表) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//算法说明</span></span><br><span class="line">    语句序列</span><br><span class="line">&#125; <span class="comment">//函数名</span></span><br></pre></td></tr></table></figure>
+<p>注：算法说明应包括功能说明，输入，输出；为提高算法可读性，关键位置加以说明；明确函数实参和形参的匹配规则，以便能正确使用算法函数。</p>
+<h3 id="相关标准"><a href="#相关标准" class="headerlink" title="相关标准"></a>相关标准</h3><h4 id="算法的时间复杂度"><a href="#算法的时间复杂度" class="headerlink" title="算法的时间复杂度"></a>算法的时间复杂度</h4><p>算法（或程序）中基本操作或语句重复执行的次数的总和。</p>
+<p>设n为求解问题的规模，基本操作（或语句）执行次数总和称为语句频度，记作$f(n)$。</p>
+<p>执行下面的步骤：</p>
+<ol>
+<li>去掉$f(n)$中的所有加法常数；</li>
+<li>只保留最高阶项。</li>
+</ol>
+<p>时间复杂度记作$T(n)$，$T(n) = O(f(n))$。</p>
+<p>常见的时间复杂度：（从小到大排列）$O(1)$, $O(log_2n)$, $O(n)$, $O(nlog_2n)$, $O(n^2)$, $O(n^3)$, $O(2^n)$。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人博客的搭建和配置</title>
+    <url>/2019/10/19/config-blog/</url>
+    <content><![CDATA[<h2 id="为什么要搭建个人博客"><a href="#为什么要搭建个人博客" class="headerlink" title="为什么要搭建个人博客"></a>为什么要搭建个人博客</h2><p>前阵子我在博客园和CSDN注册了博客，花了两天时间在博客园上写了几篇文章，给我最大的感受是：博客园的markdown支持不是很友好，而TinyMCE没有markdown好用，于是我决心搭建了这个博客。<br><a id="more"></a></p>
+<p>至于其他原因，我的一些想法，我打算放在之后再写。</p>
+<!-- more --> 
+<p>本博客搭建参考了以下几篇文章：</p>
+<p><a href="https://dp2px.com/2017/11/15/hexonext/" target="_blank" rel="noopener">使用GitHub/GitLab/码云搭建个人博客</a></p>
+<p>这篇文章介绍得非常详细，有兴趣可以参考一下。</p>
+<p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">使用next主题</a></p>
+<p>这里使用next的版本已经停止维护了，建议使用最新版本 <a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">next</a></p>
+<p><a href="https://notes.doublemine.me/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a></p>
+<p>这个在 <a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">next</a> 的doc里都有介绍</p>
+<hr>
+<h2 id="安装-nodejs"><a href="#安装-nodejs" class="headerlink" title="安装 nodejs"></a>安装 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a></h2><p>安装完后打开cmd，这里我用的是powershell，输入<code>npm -v</code></p>
+<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git</a></h2><p>安装完成后打开Git Bash，输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot; &#x2F;&#x2F;Github的用户名</span><br><span class="line">git config --global user.email &quot;email&quot; &#x2F;&#x2F;Github的邮箱</span><br></pre></td></tr></table></figure>
+<h2 id="配置本地SSH"><a href="#配置本地SSH" class="headerlink" title="配置本地SSH"></a>配置本地SSH</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-key -t rsa -C &quot;email&quot;      &#x2F;&#x2F;此处“C”要大写，邮箱使用Github注册邮箱</span><br></pre></td></tr></table></figure>
+<p>之后一路回车过去即可</p>
+<h3 id="将SSH配置到Github"><a href="#将SSH配置到Github" class="headerlink" title="将SSH配置到Github"></a>将SSH配置到Github</h3><p>生成ssh-key后会提示保存的路径，用文本编辑器打开文件，复制文件内所有文本。打开Github，在设置里的SSH里添加我们自己的ssh-key。</p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>这时候如果没问题的话，可以在<a href="http://localhost:4000/" target="_blank" rel="noopener">本地服务器</a>看到自己的博客了。</p>
+<h2 id="在Github上新建一个公共项目"><a href="#在Github上新建一个公共项目" class="headerlink" title="在Github上新建一个公共项目"></a>在Github上新建一个公共项目</h2><p>名字为 <code>username.github.io</code> ，必须是这个格式</p>
+<h2 id="修改-config-yml"><a href="#修改-config-yml" class="headerlink" title="修改_config.yml"></a>修改_config.yml</h2><p>将repo的url改成自己项目的地址，这样在后面deploy时就会上传到github的项目里。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;username&#x2F;username.github.io.git</span><br><span class="line"></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<h2 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>然后 输入命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>这时候可以到自己项目里看一下，发现public里的文件都上传到Github了。</p>
+<h2 id="使用免费域名"><a href="#使用免费域名" class="headerlink" title="使用免费域名"></a>使用免费域名</h2><p>在Github你的项目设置里Github Pages前勾上</p>
+<p>这时候可以通过<code>https://username.github.io</code>访问你的博客了</p>
+<h2 id="更新博客"><a href="#更新博客" class="headerlink" title="更新博客"></a>更新博客</h2><p>之后在更新博客时，我们只需要</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h2 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h2><p>我们可以在阿里云查询自己想要的域名，一般冷门域名首年比较便宜，购买后经过域名实名审核，我们就可以在域名管理器里配置我们的域名了。</p>
+<p>首先自己先ping一下自己的博客网站</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ping username.github.io</span><br></pre></td></tr></table></figure>
+<p>然后将得到的ip复制，在域名管理器里我们编辑解析设置。记录类型选择 <code>A-将域名指向一个ipv4地址</code>，主机记录填<code>@</code>，解析线路选择默认就好了，记录值填自己刚才复制的ip地址。</p>
+<p>然后我们在github的项目设置里，将github page的domain填上自己申请的域名，就可以通过自己的域名访问博客了。</p>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>教程</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+</search>
