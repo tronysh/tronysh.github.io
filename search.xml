@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>重装系统后hexo博客恢复</title>
+    <url>/2020/02/13/restart-blog/</url>
+    <content><![CDATA[<h3 id="安装Git和Node-js"><a href="#安装Git和Node-js" class="headerlink" title="安装Git和Node.js"></a>安装Git和Node.js</h3><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git下载</a><br><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js下载</a></p>
+<p>配置Git和Node.js环境变量</p>
+<h3 id="配置git个人信息，生成新的ssh密钥"><a href="#配置git个人信息，生成新的ssh密钥" class="headerlink" title="配置git个人信息，生成新的ssh密钥"></a>配置git个人信息，生成新的ssh密钥</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;xxxxxx&quot;</span><br><span class="line">git config --global user.email &quot;xxxxxx&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;xxxxxxxx(邮箱)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="添加公钥"><a href="#添加公钥" class="headerlink" title="添加公钥"></a>添加公钥</h3><p>把.ssh文件里面的公钥复制出来粘贴到GitHub个人设置中的ssh</p>
+<h3 id="删除部分文件"><a href="#删除部分文件" class="headerlink" title="删除部分文件"></a>删除部分文件</h3><p>打开原来博客的文件夹，除了_config.yml，theme/，source/，scaffolds/，package.json，.gitignore，其余删掉</p>
+<h3 id="运行npm"><a href="#运行npm" class="headerlink" title="运行npm"></a>运行npm</h3><p>打开powershell输入<code>npm install</code></p>
+<p><code>npm install hexo –save</code></p>
+<h3 id="安装部署文件"><a href="#安装部署文件" class="headerlink" title="安装部署文件"></a>安装部署文件</h3><p><code>npm install hexo-deployer-git --save</code></p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>blog</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构——查找</title>
     <url>/2020/02/13/data-structure-search/</url>
     <content><![CDATA[<h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>“查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。</p>
