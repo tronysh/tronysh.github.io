@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据结构——查找</title>
+    <url>/2020/02/13/data-structure-search/</url>
+    <content><![CDATA[<h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>“查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。</p>
+<p>如果R限定的关系为D中的数据元素构成一个集合的话，此时称为查找表（Search Table），即查找表定义为同一类型的数据元素（或记录）构成的集合。</p>
+<p>通常，$D={ a_1,a_2,…,a_i,…,a_n}$的每个数据元素$a_i$具有唯一标识的分量，被称为关键字，记为：$a_1.key$。</p>
+<p>用以识别若干数据元素（或记录）的数据称为次关键字。</p>
+<script type="math/tex; mode=display">x\in D\leftrightarrow x.key\in \{ a_1.key,a_2.key,...,a_i.key,...,a_n.key \}</script><p>如果D中存在给定关键字的数据元素，则称为“查找成功”，否则称为“查找失败”。</p>
+<p>查找运算的一般定义形式为<code>Search(T,x.key)</code>，<code>Search(T,x.key)</code>的返回值，通常采用下列3种形式之一。</p>
+<script type="math/tex; mode=display">
+Search(T,key)=\begin{cases}
+True\quad(key\in T)\\
+False\quad(key\notin T)\\
+\end{cases}</script><script type="math/tex; mode=display">
+Search(T,key)=\begin{cases}
+i\quad(key\in T,k_i=key)\\
+0\quad(key\notin T)\\
+\end{cases}</script><script type="math/tex; mode=display">
+Search(T,key)=\begin{cases}
+p\quad(key\in T,k_i=key)\\
+NULL\quad(key\notin T)\\    
+\end{cases}</script><p>对于查找表可以进行的操作有：</p>
+<ol>
+<li>查询某个特定的数据元素是否在查找表中；</li>
+<li>检查某个特定的数据元素的各种属性；</li>
+<li>在查找表中插入一个数据元素；</li>
+<li>从查找表中删除某个数据元素。</li>
+</ol>
+<p>如果限定对于某个查找表，只允许执行第1和第2种操作，称为静态查找表，即静态查找表内容不允许发生改变。否则，如果查找表同时允许执行第1、第2、第3和第4种操作，则称其为动态查找表。</p>
+<p>$T(n)$：在查找表中查找某一元素的时间开销计为$T(n)$，其通常与问题规模$n$相关，$n$定义为查找表中数据元素的个数。</p>
+<p>$T_{best}(n)$：指最好情况下的时间开销；</p>
+<p>$T_{worst}(n)$：指最坏情况下的时间开销；</p>
+<p>对于基本“计较”操作实现的查找算法，时间开销$T(n)$主要来源于关键字值K，往往需要跟查找表中的多个数据元素的关键字值进行比较，称这种关键字值比较次数的数学期望值为平均查找长度（Average Search Length），记为ASL。</p>
+<h3 id="顺序表的查找"><a href="#顺序表的查找" class="headerlink" title="顺序表的查找"></a>顺序表的查找</h3><h4 id="哨兵技术"><a href="#哨兵技术" class="headerlink" title="哨兵技术"></a>哨兵技术</h4><ul>
+<li>首先将待查找的那个数据元素存放在顺表表的边界，即执行赋值语句<code>a[0]=x</code>；</li>
+<li>然后从<code>a[n]</code>开始进行逆序方向进行查找。</li>
+</ul>
+<p>“查找成功”的情况</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">查找成功的位置</th>
+<th style="text-align:center">关键字比较的次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">n-1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">n-2</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">n-i+1</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">n-2</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">n-1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">n</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>平均查找长度：$T_{average}(n)=O(n)$</p>
+<p>“查找失败”的情况</p>
+<p>在“查找失败”的情况下，需要与所有关键字比较一次，共计n次。</p>
+<h4 id="折半查找法"><a href="#折半查找法" class="headerlink" title="折半查找法"></a>折半查找法</h4><p>适用于有序表，这里用递增有序表来讲解。</p>
+<p>算法思想：与处于查找表中间位置关键字比较。如果等于给定值，则查找成功，返回成功值；如果大于给定值，在表的左部折半法查找；如果小于给定值，在表的右部折半法查找；仅当左部或右部为空时候，查找失败，返回失败值。</p>
+<p>公式：$mid=(low+high)/2$</p>
+<p>顺序查找表的左半部分查找，$low$不变，$high$为$mid-1$；</p>
+<p>顺序查找表的右半部分查找，$high$不变，$low$为$mid+1$；</p>
+<p>$low\leq high$时，表示顺序查找子表非空，如果没查到数据元素，可以继续查找。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Typedef <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Elemtype *elem;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;SSTable;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search</span><span class="params">(SSTable T, KeyType k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    low=<span class="number">1</span>;</span><br><span class="line">    high=T.length;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;=high)</span><br><span class="line">    &#123;</span><br><span class="line">        mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(T.elem[mid]==k)</span><br><span class="line">            <span class="keyword">return</span> mid;  <span class="comment">//等于，成功</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(T.elem[mid]&gt;k)</span><br><span class="line">            high=mid<span class="number">-1</span>;  <span class="comment">//左部</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            low=mid+<span class="number">1</span>;  <span class="comment">//右部</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>；  <span class="comment">//失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法分析：规模为表长$n$，统计关键字之间的比较次数。</p>
+<p>最少的比较次数是1次，最多比较次数是树的高度。</p>
+<p>即：$T<em>{best}(n)=O(1), T</em>{worst}(n)=O(log_2n)$。</p>
+<script type="math/tex; mode=display">ASL(s)=\frac{n+1}{n}log_2(n+1)-1</script><h4 id="分块查找法"><a href="#分块查找法" class="headerlink" title="分块查找法"></a>分块查找法</h4><p>利用关键字序列的分段（块）有序性，建立分段（块）索引表。借助分段索引表，实现快速查找。这种方法称为分块查找法。</p>
+<p>算法思想：</p>
+<ol>
+<li>在分段索引表中“顺序”或“折半”查找给定值所在的块；</li>
+<li>在1确定的块中，顺序查找给定值。</li>
+</ol>
+<p>算法分析：假设在索引表上的平均查找长度为$ASL_b$，在查找表上的平均查找长度为$ASL_w$，则</p>
+<script type="math/tex; mode=display">ASL=ASL_b+ASL_w</script><h5 id="顺序查找法确定块"><a href="#顺序查找法确定块" class="headerlink" title="顺序查找法确定块"></a>顺序查找法确定块</h5><script type="math/tex; mode=display">ASL=\frac{1}{2}(\frac{n}{s}+s)+1</script><p>显然，当$s=\sqrt{n}$时，$ASL$达到最小值。</p>
+<h5 id="折半查找法确定块"><a href="#折半查找法确定块" class="headerlink" title="折半查找法确定块"></a>折半查找法确定块</h5><script type="math/tex; mode=display">ASL\approx log_2(\frac{n}{s}+1)+\frac{s}{2}</script><ul>
+<li><p>分块查找法需要划分块，建立分块索引表。其中，分块要求查找表呈现分块有序性，分块有序性通常属于“自然天成”的。（例如：高校历届毕业生的归档资料）。</p>
+</li>
+<li><p>分块查找法可以推广，可以建立多级分块查找法。</p>
+</li>
+</ul>
+<h3 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h3><p>一棵二叉排序树或者是一棵空树，或者是满足下列性质的一棵非空的二叉树T：</p>
+<ol>
+<li>如果T的左子树非空，则左子树中所有结点值小于T的的根节点的值；</li>
+<li>如果T的右子树非空，则右子树所有结点值大于T的根节点值；</li>
+<li>T的左子树和右子树均为二叉排序树。</li>
+</ol>
+<p><img src="/2020/02/13/data-structure-search/二叉排序树例子.jpg" alt="二叉排序树例子.jpg"></p>
+<h4 id="二叉排序树“查找”算法"><a href="#二叉排序树“查找”算法" class="headerlink" title="二叉排序树“查找”算法"></a>二叉排序树“查找”算法</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">BiTree *<span class="title">Locate</span><span class="params">(BiTree *T, KeyType K)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(T-&gt;data.key==K) <span class="keyword">return</span> T;</span><br><span class="line">    <span class="keyword">if</span>(T-&gt;data.key&lt;K) </span><br><span class="line">        T=T-&gt;lchild;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        T=T-&gt;rchild;</span><br><span class="line">    <span class="keyword">return</span> Locate(T, K); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二叉排序树“插入”算法"><a href="#二叉排序树“插入”算法" class="headerlink" title="二叉排序树“插入”算法"></a>二叉排序树“插入”算法</h4><p><code>Insert(&amp;T, K)</code></p>
+<p>T表示一棵已经存在的一棵二叉排序树的根节点，K为待插入的数据元素的关键字。</p>
+<p>根据给定的关键字K，在T为根节点的二叉排序树中查找，并在失败处插入该元素。</p>
+<h4 id="二叉排序树“创建”算法"><a href="#二叉排序树“创建”算法" class="headerlink" title="二叉排序树“创建”算法"></a>二叉排序树“创建”算法</h4><p>基本思想：先初始化一棵二叉排序树的根节点为空。然后不断地往这棵二叉排序树中，根据查找表中数据元素顺序插入数据元素。</p>
+<h4 id="二叉排序树“删除”算法"><a href="#二叉排序树“删除”算法" class="headerlink" title="二叉排序树“删除”算法"></a>二叉排序树“删除”算法</h4><p>假设二叉树排序树上被删除节点为<code>*p</code>，其双亲节点为<code>*f</code>，且不失一般性，假设<code>*p</code>是<code>*f</code>的左孩子。</p>
+<p>二叉排序树节点的“删除”，可以分为4种情况分别进行处理。</p>
+<p><strong>情况一</strong>：待“删除”的结点，左右子树均为空子树。修改其双亲节点的指针实现删除结点。</p>
+<p><strong>情况二</strong>：待“删除”的结点<code>*p</code>，其左子树为空子树，右子树为非空子树<code>Pr</code>。将<code>Pr</code>成为<code>*f</code>的左子树即可。</p>
+<p><strong>情况三</strong>：“删除”的结点<code>*p</code>，其左子树为非空子树<code>Pl</code>，右子树为空子树。将<code>Pl</code>成为<code>*f</code>的左子树即可。</p>
+<p><strong>情况四</strong>：待“删除”的结点左右子树均为非空子树。被删除节点为<code>*p</code>，其双亲节点为<code>*f</code>，且不失一般性，假设<code>*p</code>是<code>*f</code>的左孩子。结点<code>*s</code>是被删除结点<code>*p</code>的左孩子节点的右子树中的，沿着右孩子指针路径下去的，直到无右孩子的结点。</p>
+<ul>
+<li>方法一：删除结点<code>P</code>，令<code>*p</code>的左子树为<code>*f</code>的左子树，而<code>*p</code>的右子树为<code>*s</code>的右子树。</li>
+<li>方法二：结点<code>*s</code>替换结点<code>*p</code>（即删除删除结点<code>P</code>），结点<code>*s</code>的左子树作为结点<code>*s</code>的父结点<code>*q</code>的右子树。</li>
+</ul>
+<h4 id="“查找”算法分析"><a href="#“查找”算法分析" class="headerlink" title="“查找”算法分析"></a>“查找”算法分析</h4><p>假设二叉排序树有n个结点，最少的比较次数是1次，最多比较次数是树的高度h。</p>
+<p>有$T<em>{best}(n)=O(1),\quad T</em>{worst}(n)$。</p>
+<h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><p>平衡二叉树（Balanced Binary Tree）又称为AVL树。它或是一棵空树，或是满足下列性质的一棵非空的二叉树T：</p>
+<ol>
+<li>T的左子树和右子树的深度之差的绝对值不超过1；</li>
+<li>T的左子树和右子树均为平衡二叉树。</li>
+</ol>
+<p><img src="/2020/02/13/data-structure-search/平衡二叉树例子.jpg" alt="平衡二叉树例子.jpg"></p>
+<h4 id="平衡二叉排序树“创建”算法"><a href="#平衡二叉排序树“创建”算法" class="headerlink" title="平衡二叉排序树“创建”算法"></a>平衡二叉排序树“创建”算法</h4><p>算法思想：根据关键字序列，对每一个关键字K，逐个在平衡二叉排序树T上查找，在失败处插入该关键字K；如果插入时T失去平衡，对最小不平衡子树进行平衡化处理。</p>
+<p><strong>最小不平衡子树</strong>：是从插入结点k到二叉平衡树T的根之路劲上，距离结点k最近的、平衡因子绝对值&gt;1的结点为根的子树。</p>
+<h4 id="平衡化处理"><a href="#平衡化处理" class="headerlink" title="平衡化处理"></a>平衡化处理</h4><p>对于最小不平衡二叉树，可以根据导致失去平衡的插入位置，分为LL型、RR型、LR型和RL型4种情况，并分别进行平衡化处理。</p>
+<p><strong>LL型</strong>：插入点是最小不平衡子树的左子树的左子树，处理的办法是“单向右旋”。</p>
+<p><strong>RR型</strong>：插入点是最下不平衡子树的右子树的右子树，处理的办法是“单向左旋”。</p>
+<p><strong>LR型</strong>：插入点是最小不平衡子树的左子树的右子树。处理的办法是“左旋右旋”。</p>
+<p><strong>RL型</strong>：插入点是最小不平衡子树的右子树的左子树。处理的办法是“右旋左旋”。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构——图</title>
     <url>/2020/01/30/data-structure10/</url>
     <content><![CDATA[<h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>图$G$由顶点集$V$和关系集$VR$构成，记为$G=(V,VR)$。$V$是顶点（元素）的有穷非空集，</p>
