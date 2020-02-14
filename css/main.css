@@ -158,7 +158,7 @@ body {
   background: #f5f7f9;
   color: #555;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 1em;
+  font-size: 15px;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -948,7 +948,7 @@ pre .javascript .function {
   border-bottom: none;
   color: #fff;
   display: inline-block;
-  line-height: 1.375em;
+  line-height: 1.125em;
   padding: 0 40px;
   position: relative;
 }
@@ -958,7 +958,7 @@ pre .javascript .function {
 .site-title {
   display: inline-block;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 1.375em;
+  font-size: 1.125em;
   font-weight: normal;
   line-height: 1.5;
   vertical-align: top;
@@ -1146,7 +1146,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1c4fff;
+  background: #ffff74;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2399,21 +2399,21 @@ body {
 .header {
   margin: 0 auto;
   position: relative;
-  width: calc(100% - 20px);
+  width: 70%;
 }
 @media (min-width: 1200px) {
   .header {
-    width: 1160px;
+    width: 70%;
   }
 }
 @media (min-width: 1600px) {
   .header {
-    width: 73%;
+    width: 70%;
   }
 }
 @media (max-width: 991px) {
   .header {
-    width: auto;
+    width: 100%;
   }
 }
 .header-inner {
@@ -2446,9 +2446,12 @@ body {
 .main::after {
   clear: both;
 }
+.main-inner {
+  width: 70%;
+}
 @media (max-width: 991px) {
   .main-inner {
-    width: auto;
+    width: 100%;
   }
 }
 .content-wrap {
@@ -2458,7 +2461,7 @@ body {
   box-sizing: border-box;
   float: right;
   padding: 40px;
-  width: calc(100% - 248px);
+  width: calc(100% - 260px);
 }
 @media (max-width: 991px) {
   .content-wrap {
