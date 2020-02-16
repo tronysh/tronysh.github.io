@@ -52,31 +52,35 @@
   };
 </script>
 
-  <meta name="description" content="忠于美好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tronysh的博客">
-<meta property="og:url" content="http://tronysh.github.io/index.html">
+  <meta name="description" content="基本概念“排序”是基于数据逻辑结构T&#x3D;(D,R)定义的一种重要的运算。它的功能是将一个数据元素的任意序列，依据关键字的大小，重新排列称一个有序的序列。D是数据元素集；R是数据元素之间关系偶对集。 术语：能唯一标识数据元素的一个分量或多个分量的组合称为关键字；不能唯一标识数据元素的分量称为次关键字。 如果一个排序的算法，对于数据元素按照此关键字排序后，能确保相同次关键字的数据元素排序前后，相对次序不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构——排序">
+<meta property="og:url" content="http://tronysh.github.io/2020/02/16/data-structure-rank/index.html">
 <meta property="og:site_name" content="Tronysh的博客">
-<meta property="og:description" content="忠于美好">
+<meta property="og:description" content="基本概念“排序”是基于数据逻辑结构T&#x3D;(D,R)定义的一种重要的运算。它的功能是将一个数据元素的任意序列，依据关键字的大小，重新排列称一个有序的序列。D是数据元素集；R是数据元素之间关系偶对集。 术语：能唯一标识数据元素的一个分量或多个分量的组合称为关键字；不能唯一标识数据元素的分量称为次关键字。 如果一个排序的算法，对于数据元素按照此关键字排序后，能确保相同次关键字的数据元素排序前后，相对次序不">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-16T01:33:01.000Z">
+<meta property="article:modified_time" content="2020-02-16T06:14:27.511Z">
 <meta property="article:author" content="Tronysh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://tronysh.github.io/">
+<link rel="canonical" href="http://tronysh.github.io/2020/02/16/data-structure-rank/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Tronysh的博客</title>
+  <title>数据结构——排序 | Tronysh的博客</title>
   
 
 
@@ -223,10 +227,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/02/16/data-structure-rank/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -240,8 +244,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/16/data-structure-rank/" class="post-title-link" itemprop="url">数据结构——排序</a>
+          数据结构——排序
         </h1>
 
         <div class="post-meta">
@@ -267,6 +270,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -277,7 +287,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>“排序”是基于数据逻辑结构T=(D,R)定义的一种重要的运算。它的功能是将一个数据元素的任意序列，依据关键字的大小，重新排列称一个有序的序列。D是数据元素集；R是数据元素之间关系偶对集。</p>
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>“排序”是基于数据逻辑结构T=(D,R)定义的一种重要的运算。它的功能是将一个数据元素的任意序列，依据关键字的大小，重新排列称一个有序的序列。D是数据元素集；R是数据元素之间关系偶对集。</p>
 <p>术语：能唯一标识数据元素的一个分量或多个分量的组合称为关键字；不能唯一标识数据元素的分量称为次关键字。</p>
 <p>如果一个排序的算法，对于数据元素按照此关键字排序后，能确保相同次关键字的数据元素排序前后，相对次序不变，则称该算法为是稳定的，否则称该算法是不稳定的。</p>
 <p>内部排序是指对存储在计算机的主存储器（也称“内存”）中的数据进行排序的过程。</p>
@@ -404,423 +414,40 @@
 </ul>
 <p>时间性能：$T(n,d)=O(d\cdot n)\quad S(n,r)=O(r\cdot n)$</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/Math/" rel="tag"># Math</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/02/13/restart-blog/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bro.jpg">
-      <meta itemprop="name" content="Tronysh">
-      <meta itemprop="description" content="忠于美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tronysh的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/13/restart-blog/" class="post-title-link" itemprop="url">重装系统后hexo博客恢复</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-13 16:24:19" itemprop="dateCreated datePublished" datetime="2020-02-13T16:24:19+08:00">2020-02-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-14 14:53:46" itemprop="dateModified" datetime="2020-02-14T14:53:46+08:00">2020-02-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">博客搭建</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          系统重装后，如何重新部署hexo+github搭建的博客。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/13/restart-blog/">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/02/13/restart-blog/" rel="next" title="重装系统后hexo博客恢复">
+                  <i class="fa fa-chevron-left"></i> 重装系统后hexo博客恢复
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+            <span class="post-nav-divider"></span>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/02/13/data-structure-search/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bro.jpg">
-      <meta itemprop="name" content="Tronysh">
-      <meta itemprop="description" content="忠于美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tronysh的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/13/data-structure-search/" class="post-title-link" itemprop="url">数据结构——查找</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-13 09:12:30 / 修改时间：16:21:30" itemprop="dateCreated datePublished" datetime="2020-02-13T09:12:30+08:00">2020-02-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          “查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/13/data-structure-search/">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-prev post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+          </div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/01/30/data-structure10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bro.jpg">
-      <meta itemprop="name" content="Tronysh">
-      <meta itemprop="description" content="忠于美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tronysh的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/30/data-structure10/" class="post-title-link" itemprop="url">数据结构——图</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-30 17:41:29 / 修改时间：17:43:41" itemprop="dateCreated datePublished" datetime="2020-01-30T17:41:29+08:00">2020-01-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>图$G$由顶点集$V$和关系集$VR$构成，记为$G=(V,VR)$。$V$是顶点（元素）的有穷非空集，</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/01/29/data-structure9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bro.jpg">
-      <meta itemprop="name" content="Tronysh">
-      <meta itemprop="description" content="忠于美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tronysh的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/29/data-structure9/" class="post-title-link" itemprop="url">数据结构——二叉树</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-29 21:22:40" itemprop="dateCreated datePublished" datetime="2020-01-29T21:22:40+08:00">2020-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-30 17:40:23" itemprop="dateModified" datetime="2020-01-30T17:40:23+08:00">2020-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          二叉树是$n$个结点的有限集
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/29/data-structure9/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://tronysh.github.io/2020/01/29/data-structure8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/bro.jpg">
-      <meta itemprop="name" content="Tronysh">
-      <meta itemprop="description" content="忠于美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tronysh的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/29/data-structure8/" class="post-title-link" itemprop="url">数据结构——树</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-29 15:57:47" itemprop="dateCreated datePublished" datetime="2020-01-29T15:57:47+08:00">2020-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-30 17:39:13" itemprop="dateModified" datetime="2020-01-30T17:39:13+08:00">2020-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          树是$n(n\ge 0)$个结点的有限集$T$。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/29/data-structure8/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -849,6 +476,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序法"><span class="nav-text">插入排序法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接插入排序法"><span class="nav-text">直接插入排序法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序法"><span class="nav-text">交换排序法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序法"><span class="nav-text">选择排序法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单选择排序"><span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序法"><span class="nav-text">归并排序法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序法"><span class="nav-text">基数排序法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多关键字排序"><span class="nav-text">多关键字排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-text">基数排序</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
