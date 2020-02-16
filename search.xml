@@ -134,8 +134,8 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -154,14 +154,14 @@
         <category>博客搭建</category>
       </categories>
       <tags>
-        <tag>教程</tag>
         <tag>Blog</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——查找</title>
     <url>/2020/02/13/data-structure-search/</url>
-    <content><![CDATA[<h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>“查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>“查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。</p>
 <p>如果R限定的关系为D中的数据元素构成一个集合的话，此时称为查找表（Search Table），即查找表定义为同一类型的数据元素（或记录）构成的集合。</p>
 <p>通常，$D={ a_1,a_2,…,a_i,…,a_n}$的每个数据元素$a_i$具有唯一标识的分量，被称为关键字，记为：$a_1.key$。</p>
 <p>用以识别若干数据元素（或记录）的数据称为次关键字。</p>
@@ -357,27 +357,27 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——图</title>
     <url>/2020/01/30/data-structure10/</url>
-    <content><![CDATA[<h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>图$G$由顶点集$V$和关系集$VR$构成，记为$G=(V,VR)$。$V$是顶点（元素）的有穷非空集，</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>图$G$由顶点集$V$和关系集$VR$构成，记为$G=(V,VR)$。$V$是顶点（元素）的有穷非空集，</p>
 ]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——二叉树</title>
     <url>/2020/01/29/data-structure9/</url>
-    <content><![CDATA[<h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="二叉树的递归定义"><a href="#二叉树的递归定义" class="headerlink" title="二叉树的递归定义"></a>二叉树的递归定义</h4><p>二叉树是$n$个结点的有限集，可分为两种情形：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="二叉树的递归定义"><a href="#二叉树的递归定义" class="headerlink" title="二叉树的递归定义"></a>二叉树的递归定义</h4><p>二叉树是$n$个结点的有限集，可分为两种情形：</p>
 <ol>
 <li><p>如果$n=0$；那么它就是一棵空二叉树；</p>
 </li>
@@ -644,14 +644,14 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——树</title>
     <url>/2020/01/29/data-structure8/</url>
-    <content><![CDATA[<h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="树-tree"><a href="#树-tree" class="headerlink" title="树(tree)"></a>树(tree)</h4><p>树是$n(n\ge 0)$个结点的有限集$T$，</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h3><h4 id="树-tree"><a href="#树-tree" class="headerlink" title="树(tree)"></a>树(tree)</h4><p>树是$n(n\ge 0)$个结点的有限集$T$，</p>
 <p>当$n=0$时，$T$为空树；</p>
 <p>当$n&gt;0$时，有且只有一个称为$T$的根的结点，</p>
 <p>当$n&gt;1$时，余下的结点分为$m(m&gt;0)$个互不相关的有限集$T_1,T_2,…,T_m$，每个$T_i(1\le i \le m)$也是一棵树，且称为根的子树。</p>
@@ -810,14 +810,14 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——广义表</title>
     <url>/2020/01/24/data-structure7/</url>
-    <content><![CDATA[<h3 id="广义表的定义"><a href="#广义表的定义" class="headerlink" title="广义表的定义"></a>广义表的定义</h3><p>广义表（也称为列表）是$n(n\ge0)$个元素的有限序列。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="广义表的定义"><a href="#广义表的定义" class="headerlink" title="广义表的定义"></a>广义表的定义</h3><p>广义表（也称为列表）是$n(n\ge0)$个元素的有限序列。</p>
 <p>记作：$LS=(a_1,a_2,…,a_3)$</p>
 <p>其中：$LS$广义表名  $n$ $LS$的长度</p>
 <p>$a_i(1\le i\le n)$或者是数据元素，或者是广义表。</p>
@@ -867,14 +867,14 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——数组</title>
     <url>/2020/01/23/data-structure6/</url>
-    <content><![CDATA[<h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><ol>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义"></a>数组的定义</h3><ol>
 <li><p>一维数组：是一个定长线性表$(a_1,a_2,…,a_n)$</p>
 <p>记为：$A=(a_1,a_2,…,a_n)$</p>
 <p>其中：$a_i$为数据元素，$i$为下标/序号，$1\le i\le n$</p>
@@ -1047,14 +1047,14 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——队列</title>
     <url>/2020/01/23/data-structure5/</url>
-    <content><![CDATA[<h3 id="队列的相关概念"><a href="#队列的相关概念" class="headerlink" title="队列的相关概念"></a>队列的相关概念</h3><h4 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h4><p>队列：只允许在表的一端删除元素，在另一端插入元素的线性表；</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="队列的相关概念"><a href="#队列的相关概念" class="headerlink" title="队列的相关概念"></a>队列的相关概念</h3><h4 id="定义和术语"><a href="#定义和术语" class="headerlink" title="定义和术语"></a>定义和术语</h4><p>队列：只允许在表的一端删除元素，在另一端插入元素的线性表；</p>
 <p>空队列：不含元素的队列；</p>
 <p>队首：队列中只允许删除元素的一端，head，front；</p>
 <p>队尾：队列中只允许插入元素的一端，rear，tail；</p>
@@ -1125,14 +1125,14 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>数据结构——栈</title>
     <url>/2019/10/29/data-structure4/</url>
-    <content><![CDATA[<h3 id="栈的概念与特性"><a href="#栈的概念与特性" class="headerlink" title="栈的概念与特性"></a>栈的概念与特性</h3><p>一般的线性表插入和删除位置是没有限制的，而栈和队列对插入与删除的位置有限制，从而在相关操作上有一定的特殊性。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="栈的概念与特性"><a href="#栈的概念与特性" class="headerlink" title="栈的概念与特性"></a>栈的概念与特性</h3><p>一般的线性表插入和删除位置是没有限制的，而栈和队列对插入与删除的位置有限制，从而在相关操作上有一定的特殊性。</p>
 <p>栈：限制在表尾作插入、删除操作的线性表</p>
 <p><img src="/2019/10/29/data-structure4/栈的概念.png" alt="栈的概念.png"></p>
 <p><img src="/2019/10/29/data-structure4/栈图.png" alt="栈图.png"></p>
@@ -1252,14 +1252,14 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>STM32开发——SPI</title>
     <url>/2019/10/28/stm32-spi-config/</url>
-    <content><![CDATA[<h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><p>SPI是英语Serial Peripheral interface的缩写，顾名思义就是串行外围设备接口。是Motorola首先在其MC68HCXX系列处理器上定义的。SPI接口主要应用在 EEPROM，FLASH，实时时钟，AD转换器，还有数字信号处理器和数字信号解码器之间。SPI，是一种高速的，全双工，同步的通信总线，并且在芯片的管脚上只占用四根线，节约了芯片的管脚，同时为PCB 的布局上节省空间，提供方便。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><p>SPI是英语Serial Peripheral interface的缩写，顾名思义就是串行外围设备接口。是Motorola首先在其MC68HCXX系列处理器上定义的。SPI接口主要应用在 EEPROM，FLASH，实时时钟，AD转换器，还有数字信号处理器和数字信号解码器之间。SPI，是一种高速的，全双工，同步的通信总线，并且在芯片的管脚上只占用四根线，节约了芯片的管脚，同时为PCB 的布局上节省空间，提供方便。</p>
 <p><img src="/2019/10/28/stm32-spi-config/SPI.png" alt="SPI.png"></p>
 <p>SPI 接口一般使用4 条线通信：</p>
 <ul>
@@ -1341,7 +1341,7 @@ A[i,j]=\begin{cases}
   <entry>
     <title>UART与USART的区别</title>
     <url>/2019/10/28/uart-usart/</url>
-    <content><![CDATA[<h2 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>UART是一种通用串行数据总线，用于异步通信。该总线双向通信，可以实现全双工传输和接收。在嵌入式设计中，UART用于主机与辅助设备通信，如汽车音响与外接AP之间的通信，与PC机通信包括与监控调试器和其它器件，如EEPROM通信。<br><a id="more"></a></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>UART是一种通用串行数据总线，用于异步通信。该总线双向通信，可以实现全双工传输和接收。在嵌入式设计中，UART用于主机与辅助设备通信，如汽车音响与外接AP之间的通信，与PC机通信包括与监控调试器和其它器件，如EEPROM通信。<br><a id="more"></a></p>
 <p>通用异步收发传输器（Universal Asynchronous Receiver/Transmitter），通常称作UART，是一种异步收发传输器，是电脑硬件的一部分。它将要传输的资料在串行通信与并行通信之间加以转换。作为把并行输入信号转成串行输出信号的芯片，UART通常被集成于其他通讯接口的连结上。</p>
 <p>具体实物表现为独立的模块化芯片，或作为集成于微处理器中的周边设备。一般是RS-232C规格的，与类似Maxim的MAX232之类的标准信号幅度变换芯片进行搭配，作为连接外部设备的接口。在UART上追加同步方式的序列信号变换电路的产品，被称为USART（Universal Synchronous Asynchronous Receiver Transmitter）。</p>
 <h2 id="USART"><a href="#USART" class="headerlink" title="USART"></a>USART</h2><p>USART：（Universal Synchronous/Asynchronous Receiver/Transmitter）通用同步/异步串行接收/发送器USART是一个全双工通用同步/异步串行收发模块，该接口是一个高度灵活的串行通信设备。</p>
@@ -1374,7 +1374,7 @@ A[i,j]=\begin{cases}
   <entry>
     <title>STM32开发——时钟详解</title>
     <url>/2019/10/28/stm32-clock/</url>
-    <content><![CDATA[<p>本文在<a href="https://blog.csdn.net/qq_29350001/article/details/81558649" target="_blank" rel="noopener">STM32开发——时钟详解</a>做了一定修改。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>本文在<a href="https://blog.csdn.net/qq_29350001/article/details/81558649" target="_blank" rel="noopener">STM32开发——时钟详解</a>做了一定修改。</p>
 <h2 id="一、时钟系统框图"><a href="#一、时钟系统框图" class="headerlink" title="一、时钟系统框图"></a>一、时钟系统框图</h2><p><img src="/2019/10/28/stm32-clock/20180810185348721.jpg" alt="20180810185348721.jpg"></p>
 <h2 id="二、时钟系统"><a href="#二、时钟系统" class="headerlink" title="二、时钟系统"></a>二、时钟系统</h2><p><img src="/2019/10/28/stm32-clock/clock.png" alt="clock.png"></p>
 <ol>
@@ -1459,7 +1459,7 @@ A[i,j]=\begin{cases}
   <entry>
     <title>自适应滤波器——LMS算法</title>
     <url>/2019/10/23/LMS-math/</url>
-    <content><![CDATA[<p>大三课设的选题是2017年电子设计大赛国赛的E题：自适应滤波器，其中比较关键的数据处理部分使用了LMS算法。总体的方案参考了这套方案，可以百度搜得到。时隔一年，现在对算法部分做一个总结。因为没有大数据处理和信号处理的基础，以下都是个人查找文献和书籍做的一些笔记。具体C语言算法的实现参考以下几篇博客：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>大三课设的选题是2017年电子设计大赛国赛的E题：自适应滤波器，其中比较关键的数据处理部分使用了LMS算法。总体的方案参考了这套方案，可以百度搜得到。时隔一年，现在对算法部分做一个总结。因为没有大数据处理和信号处理的基础，以下都是个人查找文献和书籍做的一些笔记。具体C语言算法的实现参考以下几篇博客：</p>
 <p><a href="https://blog.csdn.net/qq_32065823/article/details/81839325" target="_blank" rel="noopener">雅克比公式求矩阵最大特征值（C语言版）</a></p>
 <p><a href="https://blog.csdn.net/qq_32065823/article/details/81839070" target="_blank" rel="noopener">LMS算法实现自适应滤波器（C语言版）</a></p>
 <h2 id="正弦干扰的自适应噪声消除"><a href="#正弦干扰的自适应噪声消除" class="headerlink" title="正弦干扰的自适应噪声消除"></a>正弦干扰的自适应噪声消除</h2><p>传统方法：使用调整干扰频率的固定陷波器（带通、带阻滤波器），这要求我们必须知道干扰的精确频率，所要求的带通频率非常陡峭。</p>
@@ -1647,8 +1647,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1799,14 +1799,14 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
     <title>Hello World</title>
     <url>/2019/10/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br><a id="more"></a></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br><a id="more"></a></p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -1820,7 +1820,7 @@ A[i,j]=\begin{cases}
   <entry>
     <title>数据结构——绪论</title>
     <url>/2019/10/20/data-structure-1/</url>
-    <content><![CDATA[<h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><p>算法 + 数据结构 = 程序设计<br><a id="more"></a><br>基本数据结构：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><p>算法 + 数据结构 = 程序设计<br><a id="more"></a><br>基本数据结构：</p>
 <ul>
 <li>线性结构：线性表；栈，队列，双队列；数组，串；</li>
 <li>非线性结构：树，二叉树；图，网。</li>
@@ -1891,8 +1891,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>学习</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1933,8 +1933,8 @@ A[i,j]=\begin{cases}
         <category>博客搭建</category>
       </categories>
       <tags>
-        <tag>教程</tag>
         <tag>Blog</tag>
+        <tag>教程</tag>
         <tag>Github</tag>
       </tags>
   </entry>
