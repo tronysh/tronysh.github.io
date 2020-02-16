@@ -65,8 +65,8 @@
 <meta property="article:published_time" content="2020-01-23T08:33:52.000Z">
 <meta property="article:modified_time" content="2020-01-23T15:03:50.953Z">
 <meta property="article:author" content="Tronysh">
-<meta property="article:tag" content="学习">
 <meta property="article:tag" content="算法">
+<meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://tronysh.github.io/2020/01/23/data-structure6/%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA.png">
 
@@ -347,7 +347,7 @@
 <p>而在第$j$列中，$a_{ij}$前面还需要存放$i$个数据元素。</p>
 <p>这样在前面存放的数据元素的总个数是$j*m+i$。所以$a_{ij}$的地址计算公式为：</p>
 <script type="math/tex; mode=display">LOC(i,j)=b+(j*m+i)L=LOC(0,0)+(j*m+i)L</script><p>对任意一个数组元素$A[i_1,i_2,…,i_n]$，可得到行序优先的寻址方式为</p>
-<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a<em>{ij}=a</em>{ji}$，$i\le m,j\le n$</p>
+<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a_{ij}=a_{ji}$，$i\le m,j\le n$</p>
 <p>下三角元素$a_{ij}$满足$i\ge j$</p>
 <p>数据元素的个数$=1+2+…+n=n(n+1)/2$</p>
 <p>假定以行序为主，顺序存储下三角元素到$SA[1…n(n+1)/2]$</p>
@@ -358,7 +358,7 @@
 <p> $\therefore$$a_{ij}$的序号为：$k=i(i-1)/2+j$</p>
 </li>
 <li><p>设$a_{ij}$在上三角，$i\lt j$</p>
-<p> $\because$上三角的$a<em>{ij}$等于下三角的$a</em>{ji}$</p>
+<p> $\because$上三角的$a_{ij}$等于下三角的$a_{ji}$</p>
 <p> 下三角的$a_{ji}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
 <p> $\therefore$上三角的$a_{ij}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
 </li>
@@ -469,8 +469,8 @@ A[i,j]=\begin{cases}
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
               <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
           </div>
 
         

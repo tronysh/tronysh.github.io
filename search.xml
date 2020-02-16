@@ -7,7 +7,7 @@
 <p>术语：能唯一标识数据元素的一个分量或多个分量的组合称为关键字；不能唯一标识数据元素的分量称为次关键字。</p>
 <p>如果一个排序的算法，对于数据元素按照此关键字排序后，能确保相同次关键字的数据元素排序前后，相对次序不变，则称该算法为是稳定的，否则称该算法是不稳定的。</p>
 <p>内部排序是指对存储在计算机的主存储器（也称“内存”）中的数据进行排序的过程。</p>
-<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><h4 id="直接插入排序法"><a href="#直接插入排序法" class="headerlink" title="直接插入排序法"></a>直接插入排序法</h4><p>基本原理：先把$a<em>1$看成一个有序的包含一个数据元素的序列。然后不断地在一个递增有序的序列$(a_1,…,a</em>{i-1})(2\le i\le n)$中，插入一个数据元素$a<em>i$，使得$a_1,…,a</em>{i-1},a_i$构成一个新的有序的序列。</p>
+<h3 id="插入排序法"><a href="#插入排序法" class="headerlink" title="插入排序法"></a>插入排序法</h3><h4 id="直接插入排序法"><a href="#直接插入排序法" class="headerlink" title="直接插入排序法"></a>直接插入排序法</h4><p>基本原理：先把$a_1$看成一个有序的包含一个数据元素的序列。然后不断地在一个递增有序的序列$(a_1,…,a_{i-1})(2\le i\le n)$中，插入一个数据元素$a_i$，使得$a_1,…,a_{i-1},a_i$构成一个新的有序的序列。</p>
 <p>基本步骤：</p>
 <ol>
 <li>确定插入位置；</li>
@@ -16,10 +16,10 @@
 </ol>
 <p>正序情况：算法的比较次数和移动次数均达到最好，待插入元素仅仅与左边一个元素比较一次，不需要移动。即：比较次数和移动次数分别为n-1次和0次。</p>
 <p>逆序情况：算法的比较次数和移动次数均达到最坏。即：比较和移动次数分别为2+3+…+n次和(2+1)+(3+1)+…+(n+1)次。</p>
-<p>算法时间性能：$T<em>{best}(n)=O(n)\quad T</em>{worst}=O(n^2)\quad T_{average}=O(n^2)$</p>
+<p>算法时间性能：$T_{best}(n)=O(n)\quad T_{worst}=O(n^2)\quad T_{average}=O(n^2)$</p>
 <p>直接插入排序算法有几种不同的变种：</p>
 <ol>
-<li>折半插入排序：折半插入排序是利用待插入表的有序性，将上述直接排序中欧给的顺序查找定位，改进采用为折半查找法定位。$T<em>{worst}(n)=T</em>{average}(n)=O(n^2)$</li>
+<li>折半插入排序：折半插入排序是利用待插入表的有序性，将上述直接排序中欧给的顺序查找定位，改进采用为折半查找法定位。$T_{worst}(n)=T_{average}(n)=O(n^2)$</li>
 <li>2-路插入排序：将待排序的数据元素，分情况插入到这两个子表的某一表中间。算法思想：<ol>
 <li>取出表$L=(a_1,a_2,a_3,…,a_i,…,a_n)$的第1个元素$a_1$存入辅助空间$D[1]$ ；</li>
 <li>取出表$L$的下一个元素$a_1(2\le i\le n)$，如果$a_i&lt;D[1]$，则插入到$D[1]$之左边的有序子表，否则插入到$D[1]$之右边的有序子表；</li>
@@ -44,7 +44,7 @@
 <h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>按照从左至右的顺序，从左边的第一个元素开始，依次比较相邻的两个数据元素，如果逆序则交换它们的位置。这样进行一趟比较交换，可以将最大值交换到最后的位置即正确位置。</p>
 <p>第一趟：对于表$L=(a_1,a_2,a_3,…,a_i,…,a_n)$，从左至右的顺序，将序号相邻的、反序的两个元素交换。第一趟结束后，$a_n$就是关键字最大的那个数据元素；</p>
 <p>第二趟：对于除最后一个数据元素之外的剩余部分构成的子表重复第一步，第二趟结束后，$a_{n-1}$就是关键字次大的那个数据元素；以此类推。直到剩余部分构成的子表表长等于1为止。</p>
-<p>在“正序情况”下，算法的交换次数达到最好，不需要移动。即0次。在“逆序情况”下，算法的交换次数达到最坏，移动次数为(n-1)+(n-2)+…+1次。<br>所以，$T<em>{best}=O(n^2)\quad T</em>{worst}=O(n^2)$。</p>
+<p>在“正序情况”下，算法的交换次数达到最好，不需要移动。即0次。在“逆序情况”下，算法的交换次数达到最坏，移动次数为(n-1)+(n-2)+…+1次。<br>所以，$T_{best}=O(n^2)\quad T_{worst}=O(n^2)$。</p>
 <h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>快速排序时通过一趟交换，将待排序序列的第1个数据元素交换到正确位置。</p>
 <ol>
 <li>依据表$L=(a_1,a_2,a_3,…,a_i,…,a_n)$的第一个元素$a_1$，把$a_1$放在合适的位置，以将表L“划分”成左右2个逻辑子表，使得$a_1$大于左子表的所有元素，且小于右子表的所有元素；</li>
@@ -59,7 +59,7 @@
 </li>
 <li>当$low &gt; high$，表示“划分结束”。</li>
 </ol>
-<p>$T<em>{best}=O(nlog_2n)\quad T</em>{worst}(n)=O(n^2)\quad$</p>
+<p>$T_{best}=O(nlog_2n)\quad T_{worst}(n)=O(n^2)\quad$</p>
 <h3 id="选择排序法"><a href="#选择排序法" class="headerlink" title="选择排序法"></a>选择排序法</h3><p>基本原理：先选择表L的最大元素，与最后位置上元素交换；然后选择表L的次大元素，与倒数第二个位置上元素交换；依此类推，最后得到一个有序的序列。</p>
 <h4 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h4><p>简单选择排序是采用顺序查找法确定最大元素的位置，与最后位置上元素交换。</p>
 <p>算法思想：</p>
@@ -67,11 +67,11 @@
 <li>对于表$L=(a_1,a_2,a_3,…,a_i,…,a_n)$，顺序遍历，选择出最大元素所在位置，与最后位置元素交换；</li>
 <li>对于除最后一个元素之外的剩余部分构成的子表重复第一步，直到剩余部分构成的子表表长等于1为止。</li>
 </ol>
-<p>算法时间性能：$T<em>{worst}(n)=T</em>{best}=O(n^2)=T_{average}(n)$</p>
+<p>算法时间性能：$T_{worst}(n)=T_{best}=O(n^2)=T_{average}(n)$</p>
 <h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><p>堆排序是利用构建“堆”的方法确定具有最大值的数据元素，并把该元素与最后位置上元素交换。</p>
 <p>满足下列条件的n个数据元素序列$(a_1,a_2,…,a_n)$称为堆。</p>
 <script type="math/tex; mode=display">a_i\ge a_{2i},a_i\ge a_{2i+1}(1\le i\le \frac{n}{2})</script><p>可以将任意一个由n个数据元素构成的序列$(a_1,a_2,…,a_n)$，按照从左到右的顺序按层排序构成一棵与该序列对应的完全二叉树。</p>
-<p>一棵完全二叉树是一个堆，当且仅当完全二叉树的每棵子树的根值$a<em>i\ge$其左子树的根值$a</em>{2i}$，同时$a<em>i\ge$其右子树的根值$a</em>{2i+1}(1\le i\le \frac{n}{2})$。</p>
+<p>一棵完全二叉树是一个堆，当且仅当完全二叉树的每棵子树的根值$a_i\ge$其左子树的根值$a_{2i}$，同时$a_i\ge$其右子树的根值$a_{2i+1}(1\le i\le \frac{n}{2})$。</p>
 <p><strong>堆和堆排序算法</strong></p>
 <p>堆排序的思路是将表$L=(a_1,a_2,a_3,…a_i,…,a_n)$转换成大顶堆，将堆的根（即L的第一个位置的元素）与最后一个叶子（即L最后一个位置的元素）交换；然后，除最后一个叶子外剩余部分再重复上述处理。</p>
 <p>假设表$L=(a_1,a_2,a_3,…a_i,…,a_n)$对应的完全二叉树T中，树根的右子树均为堆，仅仅是T的根不满足堆的条件，将这种特殊情况的完全二叉树T转换成堆的过程，称为“调整堆”。</p>
@@ -95,7 +95,7 @@
 <li>重复第一步，直到所有子表合并成一个有序子表为止。</li>
 </ol>
 <p>算法分析：$T_{worst}(n)=O(nlog_2n)\quad$空间复杂度$S(n)=O(n)$</p>
-<h3 id="基数排序法"><a href="#基数排序法" class="headerlink" title="基数排序法"></a>基数排序法</h3><h4 id="多关键字排序"><a href="#多关键字排序" class="headerlink" title="多关键字排序"></a>多关键字排序</h4><p>假设有n个数据元素的序列${R<em>1,R_2,…,R_n}$，且每个数据元素$R_i$中含有d个关键字$(K_0,K_1,…,K</em>{d-1})$。$K<em>0$：最主位关键字，$K</em>{d-1}$：最次位关键字。多关键字排序可以分为最主位优先排序法和最次位优先排序法两种。</p>
+<h3 id="基数排序法"><a href="#基数排序法" class="headerlink" title="基数排序法"></a>基数排序法</h3><h4 id="多关键字排序"><a href="#多关键字排序" class="headerlink" title="多关键字排序"></a>多关键字排序</h4><p>假设有n个数据元素的序列${R_1,R_2,…,R_n}$，且每个数据元素$R_i$中含有d个关键字$(K_0,K_1,…,K_{d-1})$。$K_0$：最主位关键字，$K_{d-1}$：最次位关键字。多关键字排序可以分为最主位优先排序法和最次位优先排序法两种。</p>
 <p><strong>最主位关键字排序（MSD-Most Significant Digit first）</strong></p>
 <p>算法思想：</p>
 <ul>
@@ -121,7 +121,7 @@
 <li>若按照MSD进行排序，必须将序列逐层分割成若干子序列，然后对各子序列分别进行排序；</li>
 <li>若按照LSD进行排序，不必分割成子序列，对每个子序列都是整个序列参加排序，且只能用稳定的排序方法。</li>
 </ul>
-<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p>基本原理：将关键字每一位$K<em>m$视为一关键字，这样排序问题就转换成多关键字$(K_0,K_1,K_2,…,K</em>{n-1})$排序，并采用最次位优先排序方法，即LSD方法进行排序。</p>
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p>基本原理：将关键字每一位$K_m$视为一关键字，这样排序问题就转换成多关键字$(K_0,K_1,K_2,…,K_{n-1})$排序，并采用最次位优先排序方法，即LSD方法进行排序。</p>
 <p>算法思想：假设每个关键字的每一位可能的取值的情形数目为r，把它定义为基数。</p>
 <ul>
 <li>首先，开辟一块连续的地址空间，作为存贮区，存放待排序的关键字序列；</li>
@@ -134,8 +134,8 @@
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -163,7 +163,7 @@
     <url>/2020/02/13/data-structure-search/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>“查找”是基于数据逻辑结构(D,R)定义的一种十分常见的运算。数学上，“查找”是指问题：“$x\in D ?$”。即查找是确定某个数据元素是否在数据元素上的问题。</p>
 <p>如果R限定的关系为D中的数据元素构成一个集合的话，此时称为查找表（Search Table），即查找表定义为同一类型的数据元素（或记录）构成的集合。</p>
-<p>通常，$D={ a_1,a_2,…,a_i,…,a_n}$的每个数据元素$a_i$具有唯一标识的分量，被称为关键字，记为：$a_1.key$。</p>
+<p>通常，$D=\{ a_1,a_2,…,a_i,…,a_n\}$的每个数据元素$a_i$具有唯一标识的分量，被称为关键字，记为：$a_1.key$。</p>
 <p>用以识别若干数据元素（或记录）的数据称为次关键字。</p>
 <script type="math/tex; mode=display">x\in D\leftrightarrow x.key\in \{ a_1.key,a_2.key,...,a_i.key,...,a_n.key \}</script><p>如果D中存在给定关键字的数据元素，则称为“查找成功”，否则称为“查找失败”。</p>
 <p>查找运算的一般定义形式为<code>Search(T,x.key)</code>，<code>Search(T,x.key)</code>的返回值，通常采用下列3种形式之一。</p>
@@ -256,7 +256,7 @@ NULL\quad(key\notin T)\\
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Typedef <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Elemtype *elem;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;SSTable;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search</span><span class="params">(SSTable T, KeyType k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    low=<span class="number">1</span>;</span><br><span class="line">    high=T.length;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;=high)</span><br><span class="line">    &#123;</span><br><span class="line">        mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(T.elem[mid]==k)</span><br><span class="line">            <span class="keyword">return</span> mid;  <span class="comment">//等于，成功</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(T.elem[mid]&gt;k)</span><br><span class="line">            high=mid<span class="number">-1</span>;  <span class="comment">//左部</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            low=mid+<span class="number">1</span>;  <span class="comment">//右部</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>；  <span class="comment">//失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>算法分析：规模为表长$n$，统计关键字之间的比较次数。</p>
 <p>最少的比较次数是1次，最多比较次数是树的高度。</p>
-<p>即：$T<em>{best}(n)=O(1), T</em>{worst}(n)=O(log_2n)$。</p>
+<p>即：$T_{best}(n)=O(1), T_{worst}(n)=O(log_2n)$。</p>
 <script type="math/tex; mode=display">ASL(s)=\frac{n+1}{n}log_2(n+1)-1</script><h4 id="分块查找法"><a href="#分块查找法" class="headerlink" title="分块查找法"></a>分块查找法</h4><p>利用关键字序列的分段（块）有序性，建立分段（块）索引表。借助分段索引表，实现快速查找。这种方法称为分块查找法。</p>
 <p>算法思想：</p>
 <ol>
@@ -294,7 +294,7 @@ NULL\quad(key\notin T)\\
 <li>方法二：结点<code>*s</code>替换结点<code>*p</code>（即删除删除结点<code>P</code>），结点<code>*s</code>的左子树作为结点<code>*s</code>的父结点<code>*q</code>的右子树。</li>
 </ul>
 <h4 id="“查找”算法分析"><a href="#“查找”算法分析" class="headerlink" title="“查找”算法分析"></a>“查找”算法分析</h4><p>假设二叉排序树有n个结点，最少的比较次数是1次，最多比较次数是树的高度h。</p>
-<p>有$T<em>{best}(n)=O(1),\quad T</em>{worst}(n)$。</p>
+<p>有$T_{best}(n)=O(1),\quad T_{worst}(n)$。</p>
 <h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><p>平衡二叉树（Balanced Binary Tree）又称为AVL树。它或是一棵空树，或是满足下列性质的一棵非空的二叉树T：</p>
 <ol>
 <li>T的左子树和右子树的深度之差的绝对值不超过1；</li>
@@ -357,8 +357,8 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -370,8 +370,8 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -391,7 +391,7 @@ NULL\quad(key\notin T)\\
 <li>二叉树的子树有左、右之分，且其次序不能任意颠倒。</li>
 </ul>
 <h3 id="二叉树的操作"><a href="#二叉树的操作" class="headerlink" title="二叉树的操作"></a>二叉树的操作</h3><h4 id="二叉树的基本操作"><a href="#二叉树的基本操作" class="headerlink" title="二叉树的基本操作"></a>二叉树的基本操作</h4><ol>
-<li>置$T$为空二叉树：$T={ }$</li>
+<li>置$T$为空二叉树：$T=\{ \}$</li>
 <li>销毁二叉树$T$</li>
 <li>生成二叉树$T$：生成哈夫曼树、二叉排序树、平衡二叉树、堆</li>
 <li><p>遍历二叉树$T$:</p>
@@ -622,7 +622,7 @@ NULL\quad(key\notin T)\\
 <li>哈夫曼树不唯一，但带权路径长度$WPL$一定相等。</li>
 </ol>
 <h4 id="Huffman算法"><a href="#Huffman算法" class="headerlink" title="Huffman算法"></a>Huffman算法</h4><ol>
-<li><p>以权值分别为$W_1,W_2,…,W_n$的n个结点，构成$n$棵二叉树$T_1,T_2,…,T_n$，并组成森林$F={T_1,T_2,…,T_n}$，每棵二叉树$T_i$仅有一个权值为$W_i$的根结点；</p>
+<li><p>以权值分别为$W_1,W_2,…,W_n$的n个结点，构成$n$棵二叉树$T_1,T_2,…,T_n$，并组成森林$F=\{T_1,T_2,…,T_n\}$，每棵二叉树$T_i$仅有一个权值为$W_i$的根结点；</p>
 </li>
 <li><p>在$F$中选取两棵结点权值最小的树作为左右子树构造一棵新二叉树，并且置新二叉树根结点权值为左右子树上根结点的权值之和。根结点的权值=左右孩子权值之和，叶结点的权值=$W_i$。</p>
 </li>
@@ -644,8 +644,8 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -810,8 +810,8 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -867,8 +867,8 @@ NULL\quad(key\notin T)\\
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -929,7 +929,7 @@ NULL\quad(key\notin T)\\
 <p>而在第$j$列中，$a_{ij}$前面还需要存放$i$个数据元素。</p>
 <p>这样在前面存放的数据元素的总个数是$j*m+i$。所以$a_{ij}$的地址计算公式为：</p>
 <script type="math/tex; mode=display">LOC(i,j)=b+(j*m+i)L=LOC(0,0)+(j*m+i)L</script><p>对任意一个数组元素$A[i_1,i_2,…,i_n]$，可得到行序优先的寻址方式为</p>
-<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a<em>{ij}=a</em>{ji}$，$i\le m,j\le n$</p>
+<script type="math/tex; mode=display">LOC(i_1,i_2,...,i_n)=LOC(0,0)+(i_1*k_2*k_3...*k_n+i_2*k_3...*k_n+...+i_{n-1}*k_n+i_n)*L</script><h3 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h3><h4 id="n阶对称矩阵"><a href="#n阶对称矩阵" class="headerlink" title="n阶对称矩阵"></a>n阶对称矩阵</h4><p>$a_{ij}=a_{ji}$，$i\le m,j\le n$</p>
 <p>下三角元素$a_{ij}$满足$i\ge j$</p>
 <p>数据元素的个数$=1+2+…+n=n(n+1)/2$</p>
 <p>假定以行序为主，顺序存储下三角元素到$SA[1…n(n+1)/2]$</p>
@@ -940,7 +940,7 @@ NULL\quad(key\notin T)\\
 <p> $\therefore$$a_{ij}$的序号为：$k=i(i-1)/2+j$</p>
 </li>
 <li><p>设$a_{ij}$在上三角，$i\lt j$</p>
-<p> $\because$上三角的$a<em>{ij}$等于下三角的$a</em>{ji}$</p>
+<p> $\because$上三角的$a_{ij}$等于下三角的$a_{ji}$</p>
 <p> 下三角的$a_{ji}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
 <p> $\therefore$上三角的$a_{ij}$的序号为$k=j(j-1)/2+i$，$i&lt;j$</p>
 </li>
@@ -1047,8 +1047,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1125,8 +1125,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1252,8 +1252,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1647,8 +1647,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1657,11 +1657,11 @@ A[i,j]=\begin{cases}
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="线性表的定义"><a href="#线性表的定义" class="headerlink" title="线性表的定义"></a>线性表的定义</h2><p>由$n(n≥0)$个数据元素$(a_1, a_2, …, a_n)$构成的有限序列。记作：$L=(a_1, a_2, …, a_n)$。$a_1$——首元素，$a_n$——尾元素。</p>
 <p>表的长度（表长）——线性表中数据元素的数目。</p>
 <p>空表——不含数据元素的线性表（表长为0）。</p>
-<h2 id="线性表的特征"><a href="#线性表的特征" class="headerlink" title="线性表的特征"></a>线性表的特征</h2><p>对于$L=(a<em>1, a_2, …, a</em>{i-1} , a<em>i, a</em>{i+1} , …, a_n)$</p>
+<h2 id="线性表的特征"><a href="#线性表的特征" class="headerlink" title="线性表的特征"></a>线性表的特征</h2><p>对于$L=(a_1, a_2, …, a_{i-1} , a_i, a_{i+1} , …, a_n)$</p>
 <ol>
-<li><p>$a<em>{i-1}$在$a_i$之前，称$a</em>{i-1}$是$a_i$的直接前驱$(1&lt;i≤n)$</p>
+<li><p>$a_{i-1}$在$a_i$之前，称$a_{i-1}$是$a_i$的直接前驱$(1&lt;i≤n)$</p>
 </li>
-<li><p>$a<em>{i+1}$在$a_i$之后，称$a</em>{i+1}$是$a_i$的直接后继$(1≤i&lt;n)$</p>
+<li><p>$a_{i+1}$在$a_i$之后，称$a_{i+1}$是$a_i$的直接后继$(1≤i&lt;n)$</p>
 </li>
 <li><p>$a_1$没有前驱</p>
 </li>
@@ -1672,7 +1672,7 @@ A[i,j]=\begin{cases}
 </ol>
 <h2 id="抽象数据类型线性表的定义"><a href="#抽象数据类型线性表的定义" class="headerlink" title="抽象数据类型线性表的定义"></a>抽象数据类型线性表的定义</h2><p>ADT List</p>
 <p>{ 数据对象：$D=\lbrace a_i|a_i∈ElemSet，i=1,2,…,n,n≥0\rbrace$</p>
-<p>  数据关系：$R<em>1=\lbrace&lt; a</em>{i-1} ,a<em>i&gt;| a</em>{i-1} ,a_i∈D,i=1,2,…,n  \rbrace$</p>
+<p>  数据关系：$R_1=\lbrace&lt; a_{i-1} ,a_i&gt;| a_{i-1} ,a_i∈D,i=1,2,…,n  \rbrace$</p>
 <p>　基本操作：</p>
 <ol>
 <li><code>InitList(&amp;L) 　　//构造空表L</code></li>
@@ -1706,7 +1706,7 @@ A[i,j]=\begin{cases}
 <p>其中：typedef——别名定义，Sqlist——结构类型名，La——结构类型变量名，La.length——表长，La.elem[0]——$a_1$，La[La.length-1]——$a_n$。</p>
 <h3 id="动态分配"><a href="#动态分配" class="headerlink" title="动态分配"></a>动态分配</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIST_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTINCREMENT 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType *elem;    <span class="comment">//存储空间基地址</span></span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> listsize;    <span class="comment">//当前分配的存储容量 以 sizeof(ElemType)为单位</span></span><br><span class="line">&#125; Sqlist;</span><br><span class="line">Sqlist Lb;</span><br></pre></td></tr></table></figure>
 <h3 id="寻址公式"><a href="#寻址公式" class="headerlink" title="寻址公式"></a>寻址公式</h3><p>假设：线性表的首地址为b，每个数据元素占p个存储单元，则表中任意元素$(1\leq i\leq n)$的存储地址是：$LOC(i)=LOC(1)+(i-1)<em>p=b+(i-1)</em>p，(1&lt;=i&lt;=n)$。</p>
-<h3 id="顺序表的插入算法"><a href="#顺序表的插入算法" class="headerlink" title="顺序表的插入算法"></a>顺序表的插入算法</h3><p>在线性表$L=(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中的第$i$个元素前插入元素$x$。 </p>
+<h3 id="顺序表的插入算法"><a href="#顺序表的插入算法" class="headerlink" title="顺序表的插入算法"></a>顺序表的插入算法</h3><p>在线性表$L=(a_1, a_2, …,a_{i-1}, a_i ,a_{i+1}, …, a_n)$中的第$i$个元素前插入元素$x$。 </p>
 <p>移动元素下标范围：$i - 1$ ~ $n - 1$ 或 $i - 1$ ~ $L.length - 1$。</p>
 <h4 id="算法1：静态分配线性表空间，用指针指向被操作的线性表"><a href="#算法1：静态分配线性表空间，用指针指向被操作的线性表" class="headerlink" title="算法1：静态分配线性表空间，用指针指向被操作的线性表"></a>算法1：静态分配线性表空间，用指针指向被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Insert</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i值不合法</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=maxleng)</span><br><span class="line">        <span class="keyword">return</span> OVERLOW;    <span class="comment">//溢出</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];    <span class="comment">//向后移动元素</span></span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//插入新元素</span></span><br><span class="line">    L.length++;    <span class="comment">// 长度变量增1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>基本思想：</p>
@@ -1717,7 +1717,7 @@ A[i,j]=\begin{cases}
 <li>把新增元素插入到这个空位置，表长增加1，返回。</li>
 </ul>
 <h4 id="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"><a href="#算法2：动态分配线性表空间，用引用参数表示被操作的线性表" class="headerlink" title="算法2：动态分配线性表空间，用引用参数表示被操作的线性表"></a>算法2：动态分配线性表空间，用引用参数表示被操作的线性表</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Insert</span><span class="params">(Sqlist &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||i&gt;L.length+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> ERROR;    <span class="comment">//i的合法取值为1至n+1</span></span><br><span class="line">    <span class="keyword">if</span>(L.length&gt;=L.listsize)    <span class="comment">//溢出时扩充</span></span><br><span class="line">    &#123;</span><br><span class="line">        ElemType *newbase;</span><br><span class="line">        newbase=(ElemType *)<span class="built_in">realloc</span>(L.elem, L.listsize+LISTINCREMENT*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="keyword">if</span>(newbase==<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> OVERFLOW;</span><br><span class="line">        L.elem=newbase;</span><br><span class="line">        L.length+=LISTINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//向后移动元素，空出第i个元素的分量elem[i-1]</span></span><br><span class="line">    <span class="keyword">for</span>(j=L.length<span class="number">-1</span>;j&gt;=i<span class="number">-1</span>;j--)</span><br><span class="line">        L.elem[j+<span class="number">1</span>]=L.elem[j];</span><br><span class="line">    L.elem[i<span class="number">-1</span>]=e;    <span class="comment">//新元素插入</span></span><br><span class="line">    L.length++;    <span class="comment">//线性表长度加1</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="插入操作移动元素次数的分析"><a href="#插入操作移动元素次数的分析" class="headerlink" title="插入操作移动元素次数的分析"></a>插入操作移动元素次数的分析</h3><p>在$(a<em>1, a_2, …,a</em>{i-1}, a<em>i ,a</em>{i+1}, …, a_n)$中$a_i$之前插入新元素$e(1\leq i\leq n)$。</p>
+<h3 id="插入操作移动元素次数的分析"><a href="#插入操作移动元素次数的分析" class="headerlink" title="插入操作移动元素次数的分析"></a>插入操作移动元素次数的分析</h3><p>在$(a_1, a_2, …,a_{i-1}, a_i ,a_{i+1}, …, a_n)$中$a_i$之前插入新元素$e(1\leq i\leq n)$。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -1746,7 +1746,7 @@ A[i,j]=\begin{cases}
 </tbody>
 </table>
 </div>
-<p>假定$P<em>i$是在各位置插入元素的概率，且$P_1=P_2=…=P_n=P</em>{n+1}=\frac{1}{n+1}$</p>
+<p>假定$P_i$是在各位置插入元素的概率，且$P_1=P_2=…=P_n=P_{n+1}=\frac{1}{n+1}$</p>
 <p>则插入一个元素时移动元素的平均值是：</p>
 <script type="math/tex; mode=display">E_{is}=\sum_{i=1}^{n+1}P_i(n-i+1)=\frac{n}{2}</script><h3 id="顺序表的删除算法"><a href="#顺序表的删除算法" class="headerlink" title="顺序表的删除算法"></a>顺序表的删除算法</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(Sqlist *L, <span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">1</span>||L-&gt;length)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"not exits"</span>);</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(j=i;j&lt;=L-&gt;length<span class="number">-1</span>;j++)</span><br><span class="line">            L-&gt;elem[j<span class="number">-1</span>]=L-&gt;elem[j];</span><br><span class="line">    L-&gt;length--;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>基本思想：</p>
@@ -1781,7 +1781,7 @@ A[i,j]=\begin{cases}
 </tbody>
 </table>
 </div>
-<p>假定$q<em>i$是在各位置插入元素的概率，且$q_1=q_2=…=q_n=q</em>{n+1}=\frac{1}{n}$</p>
+<p>假定$q_i$是在各位置插入元素的概率，且$q_1=q_2=…=q_n=q_{n+1}=\frac{1}{n}$</p>
 <p>则删除一个元素时移动的平均值是：</p>
 <script type="math/tex; mode=display">E_{dl}=\sum_{i=1}^{n+1}q_i(n-i)=\frac{n-1}{2}</script><h3 id="顺序结构的优缺点"><a href="#顺序结构的优缺点" class="headerlink" title="顺序结构的优缺点"></a>顺序结构的优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>是一种随机存储结构，存取任何元素的时间是一个常数，速度快；</li>
@@ -1799,8 +1799,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1891,8 +1891,8 @@ A[i,j]=\begin{cases}
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>学习</tag>
         <tag>算法</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
